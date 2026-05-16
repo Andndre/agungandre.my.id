@@ -43,7 +43,7 @@
     } = $props();
 
     let techInput = $state('');
-    let techStack = $state<string[]>(project.tech_stack ?? []);
+    let techStack = $state<string[]>([...(project.tech_stack ?? [])]);
     let showDeleteConfirm = $state(false);
 
     function addTech() {
@@ -172,7 +172,7 @@
                             <div class="flex flex-wrap gap-2">
                                 {#each project.images as img}
                                     <div class="relative h-20 w-20 overflow-hidden rounded-lg border border-border">
-                                        <img src={img} alt="Gallery image" class="h-full w-full object-cover" />
+                                        <img src={img} alt="Gallery" class="h-full w-full object-cover" />
                                     </div>
                                 {/each}
                             </div>

@@ -2,6 +2,7 @@
     import { Link } from '@inertiajs/svelte';
     import BookOpen from 'lucide-svelte/icons/book-open';
     import FolderGit2 from 'lucide-svelte/icons/folder-git-2';
+    import FolderPlus from 'lucide-svelte/icons/folder-plus';
     import LayoutGrid from 'lucide-svelte/icons/layout-grid';
     import type { Snippet } from 'svelte';
     import AppLogo from '@/components/AppLogo.svelte';
@@ -18,7 +19,8 @@
         SidebarMenuItem,
     } from '@/components/ui/sidebar';
     import { toUrl } from '@/lib/utils';
-    import { dashboard } from '@/routes';
+    import { dashboard } from '@/routes/admin/index';
+    import admin from '@/routes/admin';
     import type { NavItem } from '@/types';
 
     let {
@@ -32,6 +34,19 @@
             title: 'Dashboard',
             href: dashboard(),
             icon: LayoutGrid,
+        },
+    ];
+
+    const adminNavItems: NavItem[] = [
+        {
+            title: 'Projects',
+            href: admin.projects.index(),
+            icon: FolderGit2,
+        },
+        {
+            title: 'New Project',
+            href: admin.projects.create(),
+            icon: FolderPlus,
         },
     ];
 
@@ -70,6 +85,7 @@
 
     <SidebarContent>
         <NavMain items={mainNavItems} />
+        <NavMain items={adminNavItems} label="Admin" />
     </SidebarContent>
 
     <SidebarFooter>

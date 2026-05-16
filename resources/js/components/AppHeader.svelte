@@ -42,7 +42,7 @@
     import { currentUrlState } from '@/lib/currentUrl.svelte';
     import { getInitials } from '@/lib/initials';
     import { toUrl } from '@/lib/utils';
-    import { dashboard } from '@/routes';
+    import { dashboard } from '@/routes/admin/index';
     import type { BreadcrumbItem, NavItem } from '@/types';
 
     let {

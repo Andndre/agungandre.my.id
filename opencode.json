@@ -11,5 +11,8 @@
                 "boost:mcp"
             ]
         }
+    },
+    "skills": {
+        "paths": [".agent/skills"]
     }
 }

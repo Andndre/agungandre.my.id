@@ -2,7 +2,8 @@
     import { Link, page } from '@inertiajs/svelte';
     import AppHead from '@/components/AppHead.svelte';
     import { toUrl } from '@/lib/utils';
-    import { dashboard, login, register } from '@/routes';
+    import { login, register } from '@/routes';
+    import { dashboard } from '@/routes/admin';
     import { onMount } from 'svelte';
     import { fly, fade } from 'svelte/transition';
     import { spring } from 'svelte/motion';
@@ -531,7 +532,7 @@
             <div class="mt-12 flex justify-center gap-6">
                 <!-- GitHub -->
                 <a
-                    href="#"
+                    href="https://github.com"
                     class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-[#A1A09A] transition-all hover:border-white/30 hover:bg-white/10 hover:text-white"
                     aria-label="GitHub"
                 >
@@ -541,7 +542,7 @@
                 </a>
                 <!-- LinkedIn -->
                 <a
-                    href="#"
+                    href="https://linkedin.com"
                     class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-[#A1A09A] transition-all hover:border-white/30 hover:bg-white/10 hover:text-white"
                     aria-label="LinkedIn"
                 >
@@ -551,7 +552,7 @@
                 </a>
                 <!-- Twitter/X -->
                 <a
-                    href="#"
+                    href="https://x.com"
                     class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-[#A1A09A] transition-all hover:border-white/30 hover:bg-white/10 hover:text-white"
                     aria-label="Twitter"
                 >
