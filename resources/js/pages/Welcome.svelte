@@ -2,7 +2,6 @@
     import { Link, page } from '@inertiajs/svelte';
     import AppHead from '@/components/AppHead.svelte';
     import { toUrl } from '@/lib/utils';
-    import { login, register } from '@/routes';
     import { dashboard } from '@/routes/admin';
     import { onMount } from 'svelte';
     import { fly, fade } from 'svelte/transition';
@@ -183,23 +182,17 @@
                     {#if auth.user}
                         <Link
                             href={toUrl(dashboard())}
-                            class="text-sm text-[#A1A09A] transition-colors hover:text-[#EDEDEC]"
+                            class="text-sm text-[#A109A] transition-colors hover:text-[#EDEDEC]"
                         >
                             Dashboard
                         </Link>
                     {:else}
-                        <Link
-                            href={toUrl(login())}
-                            class="text-sm text-[#A1A09A] transition-colors hover:text-[#EDEDEC]"
-                        >
-                            Log in
-                        </Link>
-                        <Link
-                            href={toUrl(register())}
+                        <a
+                            href="#contact"
                             class="rounded-lg border border-cyan-400/40 bg-cyan-400/10 px-4 py-1.5 text-sm text-cyan-400 transition-all hover:border-cyan-400/80 hover:bg-cyan-400/20"
                         >
                             Get in Touch
-                        </Link>
+                        </a>
                     {/if}
                 </div>
             </div>
