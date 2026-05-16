@@ -18,7 +18,7 @@
 
 <script lang="ts">
     import AppHead from '@/components/AppHead.svelte';
-    import { Card, CardContent, CardHeader } from '@/components/ui/card';
+    import { Card, CardContent, CardHeader, CardAction } from '@/components/ui/card';
     import { Badge } from '@/components/ui/badge';
     import { Button } from '@/components/ui/button';
     import {
@@ -118,12 +118,14 @@
     <Card>
         <CardHeader class="flex flex-row items-center justify-between">
             <span class="text-base font-semibold">Recent Projects</span>
-            <Button variant="ghost" size="sm" asChild>
-                <a href={adminProjectsIndex().url}>
-                    View all
-                    <ArrowRight class="ml-1 size-3" />
-                </a>
-            </Button>
+            <CardAction>
+                <Button variant="ghost" size="sm" asChild>
+                    <a href={adminProjectsIndex().url} class="inline-flex items-center gap-2">
+                        View all
+                        <ArrowRight class="size-3" />
+                    </a>
+                </Button>
+            </CardAction>
         </CardHeader>
         <CardContent>
             {#if recentProjects.length === 0}
@@ -155,15 +157,15 @@
     <!-- Quick Actions -->
     <div class="flex gap-3">
         <Button asChild>
-            <a href={adminProjectsCreate().url}>
-                <Plus class="mr-2 size-4" />
+            <a href={adminProjectsCreate().url} class="inline-flex items-center gap-2">
+                <Plus class="size-4" />
                 Add Project
             </a>
         </Button>
         <Button variant="secondary" asChild>
-            <a href={adminProjectsIndex().url}>
+            <a href={adminProjectsIndex().url} class="inline-flex items-center gap-2">
                 Manage Projects
-                <ArrowRight class="ml-2 size-4" />
+                <ArrowRight class="size-4" />
             </a>
         </Button>
     </div>

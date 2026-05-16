@@ -20,6 +20,7 @@
     import { Input } from '@/components/ui/input';
     import { Label } from '@/components/ui/label';
     import { onMount } from 'svelte';
+    import { store } from '@/routes/admin/projects';
 
     let techInput = $state('');
     let techStack = $state<string[]>([]);
@@ -53,10 +54,11 @@
 
 <AppHead title="Create Project" />
 
-<div class="flex max-w-2xl flex-col gap-6">
+<div class="flex h-full flex-1 flex-col gap-6 overflow-x-auto rounded-xl p-4">
+    <div class="flex max-w-2xl flex-col gap-6">
     <div class="flex items-center gap-4">
         <Link
-            href={index()}
+            href={admin.index()}
             class="flex h-9 items-center gap-2 rounded-lg border border-border bg-background px-3 text-sm font-medium transition-colors hover:bg-muted"
         >
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -254,7 +256,7 @@
 
             <div class="flex justify-end gap-3">
                 <Link
-                    href={index()}
+                    href={admin.index()}
                     class="rounded-lg border border-border bg-background px-6 py-2 text-sm font-medium transition-colors hover:bg-muted"
                 >
                     Cancel
@@ -265,4 +267,5 @@
             </div>
         {/snippet}
     </Form>
+    </div>
 </div>

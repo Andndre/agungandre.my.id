@@ -38,7 +38,7 @@
 
 <AppHead title="Manage Projects" />
 
-<div class="flex flex-col gap-6">
+<div class="flex h-full flex-1 flex-col gap-6 overflow-x-auto rounded-xl p-4">
     <div class="flex items-center justify-between">
         <div>
             <h1 class="text-2xl font-bold">Projects</h1>
