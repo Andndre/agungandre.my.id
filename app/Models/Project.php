@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,20 +9,10 @@ class Project extends Model
 {
     use HasFactory;
 
-    #[Fillable]
-    public function __construct(
-        public ?string $title = null,
-        public ?string $description = null,
-        public ?string $slug = null,
-        public ?string $cover_image = null,
-        public ?array $images = null,
-        public ?array $tech_stack = null,
-        public ?string $live_url = null,
-        public ?string $repo_url = null,
-        public int $sort_order = 0,
-        public bool $is_featured = false,
-        public bool $is_published = false,
-    ) {}
+    protected $fillable = [
+        'title', 'description', 'slug', 'cover_image', 'images',
+        'tech_stack', 'live_url', 'repo_url', 'sort_order', 'is_featured', 'is_published',
+    ];
 
     protected function casts(): array
     {
