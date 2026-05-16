@@ -3,6 +3,7 @@ import stylistic from '@stylistic/eslint-plugin';
 import prettier from 'eslint-config-prettier/flat';
 import importPlugin from 'eslint-plugin-import';
 import svelte from 'eslint-plugin-svelte';
+import tailwindCanonical from 'eslint-plugin-tailwind-canonical-classes';
 import ts from 'typescript-eslint';
 
 const controlStatements = [
@@ -32,6 +33,17 @@ export default ts.config(
             parserOptions: {
                 parser: ts.parser,
             },
+        },
+        plugins: {
+            'tailwind-canonical-classes': tailwindCanonical,
+        },
+        rules: {
+            'tailwind-canonical-classes/tailwind-canonical-classes': [
+                'error',
+                {
+                    cssPath: './resources/css/app.css',
+                },
+            ],
         },
     },
     {
