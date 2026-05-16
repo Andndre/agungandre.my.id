@@ -13,6 +13,6 @@
         }
     },
     "skills": {
-        "paths": [".agent/skills"]
+        "paths": [".agents/skills"]
     }
 }
