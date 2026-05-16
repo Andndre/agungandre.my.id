@@ -17,10 +17,6 @@
 </script>
 
 <script lang="ts">
-    import AppHead from '@/components/AppHead.svelte';
-    import { Card, CardContent, CardHeader, CardAction } from '@/components/ui/card';
-    import { Badge } from '@/components/ui/badge';
-    import { Button } from '@/components/ui/button';
     import {
         FolderGit2,
         Globe,
@@ -29,6 +25,10 @@
         Pencil,
         ArrowRight,
     } from 'lucide-svelte/icons';
+    import AppHead from '@/components/AppHead.svelte';
+    import { Badge } from '@/components/ui/badge';
+    import { Button } from '@/components/ui/button';
+    import { Card, CardContent, CardHeader, CardAction } from '@/components/ui/card';
 
     let {
         stats = { total: 0, featured: 0, published: 0, drafts: 0 },
@@ -53,9 +53,11 @@
         if (project.is_featured) {
             return { label: 'Featured', variant: 'default' as const };
         }
+
         if (project.is_published) {
             return { label: 'Published', variant: 'secondary' as const };
         }
+
         return { label: 'Draft', variant: 'outline' as const };
     }
 

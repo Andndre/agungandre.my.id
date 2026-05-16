@@ -16,7 +16,6 @@
     import { Input } from '@/components/ui/input';
     import { Label } from '@/components/ui/label';
     import { Spinner } from '@/components/ui/spinner';
-    import { register } from '@/routes';
     import { store } from '@/routes/login';
     import { request } from '@/routes/password';
 
@@ -96,11 +95,6 @@
             </Button>
         </div>
 
-        {#if canRegister}
-            <div class="text-center text-sm text-muted-foreground">
-                Don't have an account?
-                <TextLink href={register()}>Sign up</TextLink>
-            </div>
-        {/if}
+
     {/snippet}
 </Form>

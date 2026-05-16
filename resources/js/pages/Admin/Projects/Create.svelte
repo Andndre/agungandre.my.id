@@ -13,13 +13,12 @@
 <script lang="ts">
     import { Form } from '@inertiajs/svelte';
     import { Link } from '@inertiajs/svelte';
+    import { onMount } from 'svelte';
     import AppHead from '@/components/AppHead.svelte';
-    import Heading from '@/components/Heading.svelte';
     import InputError from '@/components/InputError.svelte';
     import { Button } from '@/components/ui/button';
     import { Input } from '@/components/ui/input';
     import { Label } from '@/components/ui/label';
-    import { onMount } from 'svelte';
     import { store } from '@/routes/admin/projects';
 
     let techInput = $state('');
@@ -27,6 +26,7 @@
 
     function addTech() {
         const trimmed = techInput.trim();
+
         if (trimmed && !techStack.includes(trimmed) && techStack.length < 20) {
             techStack = [...techStack, trimmed];
             techInput = '';
@@ -42,6 +42,7 @@
             e.preventDefault();
             addTech();
         }
+
         if (e.key === 'Backspace' && !techInput && techStack.length > 0) {
             techStack = techStack.slice(0, -1);
         }
@@ -159,7 +160,7 @@
                 <div class="grid gap-2">
                     <Label for="tech_input">Add Technologies</Label>
                     <div class="flex flex-wrap gap-2">
-                        {#each techStack as tech}
+                        {#each techStack as tech (tech)}
                             <span class="inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1 font-mono text-xs text-secondary-foreground">
                                 {tech}
                                 <button type="button" onclick={() => removeTech(tech)} class="ml-1 hover:text-destructive">
@@ -177,7 +178,7 @@
                         onblur={addTech}
                     />
                     <!-- Hidden inputs for tech_stack array -->
-                    {#each techStack as tech}
+                    {#each techStack as tech (tech)}
                         <input type="hidden" name="tech_stack[]" value={tech} />
                     {/each}
                     <InputError message={errors.tech_stack} />

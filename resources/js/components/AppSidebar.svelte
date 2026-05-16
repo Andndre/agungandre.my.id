@@ -19,8 +19,8 @@
         SidebarMenuItem,
     } from '@/components/ui/sidebar';
     import { toUrl } from '@/lib/utils';
-    import { dashboard } from '@/routes/admin/index';
     import admin from '@/routes/admin';
+    import { dashboard } from '@/routes/admin/index';
     import type { NavItem } from '@/types';
 
     let {

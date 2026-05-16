@@ -10,12 +10,10 @@
 </script>
 
 <script lang="ts">
-    import { page } from '@inertiajs/svelte';
     import { Form } from '@inertiajs/svelte';
     import AppHead from '@/components/AppHead.svelte';
-    import Heading from '@/components/Heading.svelte';
-    import { Button } from '@/components/ui/button';
     import { Badge } from '@/components/ui/badge';
+    import { Button } from '@/components/ui/button';
 
     type Project = {
         id: number;
@@ -120,7 +118,7 @@
                         <!-- Tech stack -->
                         {#if project.tech_stack && project.tech_stack.length > 0}
                             <div class="mt-3 flex flex-wrap gap-1">
-                                {#each project.tech_stack.slice(0, 3) as tech}
+                                {#each project.tech_stack.slice(0, 3) as tech (tech)}
                                     <span class="rounded bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
                                         {tech}
                                     </span>
@@ -166,13 +164,17 @@
                                 <Button
                                     variant="outline"
                                     size="sm"
-                                    onclick={() => { deletingId = null; }}
+                                    onclick={() => {
+ deletingId = null; 
+}}
                                 >
                                     Cancel
                                 </Button>
                             {:else}
                                 <button
-                                    onclick={() => { deletingId = project.id; }}
+                                    onclick={() => {
+ deletingId = project.id; 
+}}
                                     class="flex items-center justify-center gap-1.5 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-1.5 text-sm font-medium text-destructive transition-colors hover:bg-destructive/20"
                                 >
                                     <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

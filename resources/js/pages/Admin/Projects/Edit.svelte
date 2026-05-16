@@ -1,11 +1,12 @@
 <script module lang="ts">
     import admin from '@/routes/admin/projects';
+    import projects from '@/routes/admin/projects';
 
     export const layout = {
         breadcrumbs: [
             { title: 'Dashboard', href: '/' },
             { title: 'Projects', href: admin.index() },
-            { title: 'Edit', href: admin.edit({ project: project.id }) },
+            { title: 'Edit', href: admin.projects.edit({ project: project.id }) },
         ],
     };
 </script>
@@ -14,12 +15,10 @@
     import { Form } from '@inertiajs/svelte';
     import { Link } from '@inertiajs/svelte';
     import AppHead from '@/components/AppHead.svelte';
-    import Heading from '@/components/Heading.svelte';
     import InputError from '@/components/InputError.svelte';
     import { Button } from '@/components/ui/button';
     import { Input } from '@/components/ui/input';
     import { Label } from '@/components/ui/label';
-    import { onMount } from 'svelte';
 
     type Project = {
         id: number;
@@ -48,6 +47,7 @@
 
     function addTech() {
         const trimmed = techInput.trim();
+
         if (trimmed && !techStack.includes(trimmed) && techStack.length < 20) {
             techStack = [...techStack, trimmed];
             techInput = '';
@@ -63,6 +63,7 @@
             e.preventDefault();
             addTech();
         }
+
         if (e.key === 'Backspace' && !techInput && techStack.length > 0) {
             techStack = techStack.slice(0, -1);
         }
@@ -74,7 +75,7 @@
 <div class="flex max-w-2xl flex-col gap-6">
     <div class="flex items-center gap-4">
         <Link
-            href={index()}
+            href={admin.index()}
             class="flex h-9 items-center gap-2 rounded-lg border border-border bg-background px-3 text-sm font-medium transition-colors hover:bg-muted"
         >
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -89,7 +90,7 @@
     </div>
 
     <Form
-        {...update.form({ query: { project: project.id } })}
+        {...projects.update.form({ query: { project: project.id } })}
         method="post"
         enctype="multipart/form-data"
         class="flex flex-col gap-6"
@@ -170,7 +171,7 @@
                         <div class="grid gap-2">
                             <Label>Current Gallery</Label>
                             <div class="flex flex-wrap gap-2">
-                                {#each project.images as img}
+                                {#each project.images as img (img)}
                                     <div class="relative h-20 w-20 overflow-hidden rounded-lg border border-border">
                                         <img src={img} alt="Gallery" class="h-full w-full object-cover" />
                                     </div>
@@ -199,7 +200,7 @@
                 <div class="grid gap-2">
                     <Label for="tech_input">Add Technologies</Label>
                     <div class="flex flex-wrap gap-2">
-                        {#each techStack as tech}
+                        {#each techStack as tech (tech)}
                             <span class="inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1 font-mono text-xs text-secondary-foreground">
                                 {tech}
                                 <button type="button" onclick={() => removeTech(tech)} class="ml-1 hover:text-destructive">
@@ -216,7 +217,7 @@
                         onkeydown={handleTechKeydown}
                         onblur={addTech}
                     />
-                    {#each techStack as tech}
+                    {#each techStack as tech (tech)}
                         <input type="hidden" name="tech_stack[]" value={tech} />
                     {/each}
                     <InputError message={errors.tech_stack} />
@@ -300,7 +301,7 @@
                         <div class="flex items-center gap-3">
                             <span class="text-sm text-destructive">Are you sure?</span>
                             <Form
-                                {...destroy.form({ query: { project: project.id } })}
+                                {...projects.destroy.form({ query: { project: project.id } })}
                                 method="post"
                                 options={{ preserveScroll: true }}
                             >
@@ -311,12 +312,16 @@
                                     </Button>
                                 {/snippet}
                             </Form>
-                            <Button variant="outline" size="sm" onclick={() => { showDeleteConfirm = false; }}>
+                            <Button variant="outline" size="sm" onclick={() => {
+ showDeleteConfirm = false; 
+}}>
                                 Cancel
                             </Button>
                         </div>
                     {:else}
-                        <Button variant="outline" onclick={() => { showDeleteConfirm = true; }}>
+                        <Button variant="outline" onclick={() => {
+ showDeleteConfirm = true; 
+}}>
                             <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                             </svg>
@@ -326,7 +331,7 @@
                 </div>
                 <div class="flex gap-3">
                     <Link
-                        href={index()}
+                        href={admin.index()}
                         class="rounded-lg border border-border bg-background px-6 py-2 text-sm font-medium transition-colors hover:bg-muted"
                     >
                         Cancel
