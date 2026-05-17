@@ -172,7 +172,7 @@
                     <Input
                         id="tech_input"
                         type="text"
-                        placeholder="Type a tech (e.g. Laravel) and press Enter"
+                        placeholder="Type a tech (e.g. Laravel) and press Enter or comma"
                         bind:value={techInput}
                         onkeydown={handleTechKeydown}
                         onblur={addTech}

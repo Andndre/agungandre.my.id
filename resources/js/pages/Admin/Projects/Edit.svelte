@@ -1,12 +1,14 @@
 <script module lang="ts">
-    import admin from '@/routes/admin/projects';
+    import { usePage } from '@inertiajs/svelte';
     import projects from '@/routes/admin/projects';
+
+    let { project } = usePage().props;
 
     export const layout = {
         breadcrumbs: [
             { title: 'Dashboard', href: '/' },
-            { title: 'Projects', href: admin.index() },
-            { title: 'Edit', href: admin.projects.edit({ project: project.id }) },
+            { title: 'Projects', href: projects.index() },
+            { title: 'Edit', href: projects.edit({ project: project.id }) },
         ],
     };
 </script>
@@ -20,30 +22,15 @@
     import { Input } from '@/components/ui/input';
     import { Label } from '@/components/ui/label';
 
-    type Project = {
-        id: number;
-        title: string;
-        description: string;
-        slug: string;
-        cover_image: string | null;
-        images: string[] | null;
-        tech_stack: string[] | null;
-        live_url: string | null;
-        repo_url: string | null;
-        sort_order: number;
-        is_featured: boolean;
-        is_published: boolean;
-    };
-
-    let {
-        project,
-    }: {
-        project: Project;
-    } = $props();
-
     let techInput = $state('');
     let techStack = $state<string[]>([...(project.tech_stack ?? [])]);
     let showDeleteConfirm = $state(false);
+
+    let editTitle = $state(project.title);
+    let editSlug = $state(project.slug);
+    let editLiveUrl = $state(project.live_url ?? '');
+    let editRepoUrl = $state(project.repo_url ?? '');
+    let editSortOrder = $state(project.sort_order);
 
     function addTech() {
         const trimmed = techInput.trim();
@@ -75,22 +62,34 @@
 <div class="flex max-w-2xl flex-col gap-6">
     <div class="flex items-center gap-4">
         <Link
-            href={admin.index()}
+            href={projects.index()}
             class="flex h-9 items-center gap-2 rounded-lg border border-border bg-background px-3 text-sm font-medium transition-colors hover:bg-muted"
         >
-            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            <svg
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                />
             </svg>
             Back
         </Link>
         <div>
             <h1 class="text-2xl font-bold">Edit Project</h1>
-            <p class="mt-1 text-sm text-muted-foreground">Update project details.</p>
+            <p class="mt-1 text-sm text-muted-foreground">
+                Update project details.
+            </p>
         </div>
     </div>
 
     <Form
-        {...projects.update.form({ query: { project: project.id } })}
+        {...projects.update.form({ project: project.id })}
         method="post"
         enctype="multipart/form-data"
         class="flex flex-col gap-6"
@@ -108,7 +107,7 @@
                             name="title"
                             type="text"
                             required
-                            value={project.title}
+                            bind:value={editTitle}
                         />
                         <InputError message={errors.title} />
                     </div>
@@ -120,8 +119,11 @@
                             name="slug"
                             type="text"
                             required
-                            value={project.slug}
+                            bind:value={editSlug}
                         />
+                        <p class="text-xs text-muted-foreground">
+                            URL-friendly identifier. Unique across all projects.
+                        </p>
                         <InputError message={errors.slug} />
                     </div>
 
@@ -133,7 +135,8 @@
                             required
                             rows="4"
                             class="flex w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                        >{project.description}</textarea>
+                            >{project.description}</textarea
+                        >
                         <InputError message={errors.description} />
                     </div>
                 </div>
@@ -145,25 +148,36 @@
                     {#if project.cover_image}
                         <div class="grid gap-2">
                             <Label>Current Cover Image</Label>
-                            <div class="relative aspect-video w-full max-w-sm overflow-hidden rounded-lg border border-border">
+                            <div
+                                class="relative aspect-video w-full max-w-sm overflow-hidden rounded-lg border border-border"
+                            >
                                 <img
                                     src={project.cover_image}
                                     alt={project.title}
                                     class="h-full w-full object-cover"
                                 />
                             </div>
-                            <p class="text-xs text-muted-foreground">Upload a new image to replace the current one.</p>
+                            <p class="text-xs text-muted-foreground">
+                                Upload a new image to replace the current one.
+                            </p>
                         </div>
                     {/if}
 
                     <div class="grid gap-2">
-                        <Label for="cover_image">{project.cover_image ? 'Replace Cover Image' : 'Cover Image *'}</Label>
+                        <Label for="cover_image"
+                            >{project.cover_image
+                                ? 'Replace Cover Image'
+                                : 'Cover Image *'}</Label
+                        >
                         <Input
                             id="cover_image"
                             name="cover_image"
                             type="file"
                             accept="image/*"
                         />
+                        <p class="text-xs text-muted-foreground">
+                            Main project image. Max 2MB. JPEG, PNG, WebP, GIF.
+                        </p>
                         <InputError message={errors.cover_image} />
                     </div>
 
@@ -172,12 +186,21 @@
                             <Label>Current Gallery</Label>
                             <div class="flex flex-wrap gap-2">
                                 {#each project.images as img (img)}
-                                    <div class="relative h-20 w-20 overflow-hidden rounded-lg border border-border">
-                                        <img src={img} alt="Gallery" class="h-full w-full object-cover" />
+                                    <div
+                                        class="relative h-20 w-20 overflow-hidden rounded-lg border border-border"
+                                    >
+                                        <img
+                                            src={img}
+                                            alt="Gallery"
+                                            class="h-full w-full object-cover"
+                                        />
                                     </div>
                                 {/each}
                             </div>
-                            <p class="text-xs text-muted-foreground">Upload new images to replace gallery. Old images will be deleted.</p>
+                            <p class="text-xs text-muted-foreground">
+                                Upload new images to replace gallery. Old images
+                                will be deleted.
+                            </p>
                         </div>
                     {/if}
 
@@ -190,6 +213,10 @@
                             accept="image/*"
                             multiple
                         />
+                        <p class="text-xs text-muted-foreground">
+                            Additional project screenshots. Max 10 images, 2MB
+                            each.
+                        </p>
                         <InputError message={errors.images} />
                     </div>
                 </div>
@@ -201,9 +228,15 @@
                     <Label for="tech_input">Add Technologies</Label>
                     <div class="flex flex-wrap gap-2">
                         {#each techStack as tech (tech)}
-                            <span class="inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1 font-mono text-xs text-secondary-foreground">
+                            <span
+                                class="inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1 font-mono text-xs text-secondary-foreground"
+                            >
                                 {tech}
-                                <button type="button" onclick={() => removeTech(tech)} class="ml-1 hover:text-destructive">
+                                <button
+                                    type="button"
+                                    onclick={() => removeTech(tech)}
+                                    class="ml-1 hover:text-destructive"
+                                >
                                     ×
                                 </button>
                             </span>
@@ -212,7 +245,7 @@
                     <Input
                         id="tech_input"
                         type="text"
-                        placeholder="Type a tech and press Enter"
+                        placeholder="Type a tech (e.g. Laravel) and press Enter or comma"
                         bind:value={techInput}
                         onkeydown={handleTechKeydown}
                         onblur={addTech}
@@ -234,7 +267,7 @@
                             name="live_url"
                             type="url"
                             placeholder="https://example.com"
-                            value={project.live_url ?? ''}
+                            bind:value={editLiveUrl}
                         />
                         <InputError message={errors.live_url} />
                     </div>
@@ -245,7 +278,7 @@
                             name="repo_url"
                             type="url"
                             placeholder="https://github.com/username/repo"
-                            value={project.repo_url ?? ''}
+                            bind:value={editRepoUrl}
                         />
                         <InputError message={errors.repo_url} />
                     </div>
@@ -261,7 +294,7 @@
                         name="sort_order"
                         type="number"
                         min="0"
-                        value={project.sort_order}
+                        bind:value={editSortOrder}
                     />
                     <InputError message={errors.sort_order} />
                 </div>
@@ -276,7 +309,9 @@
                         />
                         <div>
                             <span class="font-medium">Featured Project</span>
-                            <p class="text-xs text-muted-foreground">Show in featured section on homepage.</p>
+                            <p class="text-xs text-muted-foreground">
+                                Show in featured section on homepage.
+                            </p>
                         </div>
                     </label>
                     <label class="flex cursor-pointer items-center gap-3">
@@ -289,7 +324,9 @@
                         />
                         <div>
                             <span class="font-medium">Published</span>
-                            <p class="text-xs text-muted-foreground">Visible on the public portfolio page.</p>
+                            <p class="text-xs text-muted-foreground">
+                                Visible on the public portfolio page.
+                            </p>
                         </div>
                     </label>
                 </div>
@@ -299,31 +336,65 @@
                 <div>
                     {#if showDeleteConfirm}
                         <div class="flex items-center gap-3">
-                            <span class="text-sm text-destructive">Are you sure?</span>
+                            <span class="text-sm text-destructive"
+                                >Are you sure?</span
+                            >
                             <Form
-                                {...projects.destroy.form({ query: { project: project.id } })}
+                                {...projects.destroy.form({
+                                    project: project.id,
+                                })}
                                 method="post"
                                 options={{ preserveScroll: true }}
                             >
-                                {#snippet children({ processing: deleteProcessing })}
-                                    <input type="hidden" name="_method" value="delete" />
-                                    <Button type="submit" variant="destructive" size="sm" disabled={deleteProcessing}>
-                                        {deleteProcessing ? 'Deleting...' : 'Yes, Delete'}
+                                {#snippet children({
+                                    processing: deleteProcessing,
+                                })}
+                                    <input
+                                        type="hidden"
+                                        name="_method"
+                                        value="delete"
+                                    />
+                                    <Button
+                                        type="submit"
+                                        variant="destructive"
+                                        size="sm"
+                                        disabled={deleteProcessing}
+                                    >
+                                        {deleteProcessing
+                                            ? 'Deleting...'
+                                            : 'Yes, Delete'}
                                     </Button>
                                 {/snippet}
                             </Form>
-                            <Button variant="outline" size="sm" onclick={() => {
- showDeleteConfirm = false; 
-}}>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                onclick={() => {
+                                    showDeleteConfirm = false;
+                                }}
+                            >
                                 Cancel
                             </Button>
                         </div>
                     {:else}
-                        <Button variant="outline" onclick={() => {
- showDeleteConfirm = true; 
-}}>
-                            <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        <Button
+                            variant="outline"
+                            onclick={() => {
+                                showDeleteConfirm = true;
+                            }}
+                        >
+                            <svg
+                                class="mr-2 h-4 w-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                                />
                             </svg>
                             Delete Project
                         </Button>
@@ -331,7 +402,7 @@
                 </div>
                 <div class="flex gap-3">
                     <Link
-                        href={admin.index()}
+                        href={projects.index()}
                         class="rounded-lg border border-border bg-background px-6 py-2 text-sm font-medium transition-colors hover:bg-muted"
                     >
                         Cancel
