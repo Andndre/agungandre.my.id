@@ -1,0 +1,1 @@
+import{M as e,k as t,nt as n,q as r,tt as i,v as a,vt as o}from"./app-DfivTl7p.js";function s(s,c){let l=t(c,[`children`,`$$slots`,`$$events`,`$$legacy`]),u=[[`path`,{d:`M20 6 9 17l-5-5`}]];a(s,e({name:`check`},()=>l,{get iconNode(){return u},children:(e,t)=>{var a=n();r(o(a),c,`default`,{},null),i(e,a)},$$slots:{default:!0}}))}export{s as t};
