@@ -515,9 +515,15 @@
                     >
                         <div class="mb-3 text-4xl">🚀</div>
                         <p class="font-medium">Projects coming soon</p>
-                        <p class="mt-1 text-sm text-[#A1A09A]">
-                            Log in to the admin panel to add your first project.
-                        </p>
+                        {#if auth.user}
+                            <p class="mt-1 text-sm text-[#A1A09A]">
+                                Go to the <Link href={toUrl(dashboard())} class="text-cyan-400 underline transition-colors hover:text-cyan-300">admin panel</Link> to add your first project.
+                            </p>
+                        {:else}
+                            <p class="mt-1 text-sm text-[#A1A09A]">
+                                Please check back later to see my latest work.
+                            </p>
+                        {/if}
                     </div>
                 {:else}
                     <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
