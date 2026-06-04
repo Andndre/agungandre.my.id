@@ -517,7 +517,11 @@
                         <p class="font-medium">Projects coming soon</p>
                         {#if auth.user}
                             <p class="mt-1 text-sm text-[#A1A09A]">
-                                Go to the <Link href={toUrl(dashboard())} class="text-cyan-400 underline transition-colors hover:text-cyan-300">admin panel</Link> to add your first project.
+                                Go to the <Link
+                                    href={toUrl(dashboard())}
+                                    class="text-cyan-400 underline transition-colors hover:text-cyan-300"
+                                    >admin panel</Link
+                                > to add your first project.
                             </p>
                         {:else}
                             <p class="mt-1 text-sm text-[#A1A09A]">
@@ -665,7 +669,7 @@
             </p>
 
             <a
-                href="mailto:agungandre687@gmail.com"
+                href="mailto:contact@agungandre.my.id"
                 class="mt-8 inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-cyan-500 to-violet-600 px-8 py-3.5 font-medium text-white shadow-lg shadow-cyan-500/20 transition-all hover:-translate-y-0.5 hover:shadow-cyan-500/40"
             >
                 <svg
