@@ -22,11 +22,11 @@
     let {
         status = '',
         canResetPassword,
-        canRegister,
+        canRegister: _canRegister,
     }: {
         status?: string;
         canResetPassword: boolean;
-        canRegister: boolean;
+        canRegister?: boolean;
     } = $props();
 </script>
 

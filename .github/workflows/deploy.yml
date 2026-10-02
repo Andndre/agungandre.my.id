@@ -1,12 +1,15 @@
-name: Deploy to Hostinger
+name: CI/CD Pipeline
 
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  lint:
+    name: Code Quality (Pint & ESLint)
     runs-on: ubuntu-latest
 
     steps:
@@ -17,7 +20,78 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, bcmath, curl, zip
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite
+          coverage: none
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: |
+          composer install --no-interaction --prefer-dist --optimize-autoloader
+          npm ci
+
+      - name: Check PHP Code Style (Pint)
+        run: vendor/bin/pint --test
+
+      - name: Check Frontend Lint (ESLint)
+        run: npm run lint:check
+
+  test:
+    name: Automated Tests (Pest)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, bcmath, curl, zip
+          coverage: none
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: |
+          composer install --no-interaction --prefer-dist --optimize-autoloader
+          npm ci
+
+      - name: Prepare Environment & Key
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Build Assets for Test
+        run: npm run build
+
+      - name: Run Pest Tests
+        run: ./vendor/bin/pest
+
+  deploy:
+    name: Deploy to Hostinger
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, bcmath, curl, zip
           coverage: none
 
       - name: Install Composer Dependencies
