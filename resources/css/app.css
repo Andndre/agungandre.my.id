@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 @import 'tw-animate-css';
+@plugin '@tailwindcss/typography';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -77,6 +78,51 @@
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
     }
+}
+
+.blog-callout {
+    margin-block: 1.5rem;
+    border-left: 3px solid #22d3ee;
+    border-radius: 0.5rem;
+    background: rgb(34 211 238 / 0.08);
+    padding: 1rem 1.25rem;
+}
+
+.blog-callout-warning {
+    border-color: #fbbf24;
+    background: rgb(251 191 36 / 0.08);
+}
+
+.blog-video {
+    position: relative;
+    margin-block: 1.5rem;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 0.75rem;
+}
+
+.blog-video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.blog-link-card {
+    display: block;
+    margin-block: 1.5rem;
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    color: #67e8f9;
+    text-decoration: none;
+}
+
+.blog-editor .milkdown {
+    min-height: 24rem;
+}
+
+.blog-editor .blog-callout {
+    color: var(--foreground);
 }
 
 @layer utilities {

@@ -5,6 +5,7 @@
     import AppHead from '@/components/AppHead.svelte';
     import { toUrl } from '@/lib/utils';
     import { dashboard } from '@/routes/admin';
+    import { index as blogIndex } from '@/routes/blog';
 
     // Auth state
     const auth = $derived(page.props.auth);
@@ -231,6 +232,7 @@
                     &lt;andre /&gt;
                 </span>
                 <div class="flex items-center gap-6">
+                    <Link href={toUrl(blogIndex())} class="text-sm text-[#A1A09A] transition-colors hover:text-[#EDEDEC]">Blog</Link>
                     {#if auth.user}
                         <Link
                             href={toUrl(dashboard())}
