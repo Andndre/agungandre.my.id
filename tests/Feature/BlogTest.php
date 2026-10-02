@@ -131,6 +131,12 @@ test('owner can upload a validated article image', function () {
 
     expect(Storage::disk('s3')->allFiles('blog/images'))->toHaveCount(1);
 
+    $filename = basename(Storage::disk('s3')->allFiles('blog/images')[0]);
+    $this->get(route('blog.media.show', $filename))->assertOk()
+        ->assertHeader('content-type', 'image/jpeg');
+    $this->get(route('blog.media.show', 'missing.jpg'))->assertNotFound();
+    $this->get('/media/blog/images/../missing.jpg')->assertNotFound();
+
     $this->postJson(route('admin.posts.images.store'), ['image' => UploadedFile::fake()->create('vector.svg', 1, 'image/svg+xml')])
         ->assertUnprocessable()
         ->assertJsonValidationErrors('image');
