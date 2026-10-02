@@ -4,12 +4,12 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, dev ]
   workflow_dispatch:
 
 jobs:
   verify:
-    name: Code Quality & Tests (Pint, ESLint, Pest)
+    name: Code Quality & Tests (Pint, ESLint, Svelte, Pest)
     runs-on: ubuntu-latest
 
     steps:
@@ -45,6 +45,9 @@ jobs:
 
       - name: Check Frontend Lint (ESLint)
         run: npm run lint:check
+
+      - name: Check Frontend Types (Svelte)
+        run: npm run types:check
 
       - name: Run Automated Tests (Pest)
         run: ./vendor/bin/pest

@@ -35,7 +35,8 @@ php artisan migrate --force
 
 # Development Server
 npm run dev                  # Menjalankan Vite dev server untuk Svelte & Tailwind
-composer dev                 # Menjalankan concurrently: serve + queue + logs + vite
+composer dev                 # EnvKit menyediakan web server; jalankan queue + Vite
+composer dev:standalone      # Tanpa EnvKit: jalankan serve + queue + Vite
 
 # Testing & Quality
 php artisan test             # Menjalankan test suite (Pest)
@@ -81,7 +82,15 @@ npm run build                # Kompilasi aset Vite untuk production
 
 ---
 
-## 4. Laravel Boost MCP Integration
+## 4. Alur Branch dan Pull Request
+
+* Kerjakan perubahan di branch `feature/*`, lalu buat PR ke `dev`. CI menjalankan build, Pint, ESLint, pemeriksaan tipe Svelte, dan Pest untuk PR ini.
+* Setelah perubahan di `dev` selesai diperbaiki dan diverifikasi, pemilik membuat PR dari `dev` ke `main`.
+* Deploy produksi hanya berjalan pada push ke `main` setelah pemeriksaan CI lulus. Jangan arahkan PR fitur langsung ke `main`.
+
+---
+
+## 5. Laravel Boost MCP Integration
 
 Repository ini dilengkapi dengan Laravel Boost MCP server. Manfaatkan tools Boost saat tersedia:
 * `search-docs`: Selalu gunakan sebelum melakukan perubahan besar untuk memeriksa dokumentasi versi spesifik paket Laravel/Inertia yang terpasang.

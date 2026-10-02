@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { Link } from '@inertiajs/svelte';
+    import { Link, page } from '@inertiajs/svelte';
     import BookOpen from 'lucide-svelte/icons/book-open';
+    import FileText from 'lucide-svelte/icons/file-text';
     import FolderGit2 from 'lucide-svelte/icons/folder-git-2';
     import FolderPlus from 'lucide-svelte/icons/folder-plus';
     import LayoutGrid from 'lucide-svelte/icons/layout-grid';
@@ -50,6 +51,15 @@
         },
     ];
 
+    const canManagePosts = $derived(
+        Boolean(
+            (page.props.auth as { canManagePosts?: boolean }).canManagePosts,
+        ),
+    );
+    const postNavItems: NavItem[] = [
+        { title: 'Blog posts', href: admin.posts.index(), icon: FileText },
+    ];
+
     const footerNavItems: NavItem[] = [
         {
             title: 'Repository',
@@ -86,6 +96,7 @@
     <SidebarContent>
         <NavMain items={mainNavItems} />
         <NavMain items={adminNavItems} label="Admin" />
+        {#if canManagePosts}<NavMain items={postNavItems} label="Blog" />{/if}
     </SidebarContent>
 
     <SidebarFooter>
