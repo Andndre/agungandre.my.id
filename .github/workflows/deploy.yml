@@ -8,40 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
-    name: Code Quality (Pint & ESLint)
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite
-          coverage: none
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: 'npm'
-
-      - name: Install Dependencies
-        run: |
-          composer install --no-interaction --prefer-dist --optimize-autoloader
-          npm ci
-
-      - name: Check PHP Code Style (Pint)
-        run: vendor/bin/pint --test
-
-      - name: Check Frontend Lint (ESLint)
-        run: npm run lint:check
-
-  test:
-    name: Automated Tests (Pest)
+  verify:
+    name: Code Quality & Tests (Pint, ESLint, Pest)
     runs-on: ubuntu-latest
 
     steps:
@@ -66,21 +34,25 @@ jobs:
           composer install --no-interaction --prefer-dist --optimize-autoloader
           npm ci
 
-      - name: Prepare Environment & Key
+      - name: Prepare Environment & Wayfinder Types
         run: |
           cp .env.example .env
           php artisan key:generate
+          npm run build
 
-      - name: Build Assets for Test
-        run: npm run build
+      - name: Check PHP Code Style (Pint)
+        run: vendor/bin/pint --test
 
-      - name: Run Pest Tests
+      - name: Check Frontend Lint (ESLint)
+        run: npm run lint:check
+
+      - name: Run Automated Tests (Pest)
         run: ./vendor/bin/pest
 
   deploy:
     name: Deploy to Hostinger
     runs-on: ubuntu-latest
-    needs: [lint, test]
+    needs: [verify]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
@@ -94,15 +66,15 @@ jobs:
           extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, bcmath, curl, zip
           coverage: none
 
-      - name: Install Composer Dependencies
-        run: |
-          composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'npm'
+
+      - name: Install Composer Dependencies
+        run: |
+          composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
 
       - name: Build Frontend Assets
         run: |
