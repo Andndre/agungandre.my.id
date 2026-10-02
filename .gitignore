@@ -29,3 +29,5 @@ yarn-error.log
 /.zed
 **/skills/**
 .kilo
+
+/public/build

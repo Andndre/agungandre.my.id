@@ -1,1 +1,0 @@
-import{$ as e,A as t,Dt as n,Et as r,G as i,dt as a,ht as o,jt as s,lt as c,nt as l,tt as u,vt as d,wt as f}from"./app-KMfo7_ni.js";function p(p,m){n(m,!0);let h=t(m,`title`,3,``),g=`Laravel`,_=f(()=>h()?`${h()} - ${g}`:g);i(`6lre40`,t=>{var n=l();e(d(n),()=>m.children??s),a(()=>{o.title=c(_)??``}),u(t,n)}),r()}export{p as t};
