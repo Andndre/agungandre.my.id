@@ -330,6 +330,9 @@
     .hero-copy p {
         max-width: 29rem;
     }
+    .studio-hero:not(.has-project) .hero-copy {
+        max-width: 52rem;
+    }
     .product-stage {
         position: relative;
         isolation: isolate;
@@ -337,29 +340,6 @@
         overflow: hidden;
         border: 1px solid var(--outline-variant);
         background: var(--surface-container-low);
-    }
-    .stage-topbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem 1.25rem;
-        border-bottom: 1px solid var(--outline-variant);
-        font:
-            0.65rem ui-monospace,
-            monospace;
-        letter-spacing: 0.04em;
-        color: var(--on-surface-variant);
-    }
-    .stage-dots {
-        display: flex;
-        gap: 0.3rem;
-    }
-    .stage-dots i {
-        width: 0.35rem;
-        height: 0.35rem;
-        border-radius: 50%;
-        background: var(--outline);
     }
     .stage-image {
         aspect-ratio: 4 / 3;
@@ -389,51 +369,6 @@
     .stage-accent {
         height: 3px;
         background: var(--brand-gradient);
-    }
-    .architecture {
-        position: relative;
-        width: 100%;
-        min-height: 23rem;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        background-image: radial-gradient(
-            var(--outline-variant) 0.8px,
-            transparent 0.8px
-        );
-        background-size: 18px 18px;
-    }
-    .architecture-layer {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 1.1rem 1.25rem;
-        border: 1px solid var(--outline-variant);
-        border-radius: 0.9rem;
-        background: var(--surface-container-lowest);
-    }
-    .architecture-layer:nth-child(2) {
-        margin: 0.75rem 1rem;
-        background: var(--primary-container);
-        color: var(--on-primary-container);
-        border-color: transparent;
-    }
-    .architecture-layer:nth-child(3) {
-        margin-left: 2rem;
-    }
-    .architecture-number {
-        display: grid;
-        place-items: center;
-        width: 2rem;
-        height: 2rem;
-        border: 1px solid currentColor;
-        border-radius: 0.5rem;
-        font:
-            0.7rem ui-monospace,
-            monospace;
-        opacity: 0.65;
     }
     .studio-section {
         padding-block: 5rem;
@@ -471,15 +406,6 @@
         border: 1px dashed var(--outline);
         border-radius: 1.25rem;
         background: var(--surface-container-low);
-    }
-    .process-grid {
-        display: grid;
-        gap: 2rem;
-        margin-top: 3rem;
-    }
-    .process-item {
-        border-top: 1px solid var(--outline);
-        padding-top: 1.5rem;
     }
     .writing-item {
         display: flex;
@@ -743,17 +669,14 @@
     line-height: 1.2;
 }
 .intro-frame {
-    animation: studio-enter 1050ms var(--ease-standard) both;
+    animation: studio-enter var(--motion-reveal) var(--ease-standard) both;
 }
 .intro-copy {
-    animation: studio-copy 900ms var(--ease-standard) both;
+    animation: studio-copy var(--motion-reveal) var(--ease-standard) both;
 }
 @keyframes studio-enter {
     0% {
-        transform: translateY(24px) scale(0.96) rotate(1.5deg);
-    }
-    55% {
-        transform: translateY(-4px) scale(1.01);
+        transform: translateY(12px);
     }
     100% {
         transform: none;
@@ -777,9 +700,6 @@
     object-fit: cover;
 }
 @media (min-width: 768px) {
-    .process-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
     .writing-item {
         flex-direction: row;
         align-items: baseline;
@@ -791,7 +711,7 @@
     }
 }
 @media (min-width: 1024px) {
-    .studio-hero {
+    .studio-hero.has-project {
         grid-template-columns: 1fr 1fr;
         min-height: 43rem;
         gap: 4rem;
@@ -824,10 +744,6 @@
     }
     .studio-empty {
         padding: 1.5rem;
-    }
-    .architecture {
-        min-height: 19rem;
-        padding: 1.25rem;
     }
 }
 @media (prefers-reduced-motion: reduce) {

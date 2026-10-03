@@ -78,20 +78,6 @@
             month: 'short',
             year: 'numeric',
         }).format(new Date(value));
-    const process = [
-        {
-            title: 'Understand the problem.',
-            text: 'Start with the people using the product, the work they need to do, and the constraints around it.',
-        },
-        {
-            title: 'Connect the whole system.',
-            text: 'Build the interface and the backend together, so the experience holds up beyond the first screen.',
-        },
-        {
-            title: 'Ship, learn, refine.',
-            text: 'Test the important paths, listen to feedback, and make the next iteration more useful.',
-        },
-    ];
 </script>
 
 <svelte:window
@@ -104,20 +90,23 @@
 <AppHead title="Andre — Full-stack Developer"
     ><meta
         name="description"
-        content="Andre is a full-stack developer building thoughtful web and mobile products, from interface to backend. Explore the work and get in touch."
+        content="Andre is a full-stack developer from Klungkung, Bali, building web and mobile applications with Laravel, Svelte, and Flutter. View projects, read articles, or get in touch."
     /></AppHead
 >
-<section class="studio-shell studio-hero" aria-labelledby="hero-title">
+<section
+    class="studio-shell studio-hero relative"
+    class:has-project={selected !== null}
+    aria-labelledby="hero-title"
+>
     <div class="hero-copy" class:intro-copy={intro}>
-        <p class="section-kicker">Independent full-stack developer</p>
-        <h1 id="hero-title" class="studio-title mt-6">
-            Thoughtful interfaces.<br /><span class="text-primary"
-                >Solid systems.</span
+        <h1 id="hero-title" class="studio-title">
+            I'm Andre.<br /><span class="text-primary"
+                >Full-stack developer.</span
             >
         </h1>
         <p class="mt-6 text-lg leading-relaxed text-muted-foreground">
-            I'm Andre. I build web and mobile products, connecting what people
-            see with everything that makes it work.
+            I build web and mobile applications with Laravel, Svelte, and
+            Flutter. Based in Klungkung, Bali.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
             <a href="#work" class="studio-button"
@@ -128,81 +117,51 @@
                 >Get in touch <ArrowUpRight class="size-4" /></a
             >
         </div>
-        <div
-            class="mt-9 flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs text-muted-foreground"
-        >
-            <span>Laravel / Svelte / Flutter</span><span>Bali, Indonesia</span>
-        </div>
     </div>
-    <div class="relative" class:intro-frame={intro}>
-        <ProjectPreview project={selected} source="hero" eager />
-        {#if intro}<button
-                type="button"
-                class="studio-link absolute right-4 -bottom-12"
-                onclick={finishIntro}>Skip intro →</button
-            >{/if}
-        {#if projects.length > 1}<div
-                class="mt-4 flex flex-wrap gap-2"
-                role="group"
-                aria-label="Choose project preview"
-            >
-                {#each projects.slice(0, 5) as project, i (project.id)}<button
-                        type="button"
-                        class="theme-option border border-border text-xs"
-                        aria-label={'Preview ' + project.title}
-                        aria-pressed={selected?.id === project.id}
-                        onclick={() => {
-                            finishIntro();
-                            selectedId = project.id;
-                        }}>{String(i + 1).padStart(2, '0')}</button
-                    >{/each}
-            </div>{/if}
-    </div>
+    {#if selected}<div class:intro-frame={intro}>
+            <ProjectPreview project={selected} source="hero" eager />
+            {#if projects.length > 1}<div
+                    class="mt-4 flex flex-wrap gap-2"
+                    role="group"
+                    aria-label="Choose project preview"
+                >
+                    {#each projects.slice(0, 5) as project, i (project.id)}<button
+                            type="button"
+                            class="theme-option border border-border text-xs"
+                            aria-label={'Preview ' + project.title}
+                            aria-pressed={selected?.id === project.id}
+                            onclick={() => {
+                                finishIntro();
+                                selectedId = project.id;
+                            }}>{String(i + 1).padStart(2, '0')}</button
+                        >{/each}
+                </div>{/if}
+        </div>{/if}
+    {#if intro}<button
+            type="button"
+            class="studio-link absolute right-0 bottom-3"
+            onclick={finishIntro}>Skip intro →</button
+        >{/if}
 </section>
 <section id="work" class="studio-section" aria-labelledby="work-title">
     <div class="studio-shell">
-        <div class="flex flex-wrap items-end justify-between gap-5">
-            <div>
-                <p class="section-kicker">01 / Selected work</p>
-                <h2 id="work-title" class="section-title mt-4">
-                    Built to be useful.
-                </h2>
-            </div>
-            <p class="max-w-xs text-sm leading-relaxed text-muted-foreground">
-                A closer look at the products, the problems, and the decisions
-                behind them.
+        <h2 id="work-title" class="section-title">Selected work</h2>
+        {#if projects.length === 0}<p class="mt-6 text-muted-foreground">
+                No projects published yet.
             </p>
-        </div>
-        {#if projects.length === 0}<div class="studio-empty mt-10">
-                <span class="font-mono text-xs text-primary"
-                    >WORK IN PROGRESS</span
-                >
-                <h3 class="text-xl font-semibold">
-                    The next project starts with a conversation.
-                </h3>
-                <p
-                    class="max-w-xl text-sm leading-relaxed text-muted-foreground"
-                >
-                    Project stories are being prepared. In the meantime, tell me
-                    what you're building and where you could use a hand.
-                </p>
-                <a href="mailto:contact@agungandre.my.id" class="studio-link"
-                    >Let's talk <ArrowUpRight class="size-4" /></a
-                >
-            </div>
-        {:else}{#each projects as project, i (project.id)}<article
+        {:else}{#each projects as project (project.id)}<article
                     class="work-row"
                 >
                     <ProjectPreview {project} source={'work-' + project.id} />
                     <div>
-                        <p class="section-kicker">
-                            {String(i + 1).padStart(2, '0')} / {project.is_featured
-                                ? 'Featured project'
-                                : 'Project'}
-                        </p>
-                        <h3 class="mt-5 text-3xl font-semibold tracking-tight">
+                        <h3 class="text-3xl font-semibold tracking-tight">
                             {project.title}
                         </h3>
+                        {#if project.is_featured}<p
+                                class="mt-3 text-sm text-primary"
+                            >
+                                Featured project
+                            </p>{/if}
                         <p
                             class="mt-4 line-clamp-4 leading-relaxed text-muted-foreground"
                         >
@@ -222,40 +181,16 @@
                             onclick={(event?: MouseEvent) =>
                                 selectProject(event, 'work-' + project.id)}
                             class="studio-link mt-6"
-                            >Explore project <ArrowUpRight
-                                class="size-4"
-                            /></Link
+                            >View project <ArrowUpRight class="size-4" /></Link
                         >
                     </div>
                 </article>{/each}{/if}
     </div>
 </section>
-<section class="studio-section">
-    <div class="studio-shell">
-        <p class="section-kicker">02 / How I work</p>
-        <h2 class="section-title mt-4 max-w-2xl">
-            The details connect.<br />So should the work.
-        </h2>
-        <div class="process-grid">
-            {#each process as step, i (step.title)}<div class="process-item">
-                    <span class="font-mono text-xs text-primary">0{i + 1}</span>
-                    <h3 class="mt-4 text-xl font-semibold">{step.title}</h3>
-                    <p
-                        class="mt-3 text-sm leading-relaxed text-muted-foreground"
-                    >
-                        {step.text}
-                    </p>
-                </div>{/each}
-        </div>
-    </div>
-</section>
-<section id="about" class="studio-section">
+<section id="about" class="studio-section" aria-labelledby="about-title">
     <div class="studio-shell grid gap-10 lg:grid-cols-2">
         <div>
-            <p class="section-kicker">03 / A little about me</p>
-            <h2 class="section-title mt-4">
-                Curious by nature.<br />A builder by practice.
-            </h2>
+            <h2 id="about-title" class="section-title">About me</h2>
         </div>
         <div class="space-y-5 text-base leading-relaxed text-muted-foreground">
             <p>
@@ -270,28 +205,28 @@
                 Since then, I've worked on profile, news, recruitment, and event
                 systems, alongside projects for lecturers and personal clients.
             </p>
-            <div class="flex flex-wrap gap-2 pt-2">
-                {#each ['Laravel', 'Svelte', 'Flutter', 'Next.js', 'Tailwind CSS'] as tech (tech)}<span
-                        class="tech-label">{tech}</span
-                    >{/each}
-            </div>
+            <ul
+                class="flex flex-wrap gap-x-5 gap-y-2 pt-2 text-sm"
+                aria-label="Technologies"
+            >
+                {#each ['Laravel', 'Svelte', 'Flutter', 'Next.js', 'Tailwind CSS'] as tech (tech)}<li
+                    >
+                        {tech}
+                    </li>{/each}
+            </ul>
         </div>
     </div>
 </section>
-<section id="writing" class="studio-section">
+<section id="writing" class="studio-section" aria-labelledby="writing-title">
     <div class="studio-shell">
         <div class="mb-8 flex flex-wrap items-end justify-between gap-5">
-            <div>
-                <p class="section-kicker">04 / Writing</p>
-                <h2 class="section-title mt-4">Notes from the build.</h2>
-            </div>
+            <h2 id="writing-title" class="section-title">Writing</h2>
             <Link href={writing()} class="studio-link"
                 >All writing <ArrowUpRight class="size-4" /></Link
             >
         </div>
         {#if latestPosts.length === 0}<p class="text-muted-foreground">
-                Notes on development, decisions, and things learned along the
-                way. Coming soon.
+                No articles published yet.
             </p>{:else}{#each latestPosts as post (post.id)}<article
                     class="writing-item"
                 >
@@ -314,25 +249,21 @@
                     <Link
                         href={article({ slug: post.slug })}
                         class="studio-link"
-                        >Read story <ArrowUpRight class="size-4" /></Link
+                        >Read article <ArrowUpRight class="size-4" /></Link
                     >
                 </article>{/each}{/if}
     </div>
 </section>
-<section id="contact" class="studio-shell pb-12">
-    <div class="contact-panel">
+<section id="contact" class="studio-section" aria-labelledby="contact-title">
+    <div class="studio-shell flex flex-wrap items-end justify-between gap-6">
         <div>
-            <p class="text-xs font-semibold tracking-widest uppercase">
-                Have something in mind?
-            </p>
-            <h2 class="section-title mt-4">Let's make it work.</h2>
-            <p class="mt-4 max-w-xl text-sm leading-relaxed">
-                A new product, a better workflow, or an idea that needs a first
-                step. I'd like to hear about it.
+            <h2 id="contact-title" class="section-title">Contact</h2>
+            <p class="mt-4 text-muted-foreground">
+                For project enquiries or hiring conversations.
             </p>
         </div>
-        <a href="mailto:contact@agungandre.my.id" class="studio-button"
-            >Get in touch <ArrowUpRight class="size-4" /></a
+        <a href="mailto:contact@agungandre.my.id" class="studio-link"
+            >contact@agungandre.my.id <ArrowUpRight class="size-4" /></a
         >
     </div>
 </section>
