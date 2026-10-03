@@ -1,13 +1,26 @@
 <script lang="ts">
+    import { setLayoutProps } from '@inertiajs/svelte';
     import AppHead from '@/components/AppHead.svelte';
     import PostForm from '@/components/PostForm.svelte';
+    import posts from '@/routes/admin/posts';
+    setLayoutProps({
+        breadcrumbs: [
+            { title: 'Tulisan', href: posts.index().url },
+            { title: 'Artikel baru', href: posts.create().url },
+        ],
+    });
 </script>
 
 <AppHead title="Artikel Baru" />
-<div class="mx-auto w-full max-w-4xl space-y-6 p-4">
-    <div>
-        <h1 class="text-2xl font-bold">Artikel baru</h1>
-        <p class="text-sm text-muted-foreground">Tulis dan terbitkan devlog.</p>
+<div class="cms-page">
+    <div class="cms-header">
+        <div>
+            <p class="cms-eyebrow">Tulisan</p>
+            <h1 class="cms-title">Artikel baru</h1>
+            <p class="cms-description">
+                Tulis, lihat preview, lalu pilih waktu publikasi.
+            </p>
+        </div>
     </div>
     <PostForm />
 </div>

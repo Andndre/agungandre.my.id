@@ -1,3 +1,2 @@
-<div class="flex flex-col">
-    <slot />
-</div>
+<script lang="ts">import { DropdownMenu } from 'bits-ui'; import type { Snippet } from 'svelte'; let { children }: { children?: Snippet } = $props();</script>
+<DropdownMenu.Group>{@render children?.()}</DropdownMenu.Group>

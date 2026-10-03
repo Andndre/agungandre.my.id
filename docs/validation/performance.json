@@ -1,0 +1,906 @@
+{
+  "environment": {
+    "width": 390,
+    "cpu": 4,
+    "latency": 150,
+    "downloadBytesPerSecond": 200000,
+    "url": "http://127.0.0.1:8010/",
+    "server": "PHP local; no response compression"
+  },
+  "samples": [
+    {
+      "run": 1,
+      "metrics": {
+        "lcp": 4308,
+        "cls": 0,
+        "events": []
+      },
+      "paints": [
+        {
+          "name": "first-paint",
+          "startTime": 2268
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 4308
+        }
+      ],
+      "navigation": [
+        {
+          "ttfb": 77.09999990463257,
+          "dcl": 2771.699999809265
+        }
+      ],
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8010/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "transferSize": 17160,
+          "decodedBodySize": 16860,
+          "duration": 657.5999999046326
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "transferSize": 17708,
+          "decodedBodySize": 17408,
+          "duration": 667.0999999046326
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/app-Cu0yRn2N.css",
+          "transferSize": 114217,
+          "decodedBodySize": 113917,
+          "duration": 2005.2999999523163
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/app-CJNePmAC.css",
+          "transferSize": 12889,
+          "decodedBodySize": 12589,
+          "duration": 545.7000000476837
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/app-BsKM6mxS.js",
+          "transferSize": 193137,
+          "decodedBodySize": 192837,
+          "duration": 2398.7000000476837
+        },
+        {
+          "name": "http://127.0.0.1:8010/.qa/projects/qa-orbit.png",
+          "transferSize": 68860,
+          "decodedBodySize": 68560,
+          "duration": 1523.7000000476837
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/Icon-DMlwMRfN.js",
+          "transferSize": 1538,
+          "decodedBodySize": 1238,
+          "duration": 178.70000004768372
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/arrow-up-right-CdQueTTa.js",
+          "transferSize": 705,
+          "decodedBodySize": 405,
+          "duration": 178.30000019073486
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/AppHead-ChElOaES.js",
+          "transferSize": 792,
+          "decodedBodySize": 492,
+          "duration": 183.90000009536743
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/blog-Bv-f9C68.js",
+          "transferSize": 2211,
+          "decodedBodySize": 1911,
+          "duration": 205.79999995231628
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/wayfinder-zo37vXJt.js",
+          "transferSize": 1198,
+          "decodedBodySize": 898,
+          "duration": 200.70000004768372
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/projects-BupOgdKv.js",
+          "transferSize": 1032,
+          "decodedBodySize": 732,
+          "duration": 200.10000014305115
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/ThemePicker-Ba-MKYlq.js",
+          "transferSize": 2448,
+          "decodedBodySize": 2148,
+          "duration": 355.09999990463257
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/admin-uqWrRfcH.js",
+          "transferSize": 4670,
+          "decodedBodySize": 4370,
+          "duration": 413.5
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/posts-DEPIMltf.js",
+          "transferSize": 4505,
+          "decodedBodySize": 4205,
+          "duration": 397
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/routes-DJ6niqBG.js",
+          "transferSize": 1461,
+          "decodedBodySize": 1161,
+          "duration": 366.5
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "transferSize": 17312,
+          "decodedBodySize": 17012,
+          "duration": 343.80000019073486
+        }
+      ],
+      "compression": [
+        {
+          "url": "http://127.0.0.1:8010/",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-Cu0yRn2N.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-CJNePmAC.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/.qa/projects/qa-orbit.png",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/PublicLayout-4Uxo9xuI.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/Welcome-BsNiwTGh.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-BsKM6mxS.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/arrow-up-right-CdQueTTa.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/Icon-DMlwMRfN.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/AppHead-ChElOaES.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/wayfinder-zo37vXJt.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/projects-BupOgdKv.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/blog-Bv-f9C68.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/ThemePicker-Ba-MKYlq.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/routes-DJ6niqBG.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/favicon.ico",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/posts-DEPIMltf.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/admin-uqWrRfcH.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "encoding": "identity"
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "metrics": {
+        "lcp": 3732,
+        "cls": 0,
+        "events": []
+      },
+      "paints": [
+        {
+          "name": "first-paint",
+          "startTime": 2412
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 3732
+        }
+      ],
+      "navigation": [
+        {
+          "ttfb": 88.30000019073486,
+          "dcl": 2812.100000143051
+        }
+      ],
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8010/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "transferSize": 17160,
+          "decodedBodySize": 16860,
+          "duration": 668.5
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "transferSize": 17708,
+          "decodedBodySize": 17408,
+          "duration": 663.5999999046326
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/app-Cu0yRn2N.css",
+          "transferSize": 114217,
+          "decodedBodySize": 113917,
+          "duration": 2128.9000000953674
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/app-CJNePmAC.css",
+          "transferSize": 12889,
+          "decodedBodySize": 12589,
+          "duration": 555.0999999046326
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/app-BsKM6mxS.js",
+          "transferSize": 193137,
+          "decodedBodySize": 192837,
+          "duration": 2521.5999999046326
+        },
+        {
+          "name": "http://127.0.0.1:8010/.qa/projects/qa-orbit.png",
+          "transferSize": 68860,
+          "decodedBodySize": 68560,
+          "duration": 1637.2999999523163
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/Icon-DMlwMRfN.js",
+          "transferSize": 1538,
+          "decodedBodySize": 1238,
+          "duration": 170.70000004768372
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/arrow-up-right-CdQueTTa.js",
+          "transferSize": 705,
+          "decodedBodySize": 405,
+          "duration": 185.59999990463257
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/AppHead-ChElOaES.js",
+          "transferSize": 792,
+          "decodedBodySize": 492,
+          "duration": 185
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/blog-Bv-f9C68.js",
+          "transferSize": 2211,
+          "decodedBodySize": 1911,
+          "duration": 210
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/wayfinder-zo37vXJt.js",
+          "transferSize": 1198,
+          "decodedBodySize": 898,
+          "duration": 194.59999990463257
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/projects-BupOgdKv.js",
+          "transferSize": 1032,
+          "decodedBodySize": 732,
+          "duration": 197
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/ThemePicker-Ba-MKYlq.js",
+          "transferSize": 2448,
+          "decodedBodySize": 2148,
+          "duration": 325.5
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/admin-uqWrRfcH.js",
+          "transferSize": 4670,
+          "decodedBodySize": 4370,
+          "duration": 429.89999985694885
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/posts-DEPIMltf.js",
+          "transferSize": 4505,
+          "decodedBodySize": 4205,
+          "duration": 399.90000009536743
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/routes-DJ6niqBG.js",
+          "transferSize": 1461,
+          "decodedBodySize": 1161,
+          "duration": 367.5
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "transferSize": 17312,
+          "decodedBodySize": 17012,
+          "duration": 335.09999990463257
+        }
+      ],
+      "compression": [
+        {
+          "url": "http://127.0.0.1:8010/",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-Cu0yRn2N.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-CJNePmAC.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/.qa/projects/qa-orbit.png",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/PublicLayout-4Uxo9xuI.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/Welcome-BsNiwTGh.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-BsKM6mxS.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/arrow-up-right-CdQueTTa.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/Icon-DMlwMRfN.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/AppHead-ChElOaES.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/wayfinder-zo37vXJt.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/projects-BupOgdKv.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/blog-Bv-f9C68.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/ThemePicker-Ba-MKYlq.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/routes-DJ6niqBG.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/favicon.ico",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/posts-DEPIMltf.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/admin-uqWrRfcH.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-Cu0yRn2N.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-CJNePmAC.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/.qa/projects/qa-orbit.png",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/PublicLayout-4Uxo9xuI.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/Welcome-BsNiwTGh.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-BsKM6mxS.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/Icon-DMlwMRfN.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/arrow-up-right-CdQueTTa.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/AppHead-ChElOaES.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/wayfinder-zo37vXJt.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/projects-BupOgdKv.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/blog-Bv-f9C68.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/ThemePicker-Ba-MKYlq.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/favicon.ico",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/routes-DJ6niqBG.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/posts-DEPIMltf.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/admin-uqWrRfcH.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "encoding": "identity"
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "metrics": {
+        "lcp": 3576,
+        "cls": 0,
+        "events": []
+      },
+      "paints": [
+        {
+          "name": "first-paint",
+          "startTime": 2288
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 3576
+        }
+      ],
+      "navigation": [
+        {
+          "ttfb": 58.60000014305115,
+          "dcl": 2689.9000000953674
+        }
+      ],
+      "resources": [
+        {
+          "name": "http://127.0.0.1:8010/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "transferSize": 17160,
+          "decodedBodySize": 16860,
+          "duration": 666.5
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "transferSize": 17708,
+          "decodedBodySize": 17408,
+          "duration": 680.2000000476837
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/app-Cu0yRn2N.css",
+          "transferSize": 114217,
+          "decodedBodySize": 113917,
+          "duration": 2018.5
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/app-CJNePmAC.css",
+          "transferSize": 12889,
+          "decodedBodySize": 12589,
+          "duration": 558.8999998569489
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/app-BsKM6mxS.js",
+          "transferSize": 193137,
+          "decodedBodySize": 192837,
+          "duration": 2424.0999999046326
+        },
+        {
+          "name": "http://127.0.0.1:8010/.qa/projects/qa-orbit.png",
+          "transferSize": 68860,
+          "decodedBodySize": 68560,
+          "duration": 1569.5999999046326
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/Icon-DMlwMRfN.js",
+          "transferSize": 1538,
+          "decodedBodySize": 1238,
+          "duration": 171.59999990463257
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/arrow-up-right-CdQueTTa.js",
+          "transferSize": 705,
+          "decodedBodySize": 405,
+          "duration": 172.40000009536743
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/AppHead-ChElOaES.js",
+          "transferSize": 792,
+          "decodedBodySize": 492,
+          "duration": 183.59999990463257
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/blog-Bv-f9C68.js",
+          "transferSize": 2211,
+          "decodedBodySize": 1911,
+          "duration": 212.69999980926514
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/wayfinder-zo37vXJt.js",
+          "transferSize": 1198,
+          "decodedBodySize": 898,
+          "duration": 194.5
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/projects-BupOgdKv.js",
+          "transferSize": 1032,
+          "decodedBodySize": 732,
+          "duration": 209.19999980926514
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/ThemePicker-Ba-MKYlq.js",
+          "transferSize": 2448,
+          "decodedBodySize": 2148,
+          "duration": 356.89999985694885
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/admin-uqWrRfcH.js",
+          "transferSize": 4670,
+          "decodedBodySize": 4370,
+          "duration": 413.60000014305115
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/posts-DEPIMltf.js",
+          "transferSize": 4505,
+          "decodedBodySize": 4205,
+          "duration": 397.59999990463257
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/routes-DJ6niqBG.js",
+          "transferSize": 1461,
+          "decodedBodySize": 1161,
+          "duration": 351.09999990463257
+        },
+        {
+          "name": "http://127.0.0.1:8010/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "transferSize": 17312,
+          "decodedBodySize": 17012,
+          "duration": 346.7999999523163
+        }
+      ],
+      "compression": [
+        {
+          "url": "http://127.0.0.1:8010/",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-Cu0yRn2N.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-CJNePmAC.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/.qa/projects/qa-orbit.png",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/PublicLayout-4Uxo9xuI.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/Welcome-BsNiwTGh.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-BsKM6mxS.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/arrow-up-right-CdQueTTa.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/Icon-DMlwMRfN.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/AppHead-ChElOaES.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/wayfinder-zo37vXJt.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/projects-BupOgdKv.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/blog-Bv-f9C68.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/ThemePicker-Ba-MKYlq.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/routes-DJ6niqBG.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/favicon.ico",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/posts-DEPIMltf.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/admin-uqWrRfcH.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-Cu0yRn2N.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-CJNePmAC.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/.qa/projects/qa-orbit.png",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/PublicLayout-4Uxo9xuI.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/Welcome-BsNiwTGh.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-BsKM6mxS.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/Icon-DMlwMRfN.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/arrow-up-right-CdQueTTa.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/AppHead-ChElOaES.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/wayfinder-zo37vXJt.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/projects-BupOgdKv.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/blog-Bv-f9C68.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/ThemePicker-Ba-MKYlq.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/favicon.ico",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/routes-DJ6niqBG.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/posts-DEPIMltf.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/admin-uqWrRfcH.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-Cu0yRn2N.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-CJNePmAC.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/.qa/projects/qa-orbit.png",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/PublicLayout-4Uxo9xuI.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/Welcome-BsNiwTGh.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/app-BsKM6mxS.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/Icon-DMlwMRfN.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/arrow-up-right-CdQueTTa.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/AppHead-ChElOaES.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/wayfinder-zo37vXJt.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/blog-Bv-f9C68.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/projects-BupOgdKv.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/routes-DJ6niqBG.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/ThemePicker-Ba-MKYlq.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/favicon.ico",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/posts-DEPIMltf.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/admin-uqWrRfcH.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "http://127.0.0.1:8010/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "encoding": "identity"
+        }
+      ]
+    }
+  ]
+}

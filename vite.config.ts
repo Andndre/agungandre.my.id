@@ -3,7 +3,7 @@ import { wayfinder } from '@laravel/vite-plugin-wayfinder';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import tailwindcss from '@tailwindcss/vite';
 import laravel from 'laravel-vite-plugin';
-import { bunny } from 'laravel-vite-plugin/fonts';
+import { local } from 'laravel-vite-plugin/fonts';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -12,8 +12,15 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.ts'],
             refresh: true,
             fonts: [
-                bunny('Instrument Sans', {
-                    weights: [400, 500, 600],
+                local('Instrument Sans', {
+                    variants: [400, 500, 600, 700].map((weight) => ({
+                        src:
+                            'resources/fonts/instrument-sans-' +
+                            weight +
+                            '-latin.woff2',
+                        weight,
+                    })),
+                    preload: [{ weight: 400 }, { weight: 600 }],
                 }),
             ],
         }),

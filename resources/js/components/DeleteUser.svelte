@@ -20,24 +20,26 @@
 <div class="space-y-6">
     <Heading
         variant="small"
-        title="Delete account"
-        description="Delete your account and all of its resources"
+        title="Hapus akun"
+        description="Hapus akun dan seluruh data terkait."
     />
     <div
-        class="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10"
+        class="space-y-4 rounded-lg border border-destructive/20 bg-error-container p-4"
     >
-        <div class="relative space-y-0.5 text-red-600 dark:text-red-100">
-            <p class="font-medium">Warning</p>
-            <p class="text-sm">
-                Please proceed with caution, this cannot be undone.
-            </p>
+        <div class="relative space-y-0.5 text-on-error-container">
+            <p class="font-medium">Perhatian</p>
+            <p class="text-sm">Penghapusan akun tidak dapat dibatalkan.</p>
         </div>
         <Dialog>
-            <DialogTrigger>
-                <Button variant="destructive" data-test="delete-user-button"
-                    >Delete account</Button
-                >
-            </DialogTrigger>
+            <DialogTrigger asChild
+                >{#snippet children(props)}
+                    <Button
+                        {...props}
+                        variant="destructive"
+                        data-test="delete-user-button">Hapus akun</Button
+                    >
+                {/snippet}</DialogTrigger
+            >
             <DialogContent>
                 <Form
                     {...ProfileController.destroy.form()}
@@ -46,34 +48,39 @@
                 >
                     {#snippet children({ errors, processing })}
                         <div class="space-y-3">
-                            <DialogTitle
-                                >Are you sure you want to delete your account?</DialogTitle
-                            >
+                            <DialogTitle>Hapus akun Anda?</DialogTitle>
                             <DialogDescription>
-                                Once your account is deleted, all of its
-                                resources and data will also be permanently
-                                deleted. Please enter your password to confirm
-                                you would like to permanently delete your
-                                account.
+                                Akun beserta data terkait akan dihapus secara
+                                permanen. Masukkan kata sandi Anda untuk
+                                mengonfirmasi penghapusan.
                             </DialogDescription>
                         </div>
 
                         <div class="grid gap-2">
                             <Label for="password" class="sr-only"
-                                >Password</Label
+                                >Kata sandi</Label
                             >
                             <PasswordInput
                                 id="password"
                                 name="password"
-                                placeholder="Password"
+                                placeholder="Kata sandi"
+                                aria-invalid={Boolean(errors.password)}
+                                aria-describedby="delete-password-error"
                             />
-                            <InputError message={errors.password} />
+                            <InputError
+                                id="delete-password-error"
+                                message={errors.password}
+                            />
                         </div>
 
                         <DialogFooter class="gap-2">
-                            <DialogClose>
-                                <Button variant="secondary">Cancel</Button>
-                            </DialogClose>
+                            <DialogClose asChild
+                                >{#snippet children(props)}
+                                    <Button {...props} variant="secondary"
+                                        >Batal</Button
+                                    >
+                                {/snippet}</DialogClose
+                            >
 
                             <Button
                                 type="submit"
@@ -81,7 +88,7 @@
                                 disabled={processing}
                                 data-test="confirm-delete-user-button"
                             >
-                                Delete account
+                                Hapus akun
                             </Button>
                         </DialogFooter>
                     {/snippet}

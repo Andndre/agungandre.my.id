@@ -7,7 +7,10 @@
     import '@milkdown/crepe/theme/common/style.css';
     import '@milkdown/crepe/theme/frame.css';
 
-    let { value = $bindable('') }: { value?: string } = $props();
+    let {
+        value = $bindable(''),
+        onReady,
+    }: { value?: string; onReady?: (markdown: string) => void } = $props();
     let root: HTMLDivElement;
     let editor: Crepe | null = null;
     let error = $state('');
@@ -30,7 +33,7 @@
 
         if (!response.ok) {
             throw new Error(
-                'Image upload failed. Check the file type and storage settings.',
+                'Gambar gagal diunggah. Periksa jenis file dan pengaturan penyimpanan.',
             );
         }
 
@@ -48,7 +51,7 @@
 
         if (kind === 'embed') {
             const url = window.prompt(
-                'HTTPS URL for YouTube video or link card',
+                'URL HTTPS untuk video YouTube atau kartu tautan',
             );
 
             if (!url) {
@@ -66,7 +69,7 @@
                     throw new Error();
                 }
             } catch {
-                error = 'Enter a valid HTTPS URL.';
+                error = 'Masukkan URL HTTPS yang valid.';
 
                 return;
             }
@@ -76,7 +79,9 @@
             );
         } else {
             editor.editor.action(
-                insert(`\n\n\`\`\`${kind}\nWrite your note here.\n\`\`\`\n`),
+                insert(
+                    `\n\n\`\`\`${kind}\nTulis catatan Anda di sini.\n\`\`\`\n`,
+                ),
             );
         }
 
@@ -85,10 +90,65 @@
     }
 
     onMount(() => {
+        let active = true;
         const instance = new Crepe({
             root,
             defaultValue: value,
-            featureConfigs: { 'image-block': { onUpload: upload } },
+            featureConfigs: {
+                placeholder: { text: 'Mulai menulis…' },
+                'image-block': {
+                    onUpload: upload,
+                    inlineUploadButton: 'Unggah',
+                    inlineUploadPlaceholderText: 'atau tempel tautan',
+                    blockUploadButton: 'Unggah gambar',
+                    blockConfirmButton: 'Konfirmasi',
+                    blockCaptionPlaceholderText: 'Tulis keterangan gambar',
+                    blockUploadPlaceholderText: 'atau tempel tautan',
+                },
+                toolbar: {
+                    boldLabel: 'Tebal',
+                    italicLabel: 'Miring',
+                    codeLabel: 'Kode',
+                    linkLabel: 'Tautan',
+                    strikethroughLabel: 'Coret',
+                    latexLabel: 'Rumus',
+                },
+                'link-tooltip': { inputPlaceholder: 'Tempel tautan…' },
+                'code-mirror': {
+                    searchPlaceholder: 'Cari bahasa',
+                    copyText: 'Salin',
+                    noResultText: 'Tidak ada hasil',
+                    previewToggleText: (previewOnly) =>
+                        previewOnly ? 'Edit' : 'Sembunyikan',
+                },
+                'block-edit': {
+                    textGroup: {
+                        label: 'Teks',
+                        text: { label: 'Paragraf' },
+                        h1: { label: 'Judul 1' },
+                        h2: { label: 'Judul 2' },
+                        h3: { label: 'Judul 3' },
+                        h4: { label: 'Judul 4' },
+                        h5: { label: 'Judul 5' },
+                        h6: { label: 'Judul 6' },
+                        quote: { label: 'Kutipan' },
+                        divider: { label: 'Pemisah' },
+                    },
+                    listGroup: {
+                        label: 'Daftar',
+                        bulletList: { label: 'Daftar poin' },
+                        orderedList: { label: 'Daftar nomor' },
+                        taskList: { label: 'Daftar tugas' },
+                    },
+                    advancedGroup: {
+                        label: 'Lanjutan',
+                        image: { label: 'Gambar' },
+                        codeBlock: { label: 'Blok kode' },
+                        table: { label: 'Tabel' },
+                        math: { label: 'Rumus' },
+                    },
+                },
+            },
         });
         instance.editor.use([...blogBlockRemark, calloutNode, embedNode]);
         instance.on((listener) => {
@@ -99,13 +159,24 @@
         void instance
             .create()
             .then(() => {
+                if (!active) {
+                    void instance.destroy();
+
+                    return;
+                }
+
                 editor = instance;
+                value = instance.getMarkdown();
+                onReady?.(value);
             })
             .catch(() => {
-                error = 'Editor could not start.';
+                if (active) {
+                    error = 'Editor tidak dapat dimulai.';
+                }
             });
 
         return () => {
+            active = false;
             void instance.destroy();
         };
     });
@@ -115,18 +186,18 @@
     <div class="flex flex-wrap gap-2">
         <button
             type="button"
-            class="rounded-md border px-3 py-1.5 text-sm hover:bg-muted"
-            onclick={() => insertBlock('callout:info')}>+ Note</button
+            class="min-h-11 rounded-md border px-3 text-sm hover:bg-muted"
+            onclick={() => insertBlock('callout:info')}>+ Catatan</button
         >
         <button
             type="button"
-            class="rounded-md border px-3 py-1.5 text-sm hover:bg-muted"
-            onclick={() => insertBlock('callout:warning')}>+ Warning</button
+            class="min-h-11 rounded-md border px-3 text-sm hover:bg-muted"
+            onclick={() => insertBlock('callout:warning')}>+ Peringatan</button
         >
         <button
             type="button"
-            class="rounded-md border px-3 py-1.5 text-sm hover:bg-muted"
-            onclick={() => insertBlock('embed')}>+ Embed</button
+            class="min-h-11 rounded-md border px-3 text-sm hover:bg-muted"
+            onclick={() => insertBlock('embed')}>+ Sematan</button
         >
     </div>
     <div

@@ -3,153 +3,83 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\SaveProjectRequest;
 use App\Models\Project;
-use Illuminate\Http\Request;
+use App\Support\ProjectData;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
-        $projects = Project::ordered()->get();
-
         return Inertia::render('Admin/Projects/Index', [
-            'projects' => $projects,
+            'projects' => Project::ordered()->get()->map(ProjectData::admin(...)),
         ]);
     }
 
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('Admin/Projects/Create');
     }
 
-    public function store(Request $request)
+    public function store(SaveProjectRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
-            'slug' => ['required', 'string', 'max:255', 'unique:projects,slug'],
-            'cover_image' => ['required', 'image', 'max:2048'],
-            'images' => ['nullable', 'array', 'max:10'],
-            'images.*' => ['image', 'max:2048'],
-            'tech_stack' => ['nullable', 'array', 'max:20'],
-            'tech_stack.*' => ['string', 'max:50'],
-            'live_url' => ['nullable', 'url', 'max:500'],
-            'repo_url' => ['nullable', 'url', 'max:500'],
-            'sort_order' => ['integer', 'min:0'],
-            'is_featured' => ['boolean'],
-            'is_published' => ['boolean'],
-        ]);
-
-        $coverPath = $request->file('cover_image')
-            ->store('projects/covers', 'public');
-
-        $imagesPaths = [];
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $imagesPaths[] = $image->store('projects/gallery', 'public');
-            }
-        }
-
         Project::create([
-            'title' => $validated['title'],
-            'description' => $validated['description'],
-            'slug' => $validated['slug'],
-            'cover_image' => $coverPath,
-            'images' => $imagesPaths,
-            'tech_stack' => $validated['tech_stack'] ?? [],
-            'live_url' => $validated['live_url'] ?? null,
-            'repo_url' => $validated['repo_url'] ?? null,
-            'sort_order' => $validated['sort_order'] ?? 0,
-            'is_featured' => $validated['is_featured'] ?? false,
-            'is_published' => $validated['is_published'] ?? false,
+            ...$request->safe()->except(['cover_image', 'images']),
+            'cover_image' => $request->file('cover_image')->store('projects/covers', 'public'),
+            'images' => $this->storeImages($request->file('images', [])),
         ]);
 
-        Inertia::flash('toast', [
-            'type' => 'success',
-            'message' => __('Project created successfully.'),
-        ]);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Proyek berhasil dibuat.']);
 
         return redirect()->route('admin.projects.index');
     }
 
-    public function edit(Project $project)
+    public function edit(Project $project): Response
     {
-        return Inertia::render('Admin/Projects/Edit', [
-            'project' => $project,
-        ]);
+        return Inertia::render('Admin/Projects/Edit', ['project' => ProjectData::admin($project)]);
     }
 
-    public function update(Request $request, Project $project)
+    public function update(SaveProjectRequest $request, Project $project): RedirectResponse
     {
-        $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
-            'slug' => ['required', 'string', 'max:255', 'unique:projects,slug,'.$project->id],
-            'cover_image' => ['nullable', 'image', 'max:2048'],
-            'images' => ['nullable', 'array', 'max:10'],
-            'images.*' => ['image', 'max:2048'],
-            'tech_stack' => ['nullable', 'array', 'max:20'],
-            'tech_stack.*' => ['string', 'max:50'],
-            'live_url' => ['nullable', 'url', 'max:500'],
-            'repo_url' => ['nullable', 'url', 'max:500'],
-            'sort_order' => ['integer', 'min:0'],
-            'is_featured' => ['boolean'],
-            'is_published' => ['boolean'],
-        ]);
-
-        $data = collect($validated)->except(['cover_image', 'images'])->toArray();
+        $data = $request->safe()->except(['cover_image', 'images']);
+        $replacedPaths = [];
 
         if ($request->hasFile('cover_image')) {
-            if ($project->cover_image) {
-                Storage::disk('public')->delete($project->cover_image);
-            }
-            $data['cover_image'] = $request->file('cover_image')
-                ->store('projects/covers', 'public');
+            $data['cover_image'] = $request->file('cover_image')->store('projects/covers', 'public');
+            $replacedPaths[] = $project->cover_image;
         }
 
         if ($request->hasFile('images')) {
-            if ($project->images) {
-                foreach ($project->images as $oldImage) {
-                    Storage::disk('public')->delete($oldImage);
-                }
-            }
-            $imagesPaths = [];
-            foreach ($request->file('images') as $image) {
-                $imagesPaths[] = $image->store('projects/gallery', 'public');
-            }
-            $data['images'] = $imagesPaths;
+            $data['images'] = $this->storeImages($request->file('images'));
+            $replacedPaths = [...$replacedPaths, ...($project->images ?? [])];
         }
 
         $project->update($data);
+        Storage::disk('public')->delete(array_filter($replacedPaths));
 
-        Inertia::flash('toast', [
-            'type' => 'success',
-            'message' => __('Project updated successfully.'),
-        ]);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Proyek berhasil diperbarui.']);
 
         return redirect()->route('admin.projects.index');
     }
 
-    public function destroy(Project $project)
+    public function destroy(Project $project): RedirectResponse
     {
-        if ($project->cover_image) {
-            Storage::disk('public')->delete($project->cover_image);
-        }
-        if ($project->images) {
-            foreach ($project->images as $image) {
-                Storage::disk('public')->delete($image);
-            }
-        }
-
+        Storage::disk('public')->delete(array_filter([$project->cover_image, ...($project->images ?? [])]));
         $project->delete();
 
-        Inertia::flash('toast', [
-            'type' => 'success',
-            'message' => __('Project deleted successfully.'),
-        ]);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Proyek berhasil dihapus.']);
 
         return redirect()->route('admin.projects.index');
+    }
+
+    /** @param array<UploadedFile> $images */
+    private function storeImages(array $images): array
+    {
+        return array_map(static fn (UploadedFile $image): string => $image->store('projects/gallery', 'public'), $images);
     }
 }

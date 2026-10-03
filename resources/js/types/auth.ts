@@ -11,6 +11,7 @@ export type User = {
 
 export type Auth = {
     user: User;
+    canManagePosts: boolean;
 };
 
 export type TwoFactorConfigContent = {

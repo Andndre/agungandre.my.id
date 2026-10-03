@@ -3,7 +3,7 @@
     import Check from 'lucide-svelte/icons/check';
     import Copy from 'lucide-svelte/icons/copy';
     import ScanLine from 'lucide-svelte/icons/scan-line';
-    import { tick } from 'svelte';
+    import { tick, onDestroy } from 'svelte';
     import AlertError from '@/components/AlertError.svelte';
     import InputError from '@/components/InputError.svelte';
     import { Button } from '@/components/ui/button';
@@ -40,32 +40,35 @@
     let showVerificationStep = $state(false);
     let code = $state('');
     let copied = $state(false);
+    let copyTimer: ReturnType<typeof setTimeout>;
+    let copyError = $state('');
+    onDestroy(() => clearTimeout(copyTimer));
     let pinInputContainerRef = $state<HTMLDivElement>();
 
     const modalConfig: TwoFactorConfigContent = $derived.by(() => {
         if (twoFactorEnabled) {
             return {
-                title: 'Two-factor authentication enabled',
+                title: 'Autentikasi dua faktor aktif',
                 description:
-                    'Two-factor authentication is now enabled. Scan the QR code or enter the setup key in your authenticator app.',
-                buttonText: 'Close',
+                    'Autentikasi dua faktor aktif. Pindai kode QR atau masukkan kunci pengaturan di aplikasi autentikator Anda.',
+                buttonText: 'Tutup',
             };
         }
 
         if (showVerificationStep) {
             return {
-                title: 'Verify authentication code',
+                title: 'Verifikasi kode autentikasi',
                 description:
-                    'Enter the 6-digit code from your authenticator app',
-                buttonText: 'Continue',
+                    'Masukkan kode enam digit dari aplikasi autentikator Anda',
+                buttonText: 'Lanjutkan',
             };
         }
 
         return {
-            title: 'Enable two-factor authentication',
+            title: 'Aktifkan autentikasi dua faktor',
             description:
-                'To finish enabling two-factor authentication, scan the QR code or enter the setup key in your authenticator app',
-            buttonText: 'Continue',
+                'Pindai kode QR atau masukkan kunci pengaturan di aplikasi autentikator untuk menyelesaikan pengaturan.',
+            buttonText: 'Lanjutkan',
         };
     });
 
@@ -80,9 +83,16 @@
     });
 
     async function copyToClipboard(text: string) {
-        await navigator.clipboard.writeText(text);
-        copied = true;
-        setTimeout(() => (copied = false), 2000);
+        try {
+            await navigator.clipboard.writeText(text);
+            copied = true;
+            copyError = '';
+            clearTimeout(copyTimer);
+            copyTimer = setTimeout(() => (copied = false), 2000);
+        } catch {
+            copyError =
+                'Kunci tidak dapat disalin. Pilih dan salin teks secara manual.';
+        }
     }
 
     async function handleModalNextStep() {
@@ -185,7 +195,7 @@
                                     >
                                         <img
                                             src={qrCodeDataUrl}
-                                            alt="Two-factor authentication QR code"
+                                            alt="Kode QR autentikasi dua faktor"
                                             class="size-full"
                                         />
                                     </div>
@@ -207,7 +217,7 @@
                             class="absolute inset-0 top-1/2 h-px w-full bg-border"
                         ></div>
                         <span class="relative bg-card px-2 py-1"
-                            >or, enter the code manually</span
+                            >atau, masukkan kunci secara manual</span
                         >
                     </div>
 
@@ -226,11 +236,15 @@
                             {:else}
                                 <input
                                     type="text"
+                                    aria-label="Kunci pengaturan autentikasi"
                                     readonly
                                     value={twoFactorAuth.state.manualSetupKey}
                                     class="h-full w-full bg-background p-3 text-foreground"
                                 />
                                 <button
+                                    aria-label={copied
+                                        ? 'Kunci tersalin'
+                                        : 'Salin kunci pengaturan'}
                                     onclick={() =>
                                         copyToClipboard(
                                             twoFactorAuth.state
@@ -247,6 +261,12 @@
                             {/if}
                         </div>
                     </div>
+                    {#if copyError}<p
+                            role="alert"
+                            class="text-sm text-destructive"
+                        >
+                            {copyError}
+                        </p>{/if}
                 {/if}
             {:else}
                 <Form
@@ -266,6 +286,13 @@
                             >
                                 <InputOTP
                                     id="otp"
+                                    aria-label="Kode autentikasi enam digit"
+                                    aria-invalid={Boolean(
+                                        formErrors?.[
+                                            'confirmTwoFactorAuthentication.code'
+                                        ],
+                                    )}
+                                    aria-describedby="setup-otp-error"
                                     bind:value={code}
                                     maxlength={6}
                                     disabled={processing}
@@ -278,6 +305,7 @@
                                     </InputOTPGroup>
                                 </InputOTP>
                                 <InputError
+                                    id="setup-otp-error"
                                     message={formErrors?.[
                                         'confirmTwoFactorAuthentication.code'
                                     ]}
@@ -293,14 +321,14 @@
                                         (showVerificationStep = false)}
                                     disabled={processing}
                                 >
-                                    Back
+                                    Kembali
                                 </Button>
                                 <Button
                                     type="submit"
                                     class="w-auto flex-1"
                                     disabled={processing || code.length < 6}
                                 >
-                                    Confirm
+                                    Konfirmasi
                                 </Button>
                             </div>
                         </div>

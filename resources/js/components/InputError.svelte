@@ -1,15 +1,15 @@
 <script lang="ts">
     let {
-        message = '',
+        message,
+        id,
         class: className = '',
-    }: {
-        message?: string;
-        class?: string;
-    } = $props();
+    }: { message?: string; id?: string; class?: string } = $props();
 </script>
 
-{#if message}
-    <div class={className}>
-        <p class="text-sm text-red-600 dark:text-red-500">{message}</p>
-    </div>
-{/if}
+{#if message}<p
+        {id}
+        role="alert"
+        class={'text-sm text-destructive ' + className}
+    >
+        {message}
+    </p>{/if}

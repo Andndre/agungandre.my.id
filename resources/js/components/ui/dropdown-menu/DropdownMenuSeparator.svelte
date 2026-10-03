@@ -1,1 +1,1 @@
-<div class="my-1 h-px bg-border"></div>
+<script lang="ts">import { DropdownMenu } from 'bits-ui';</script><DropdownMenu.Separator class="my-2 h-px bg-border" />

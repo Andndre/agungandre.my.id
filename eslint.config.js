@@ -112,10 +112,16 @@ export default ts.config(
     },
     {
         ignores: [
+            '.agents/**',
+            '.codex/**',
+            '.claude/**',
+            '.gemini/**',
+            '.github/skills/**',
             'vendor',
             'node_modules',
             'public',
             'bootstrap/ssr',
+            'storage/**',
             'tailwind.config.js',
             'vite.config.ts',
             'resources/js/actions/**',

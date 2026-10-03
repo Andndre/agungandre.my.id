@@ -106,3 +106,7 @@ Repository ini dilengkapi dengan Laravel Boost MCP server. Manfaatkan tools Boos
 - formatter: pint (--format agent)
 - testing: pest v4
 </laravel-boost-guidelines>
+
+## 6. Design system
+
+Untuk perubahan UI, ikuti [Studio Engineering design system](docs/design-system.md). Bukti evaluasi ada di [redesign validation](docs/redesign-validation.md); cara menjalankan pengujian terisolasi ada di [testing guide](docs/testing.md).

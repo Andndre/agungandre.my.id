@@ -1,7 +1,7 @@
 <script module lang="ts">
     export const layout = {
-        title: 'Log in to your account',
-        description: 'Enter your email and password below to log in',
+        title: 'Selamat datang kembali',
+        description: 'Masuk untuk mengelola proyek dan tulisan Anda.',
     };
 </script>
 
@@ -18,83 +18,77 @@
     import { Spinner } from '@/components/ui/spinner';
     import { store } from '@/routes/login';
     import { request } from '@/routes/password';
-
     let {
         status = '',
         canResetPassword,
-        canRegister: _canRegister,
-    }: {
-        status?: string;
-        canResetPassword: boolean;
-        canRegister?: boolean;
-    } = $props();
+    }: { status?: string; canResetPassword: boolean; canRegister?: boolean } =
+        $props();
+    let remember = $state(false);
 </script>
 
-<AppHead title="Log in" />
-
-{#if status}
-    <div class="mb-4 text-center text-sm font-medium text-green-600">
+<AppHead title="Masuk" />
+{#if status}<p
+        role="status"
+        class="mb-6 rounded-xl bg-success-container p-4 text-sm text-on-success-container"
+    >
         {status}
-    </div>
-{/if}
-
-<Form
-    {...store.form()}
-    resetOnSuccess={['password']}
-    class="flex flex-col gap-6"
->
+    </p>{/if}
+<Form {...store.form()} resetOnSuccess={['password']} class="space-y-6">
     {#snippet children({ errors, processing })}
-        <div class="grid gap-6">
-            <div class="grid gap-2">
-                <Label for="email">Email address</Label>
-                <Input
-                    id="email"
-                    type="email"
-                    name="email"
-                    required
-                    autocomplete="email"
-                    placeholder="email@example.com"
-                />
-                <InputError message={errors.email} />
-            </div>
-
-            <div class="grid gap-2">
-                <div class="flex items-center justify-between">
-                    <Label for="password">Password</Label>
-                    {#if canResetPassword}
-                        <TextLink href={request()} class="text-sm">
-                            Forgot password?
-                        </TextLink>
-                    {/if}
-                </div>
-                <PasswordInput
-                    id="password"
-                    name="password"
-                    required
-                    autocomplete="current-password"
-                    placeholder="Password"
-                />
-                <InputError message={errors.password} />
-            </div>
-
-            <div class="flex items-center justify-between">
-                <Label for="remember" class="flex items-center space-x-3">
-                    <Checkbox id="remember" name="remember" />
-                    <span>Remember me</span>
-                </Label>
-            </div>
-
-            <Button
-                type="submit"
-                class="mt-4 w-full"
-                disabled={processing}
-                data-test="login-button"
-            >
-                {#if processing}<Spinner />{/if}
-                Log in
-            </Button>
+        <div class="cms-field">
+            <Label for="email">Alamat email</Label><Input
+                id="email"
+                type="email"
+                name="email"
+                required
+                autocomplete="email"
+                placeholder="email@example.com"
+                aria-invalid={Boolean(errors.email)}
+                aria-describedby={errors.email ? 'email-error' : undefined}
+            /><InputError id="email-error" message={errors.email} />
         </div>
-
-
+        <div class="cms-field">
+            <div class="flex items-center justify-between gap-3">
+                <Label for="password">Kata sandi</Label
+                >{#if canResetPassword}<TextLink
+                        href={request()}
+                        class="inline-flex min-h-11 items-center text-sm"
+                        >Lupa kata sandi?</TextLink
+                    >{/if}
+            </div>
+            <PasswordInput
+                id="password"
+                name="password"
+                required
+                autocomplete="current-password"
+                placeholder="Kata sandi"
+                aria-invalid={Boolean(errors.password)}
+                aria-describedby={errors.password
+                    ? 'password-error'
+                    : undefined}
+            /><InputError id="password-error" message={errors.password} />
+        </div>
+        <Label
+            for="remember"
+            class="flex min-h-11 cursor-pointer items-center gap-3"
+            ><Checkbox
+                id="remember"
+                name="remember"
+                value="1"
+                bind:checked={remember}
+            /><span>Ingat saya</span></Label
+        >
+        <Button
+            type="submit"
+            class="w-full"
+            disabled={processing}
+            data-test="login-button"
+            >{#if processing}<Spinner />{/if}{processing
+                ? 'Memproses…'
+                : 'Masuk'}</Button
+        >
+        <p class="sr-only" role="status">
+            {processing ? 'Sedang memproses login' : ''}
+        </p>
     {/snippet}
 </Form>

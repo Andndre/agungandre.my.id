@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { Link } from '@inertiajs/svelte';
+    import { Link, setLayoutProps } from '@inertiajs/svelte';
     import AppHead from '@/components/AppHead.svelte';
+    import { dashboard } from '@/routes/admin';
     import postsRoutes from '@/routes/admin/posts';
     import type { AdminPost, PostPage } from '@/types/blog';
-
     let {
         posts,
     }: {
@@ -21,60 +21,85 @@
     } = $props();
     const status = (value: string | null) =>
         !value ? 'Draf' : new Date(value) > new Date() ? 'Terjadwal' : 'Terbit';
+    setLayoutProps({
+        breadcrumbs: [
+            { title: 'Ringkasan', href: dashboard() },
+            { title: 'Tulisan', href: postsRoutes.index() },
+        ],
+    });
 </script>
 
-<AppHead title="Kelola Blog" />
-
-<div class="flex h-full flex-col gap-6 rounded-xl p-4">
-    <div class="flex flex-wrap items-center justify-between gap-4">
+<AppHead title="Tulisan" />
+<div class="cms-page">
+    <header class="cms-header">
         <div>
-            <h1 class="text-2xl font-bold">Blog / Devlog</h1>
-            <p class="text-sm text-muted-foreground">
-                Kelola artikel dan jadwal publikasi.
+            <p class="section-kicker">Portfolio / Konten</p>
+            <h1 class="cms-title">Tulisan</h1>
+            <p class="mt-2 text-muted-foreground">
+                {posts.total} artikel · Draf, publikasi, dan jadwal terbit.
             </p>
         </div>
-        <Link
-            href={postsRoutes.create()}
-            class="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
+        <Link href={postsRoutes.create()} class="studio-button"
             >+ Artikel baru</Link
         >
-    </div>
-
-    {#if posts.data.length === 0}
-        <div
-            class="rounded-xl border border-dashed p-10 text-center text-muted-foreground"
-        >
-            Belum ada artikel.
+    </header>
+    {#if posts.data.length === 0}<div class="studio-empty">
+            <h2 class="text-xl font-semibold">Belum ada artikel</h2>
+            <p class="text-muted-foreground">
+                Tulis catatan tentang proyek, kode, atau hal yang Anda pelajari.
+            </p>
+            <Link href={postsRoutes.create()} class="studio-button mt-4"
+                >Tulis artikel pertama</Link
+            >
         </div>
-    {:else}
-        <div class="divide-y rounded-xl border bg-card">
-            {#each posts.data as post (post.id)}
-                <div
-                    class="flex flex-wrap items-center justify-between gap-3 p-4"
+    {:else}<div class="cms-panel space-y-0 p-0">
+            {#each posts.data as post (post.id)}<article
+                    class="flex flex-wrap items-center justify-between gap-4 border-b border-border p-6 last:border-b-0"
                 >
-                    <div>
-                        <p class="font-medium">{post.title}</p>
-                        <p class="mt-1 text-xs text-muted-foreground">
-                            /{post.slug} · {post.reading_time} menit · {status(
-                                post.published_at,
-                            )}
-                        </p>
+                    <div class="min-w-0 flex-1">
+                        <Link
+                            href={postsRoutes.edit({ post: post.id })}
+                            class="block break-words font-semibold hover:text-primary"
+                            >{post.title}</Link
+                        >
+                        <div class="mt-3 flex flex-wrap items-center gap-3">
+                            <span
+                                class="status-label"
+                                class:published={status(post.published_at) ===
+                                    'Terbit'}
+                                class:scheduled={status(post.published_at) ===
+                                    'Terjadwal'}
+                                >{status(post.published_at)}</span
+                            ><span class="text-xs text-muted-foreground"
+                                >{post.reading_time} menit baca · Diperbarui {new Date(
+                                    post.updated_at,
+                                ).toLocaleDateString('id-ID')}</span
+                            >{#if status(post.published_at) === 'Terjadwal' && post.published_at}<time
+                                    datetime={post.published_at}
+                                    class="text-xs text-muted-foreground"
+                                    >{new Date(
+                                        post.published_at,
+                                    ).toLocaleString('id-ID')}</time
+                                >{/if}
+                        </div>
                     </div>
                     <Link
+                        class="studio-button quiet"
                         href={postsRoutes.edit({ post: post.id })}
-                        class="rounded-lg border px-3 py-1.5 text-sm hover:bg-muted"
-                        >Edit</Link
+                        >Edit artikel</Link
                     >
-                </div>
-            {/each}
+                </article>{/each}
         </div>
-        <nav class="flex justify-between text-sm">
-            {#if posts.prev_page_url}<Link href={posts.prev_page_url}
-                    >← Sebelumnya</Link
-                >{:else}<span></span>{/if}
-            {#if posts.next_page_url}<Link href={posts.next_page_url}
-                    >Berikutnya →</Link
+        <nav
+            class="mt-6 flex justify-between gap-3"
+            aria-label="Halaman daftar artikel"
+        >
+            {#if posts.prev_page_url}<Link
+                    class="studio-button quiet"
+                    href={posts.prev_page_url}>← Sebelumnya</Link
+                >{:else}<span></span>{/if}{#if posts.next_page_url}<Link
+                    class="studio-button quiet"
+                    href={posts.next_page_url}>Berikutnya →</Link
                 >{/if}
-        </nav>
-    {/if}
+        </nav>{/if}
 </div>

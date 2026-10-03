@@ -1,7 +1,7 @@
 <script module lang="ts">
     export const layout = {
-        title: 'Reset password',
-        description: 'Please enter your new password below',
+        title: 'Reset kata sandi',
+        description: 'Masukkan kata sandi baru Anda.',
     };
 </script>
 
@@ -27,7 +27,7 @@
     } = $props();
 </script>
 
-<AppHead title="Reset password" />
+<AppHead title="Reset kata sandi" />
 
 <Form
     {...update.form()}
@@ -42,38 +42,51 @@
                     id="email"
                     type="email"
                     name="email"
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby="email-error"
                     autocomplete="email"
                     value={email}
                     class="mt-1 block w-full"
                     readonly
                 />
-                <InputError message={errors.email} class="mt-2" />
+                <InputError
+                    id="email-error"
+                    message={errors.email}
+                    class="mt-2"
+                />
             </div>
 
             <div class="grid gap-2">
-                <Label for="password">Password</Label>
+                <Label for="password">Kata sandi</Label>
                 <PasswordInput
                     id="password"
                     name="password"
+                    aria-invalid={Boolean(errors.password)}
+                    aria-describedby="password-error"
                     autocomplete="new-password"
                     class="mt-1 block w-full"
-                    placeholder="Password"
+                    placeholder="Kata sandi"
                     passwordrules={passwordRules}
                 />
-                <InputError message={errors.password} />
+                <InputError id="password-error" message={errors.password} />
             </div>
 
             <div class="grid gap-2">
-                <Label for="password_confirmation">Confirm password</Label>
+                <Label for="password_confirmation">Konfirmasi kata sandi</Label>
                 <PasswordInput
                     id="password_confirmation"
                     name="password_confirmation"
+                    aria-invalid={Boolean(errors.password_confirmation)}
+                    aria-describedby="confirmation-error"
                     autocomplete="new-password"
                     class="mt-1 block w-full"
-                    placeholder="Confirm password"
+                    placeholder="Konfirmasi kata sandi"
                     passwordrules={passwordRules}
                 />
-                <InputError message={errors.password_confirmation} />
+                <InputError
+                    id="confirmation-error"
+                    message={errors.password_confirmation}
+                />
             </div>
 
             <Button
@@ -83,7 +96,7 @@
                 data-test="reset-password-button"
             >
                 {#if processing}<Spinner />{/if}
-                Reset password
+                Reset kata sandi
             </Button>
         </div>
     {/snippet}
