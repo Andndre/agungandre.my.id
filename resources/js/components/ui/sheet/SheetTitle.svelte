@@ -1,16 +1,2 @@
-<script lang="ts">
-    import type { Snippet } from 'svelte';
-    import { cn } from '@/lib/utils';
-
-    let {
-        class: className = '',
-        children,
-    }: {
-        class?: string;
-        children?: Snippet;
-    } = $props();
-</script>
-
-<h2 class={cn('text-lg font-semibold text-foreground', className)}>
-    {@render children?.()}
-</h2>
+<script lang="ts">import { Dialog } from 'bits-ui'; import type { Snippet } from 'svelte'; let { children, class: className = '' }: { children?: Snippet; class?: string } = $props();</script>
+<Dialog.Title class={'pr-10 text-lg font-semibold ' + className}>{@render children?.()}</Dialog.Title>

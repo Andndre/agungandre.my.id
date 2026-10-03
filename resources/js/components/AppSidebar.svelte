@@ -1,10 +1,10 @@
 <script lang="ts">
     import { Link, page } from '@inertiajs/svelte';
-    import BookOpen from 'lucide-svelte/icons/book-open';
+    import ExternalLink from 'lucide-svelte/icons/external-link';
     import FileText from 'lucide-svelte/icons/file-text';
     import FolderGit2 from 'lucide-svelte/icons/folder-git-2';
-    import FolderPlus from 'lucide-svelte/icons/folder-plus';
     import LayoutGrid from 'lucide-svelte/icons/layout-grid';
+    import Settings from 'lucide-svelte/icons/settings';
     import type { Snippet } from 'svelte';
     import AppLogo from '@/components/AppLogo.svelte';
     import NavFooter from '@/components/NavFooter.svelte';
@@ -20,8 +20,10 @@
         SidebarMenuItem,
     } from '@/components/ui/sidebar';
     import { toUrl } from '@/lib/utils';
+    import { home } from '@/routes';
     import admin from '@/routes/admin';
     import { dashboard } from '@/routes/admin/index';
+    import { edit } from '@/routes/profile';
     import type { NavItem } from '@/types';
 
     let {
@@ -32,7 +34,7 @@
 
     const mainNavItems: NavItem[] = [
         {
-            title: 'Dashboard',
+            title: 'Ringkasan',
             href: dashboard(),
             icon: LayoutGrid,
         },
@@ -40,14 +42,14 @@
 
     const adminNavItems: NavItem[] = [
         {
-            title: 'Projects',
+            title: 'Proyek',
             href: admin.projects.index(),
             icon: FolderGit2,
         },
         {
-            title: 'New Project',
-            href: admin.projects.create(),
-            icon: FolderPlus,
+            title: 'Pengaturan',
+            href: edit(),
+            icon: Settings,
         },
     ];
 
@@ -57,20 +59,11 @@
         ),
     );
     const postNavItems: NavItem[] = [
-        { title: 'Blog posts', href: admin.posts.index(), icon: FileText },
+        { title: 'Tulisan', href: admin.posts.index(), icon: FileText },
     ];
 
     const footerNavItems: NavItem[] = [
-        {
-            title: 'Repository',
-            href: 'https://github.com/laravel/svelte-starter-kit',
-            icon: FolderGit2,
-        },
-        {
-            title: 'Documentation',
-            href: 'https://laravel.com/docs/starter-kits#svelte',
-            icon: BookOpen,
-        },
+        { title: 'Buka portfolio', href: home(), icon: ExternalLink },
     ];
 </script>
 
@@ -95,8 +88,11 @@
 
     <SidebarContent>
         <NavMain items={mainNavItems} />
-        <NavMain items={adminNavItems} label="Admin" />
-        {#if canManagePosts}<NavMain items={postNavItems} label="Blog" />{/if}
+        <NavMain items={adminNavItems} label="Konten" />
+        {#if canManagePosts}<NavMain
+                items={postNavItems}
+                label="Publikasi"
+            />{/if}
     </SidebarContent>
 
     <SidebarFooter>

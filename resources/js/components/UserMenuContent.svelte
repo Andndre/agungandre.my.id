@@ -38,13 +38,13 @@
     <DropdownMenuItem asChild>
         {#snippet children(props)}
             <Link
-                class={props.class}
+                {...props}
                 href={toUrl(edit())}
                 prefetch
                 onclick={props.onClick}
             >
                 <Settings class="mr-2 h-4 w-4" />
-                Settings
+                Pengaturan
             </Link>
         {/snippet}
     </DropdownMenuItem>
@@ -53,14 +53,14 @@
 <DropdownMenuItem asChild>
     {#snippet children(props)}
         <Link
-            class={props.class}
+            {...props}
             href={logout()}
             as="button"
             onclick={handleLogout(props.onClick)}
             data-test="logout-button"
         >
             <LogOut class="mr-2 h-4 w-4" />
-            Log out
+            Keluar
         </Link>
     {/snippet}
 </DropdownMenuItem>

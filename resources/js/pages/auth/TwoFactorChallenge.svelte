@@ -18,18 +18,17 @@
     const authConfigContent: TwoFactorConfigContent = $derived.by(() => {
         if (showRecoveryInput) {
             return {
-                title: 'Recovery code',
+                title: 'Kode pemulihan',
                 description:
-                    'Please confirm access to your account by entering one of your emergency recovery codes.',
-                buttonText: 'login using an authentication code',
+                    'Masukkan salah satu kode pemulihan untuk mengakses akun Anda.',
+                buttonText: 'gunakan kode autentikasi',
             };
         }
 
         return {
-            title: 'Authentication code',
-            description:
-                'Enter the authentication code provided by your authenticator application.',
-            buttonText: 'login using a recovery code',
+            title: 'Kode autentikasi',
+            description: 'Masukkan kode dari aplikasi autentikator Anda.',
+            buttonText: 'gunakan kode pemulihan',
         };
     });
 
@@ -47,7 +46,7 @@
     }
 </script>
 
-<AppHead title="Two-factor authentication" />
+<AppHead title="Autentikasi dua faktor" />
 
 <div class="space-y-6">
     {#if !showRecoveryInput}
@@ -65,6 +64,9 @@
                     <div class="flex w-full items-center justify-center">
                         <InputOTP
                             id="otp"
+                            aria-label="Kode autentikasi enam digit"
+                            aria-invalid={Boolean(errors.code)}
+                            aria-describedby="otp-error"
                             bind:value={code}
                             maxlength={6}
                             disabled={processing}
@@ -77,13 +79,13 @@
                             </InputOTPGroup>
                         </InputOTP>
                     </div>
-                    <InputError message={errors.code} />
+                    <InputError id="otp-error" message={errors.code} />
                 </div>
                 <Button type="submit" class="w-full" disabled={processing}
-                    >Continue</Button
+                    >Lanjutkan</Button
                 >
                 <div class="text-center text-sm text-muted-foreground">
-                    <span>or you can </span>
+                    <span>atau </span>
                     <button
                         type="button"
                         class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
@@ -99,17 +101,23 @@
             {#snippet children({ errors, processing, clearErrors })}
                 <Input
                     name="recovery_code"
+                    aria-label="Kode pemulihan"
+                    aria-invalid={Boolean(errors.recovery_code)}
+                    aria-describedby="recovery-error"
                     type="text"
-                    placeholder="Enter recovery code"
+                    placeholder="Masukkan kode pemulihan"
                     required
                 />
-                <InputError message={errors.recovery_code} />
+                <InputError
+                    id="recovery-error"
+                    message={errors.recovery_code}
+                />
                 <Button type="submit" class="w-full" disabled={processing}
-                    >Continue</Button
+                    >Lanjutkan</Button
                 >
 
                 <div class="text-center text-sm text-muted-foreground">
-                    <span>or you can </span>
+                    <span>atau </span>
                     <button
                         type="button"
                         class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"

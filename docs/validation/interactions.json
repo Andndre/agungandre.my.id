@@ -1,0 +1,272 @@
+[
+  {
+    "name": "first visit intro, content and CTA already visible",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "Escape ends intro",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "repeat visit skips intro",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "Skip ends intro without moving focus",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "reduced motion starts at final state",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "mobile menu is labeled",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "mobile menu traps keyboard focus",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "mobile menu returns focus",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "detail has one shared screenshot transition name",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "return restores project focus and scroll",
+    "passed": true,
+    "detail": {
+      "pass": true,
+      "focus": "work-1",
+      "scrollY": 1028
+    }
+  },
+  {
+    "name": "return navigation does not restart intro",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "no View Transitions API navigation fallback",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "storage denied still supports theme and visible content",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "storage denied in-memory intro guard",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "system theme follows dark preference before app paint",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "system theme follows live preference change",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "explicit theme ignores system changes",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "missing cover has readable fallback",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "idle has no running animation loop",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "200% desktop equivalent layout has no overflow",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "filter empty state differs from no content",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "local preview escapes description",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "project preview traps focus",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "project preview returns focus",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "validation error keeps unsaved values and association",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "editor initially clean",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "server article preview renders current form",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "article preview returns focus and keeps dirty state",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "CMS mobile sidebar returns focus",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "no runtime errors in final CMS navigation",
+    "passed": true,
+    "detail": true
+  },
+  {
+    "name": "normal text role pairs contrast >=4.5:1",
+    "passed": true,
+    "detail": [
+      {
+        "theme": "light",
+        "pairs": [
+          {
+            "bg": "surface",
+            "fg": "on-surface",
+            "ratio": 15.066712876271081
+          },
+          {
+            "bg": "surface",
+            "fg": "on-surface-variant",
+            "ratio": 5.7681047426415075
+          },
+          {
+            "bg": "surface-container",
+            "fg": "on-surface-variant",
+            "ratio": 5.045615576491809
+          },
+          {
+            "bg": "primary",
+            "fg": "on-primary",
+            "ratio": 7.234473689025559
+          },
+          {
+            "bg": "primary-container",
+            "fg": "on-primary-container",
+            "ratio": 9.81719451510653
+          },
+          {
+            "bg": "secondary-container",
+            "fg": "on-secondary-container",
+            "ratio": 9.346255579214755
+          },
+          {
+            "bg": "tertiary-container",
+            "fg": "on-tertiary-container",
+            "ratio": 9.511575986599784
+          },
+          {
+            "bg": "error-container",
+            "fg": "error",
+            "ratio": 5.354656623646322
+          },
+          {
+            "bg": "success-container",
+            "fg": "success",
+            "ratio": 5.813701027942409
+          },
+          {
+            "bg": "warning-container",
+            "fg": "warning",
+            "ratio": 6.223975308475338
+          }
+        ]
+      },
+      {
+        "theme": "dark",
+        "pairs": [
+          {
+            "bg": "surface",
+            "fg": "on-surface",
+            "ratio": 15.712331584095663
+          },
+          {
+            "bg": "surface",
+            "fg": "on-surface-variant",
+            "ratio": 9.000748792222316
+          },
+          {
+            "bg": "surface-container",
+            "fg": "on-surface-variant",
+            "ratio": 7.413092975646692
+          },
+          {
+            "bg": "primary",
+            "fg": "on-primary",
+            "ratio": 7.278098377218487
+          },
+          {
+            "bg": "primary-container",
+            "fg": "on-primary-container",
+            "ratio": 9.324963428107324
+          },
+          {
+            "bg": "secondary-container",
+            "fg": "on-secondary-container",
+            "ratio": 9.694017742496902
+          },
+          {
+            "bg": "tertiary-container",
+            "fg": "on-tertiary-container",
+            "ratio": 7.870311510666494
+          },
+          {
+            "bg": "error-container",
+            "fg": "error",
+            "ratio": 7.4903071310277785
+          },
+          {
+            "bg": "success-container",
+            "fg": "success",
+            "ratio": 7.542167587447818
+          },
+          {
+            "bg": "warning-container",
+            "fg": "warning",
+            "ratio": 7.283547801773288
+          }
+        ]
+      }
+    ]
+  }
+]

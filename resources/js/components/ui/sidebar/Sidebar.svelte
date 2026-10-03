@@ -1,12 +1,12 @@
 <script lang="ts">
     import type { Snippet } from 'svelte';
     import { getContext } from 'svelte';
-    import { cubicOut } from 'svelte/easing';
-    import { fade, fly } from 'svelte/transition';
+    import { Sheet, SheetContent, SheetTitle, SheetDescription } from '@/components/ui/sheet';
+
     import { cn } from '@/lib/utils';
     import {
         SIDEBAR_CONTEXT,
-        SIDEBAR_WIDTH_MOBILE,
+
         type SidebarContext,
     } from './context';
 
@@ -35,33 +35,10 @@
         {@render children?.()}
     </div>
 {:else if $isMobile}
-    {#if $openMobile}
-        <div class="fixed inset-0 z-50">
-            <button
-                type="button"
-                class="fixed inset-0 bg-black/50"
-                aria-label="Close"
-                onclick={() => setOpenMobile(false)}
-                transition:fade={{ duration: 200 }}
-            ></button>
-            <div
-                data-sidebar="sidebar"
-                data-slot="sidebar"
-                data-mobile="true"
-                class={cn(
-                    'fixed inset-y-0 bg-sidebar text-sidebar-foreground h-svh w-(--sidebar-width) p-0',
-                    side === 'left' ? 'left-0 border-r' : 'right-0 border-l',
-                    className,
-                )}
-                style={`--sidebar-width: ${SIDEBAR_WIDTH_MOBILE};`}
-                transition:fly={{ x: side === 'left' ? -320 : 320, duration: 300, opacity: 1, easing: cubicOut }}
-            >
-                <div class="flex h-full w-full flex-col">
-                    {@render children?.()}
-                </div>
-            </div>
-        </div>
-    {/if}
+<Sheet open={$openMobile} onOpenChange={setOpenMobile}><SheetContent {side} class="p-3">
+<SheetTitle>Ruang kerja</SheetTitle><SheetDescription>Navigasi pengelolaan portfolio.</SheetDescription>
+<div class="flex min-h-0 flex-1 flex-col" onclick={(event) => { if ((event.target as HTMLElement).closest('a')) setOpenMobile(false); }} role="presentation">{@render children?.()}</div>
+</SheetContent></Sheet>
 {:else}
     <div
         class="group peer text-sidebar-foreground hidden md:block"
@@ -85,8 +62,8 @@
             class={cn(
                 'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-200 ease-linear md:flex',
                 side === 'left'
-                    ? 'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]'
-                    : 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',
+                    ? 'left-0 group-data-[collapsible=offcanvas]:-left-(--sidebar-width)'
+                    : 'right-0 group-data-[collapsible=offcanvas]:-right-(--sidebar-width)',
                 variant === 'floating' || variant === 'inset'
                     ? 'p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]'
                     : 'group-data-[collapsible=icon]:w-(--sidebar-width-icon) group-data-[side=left]:border-r group-data-[side=right]:border-l',

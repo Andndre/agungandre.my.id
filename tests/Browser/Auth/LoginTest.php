@@ -1,74 +1,81 @@
 <?php
 
-namespace Tests\Browser\Auth;
-
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Dusk\Browser;
-use Tests\DuskTestCase;
 
-class LoginTest extends DuskTestCase
-{
-    use DatabaseMigrations;
+uses(DatabaseMigrations::class);
 
-    public function test_can_render_login_page(): void
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/login')
-                ->assertSee('Email address')
-                ->assertSee('Password')
-                ->assertSee('Log in');
-        });
-    }
+test('login page renders Indonesian labels', function () {
+    $this->browse(function (Browser $browser) {
+        $browser->visit('/login')
+            ->waitFor('input[name="email"]')
+            ->assertSee('Alamat email')
+            ->assertSee('Kata sandi')
+            ->assertSee('Masuk')
+            ->assertSee('Ingat saya');
+    });
+});
 
-    public function test_can_login_with_valid_credentials(): void
-    {
-        $user = User::factory()->create();
+test('valid credentials log in without a remember cookie when unchecked', function () {
+    $user = User::factory()->create();
+    $rememberCookie = Auth::guard()->getRecallerName();
 
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit('/login')
-                ->type('input[name="email"]', $user->email)
-                ->type('input[name="password"]', 'password')
-                ->press('[data-test="login-button"]')
-                ->pause(5000)
-                ->assertUrlIs('**/admin');
-        });
-    }
+    $this->browse(function (Browser $browser) use ($user, $rememberCookie) {
+        $browser->visit('/login')
+            ->waitFor('input[name="email"]')
+            ->type('input[name="email"]', $user->email)
+            ->type('input[name="password"]', 'password')
+            ->assertNotChecked('remember')
+            ->press('[data-test="login-button"]')
+            ->waitForLocation('/admin')
+            ->assertPathIs('/admin')
+            ->assertAuthenticatedAs($user)
+            ->assertCookieMissing($rememberCookie);
+    });
+});
 
-    public function test_shows_error_with_invalid_credentials(): void
-    {
-        $user = User::factory()->create();
+test('invalid credentials show a field error', function () {
+    $user = User::factory()->create();
 
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit('/login')
-                ->type('input[name="email"]', $user->email)
-                ->type('input[name="password"]', 'wrong-password')
-                ->press('[data-test="login-button"]')
-                ->waitForText('These credentials do not match our records.')
-                ->assertSee('These credentials do not match our records.');
-        });
-    }
+    $this->browse(function (Browser $browser) use ($user) {
+        $browser->visit('/login')
+            ->waitFor('input[name="email"]')
+            ->type('input[name="email"]', $user->email)
+            ->type('input[name="password"]', 'wrong-password')
+            ->press('[data-test="login-button"]')
+            ->waitForText('These credentials do not match our records.')
+            ->assertSee('These credentials do not match our records.');
+    });
+});
 
-    public function test_can_see_forgot_password_link(): void
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/login')
-                ->assertSee('Forgot password?');
-        });
-    }
+test('password reset link opens the reset request form', function () {
+    $this->browse(function (Browser $browser) {
+        $browser->visit('/login')
+            ->waitFor('input[name="email"]')
+            ->assertSee('Lupa kata sandi?')
+            ->clickLink('Lupa kata sandi?')
+            ->waitForLocation('/forgot-password')
+            ->assertPathIs('/forgot-password');
+    });
+});
 
-    public function test_can_login_with_remember_me_checked(): void
-    {
-        $user = User::factory()->create();
+test('checked remember choice persists a remember cookie', function () {
+    $user = User::factory()->create();
+    $rememberCookie = Auth::guard()->getRecallerName();
 
-        $this->browse(function (Browser $browser) use ($user) {
-            $browser->visit('/login')
-                ->type('input[name="email"]', $user->email)
-                ->type('input[name="password"]', 'password')
-                ->click('label[for="remember"]')
-                ->press('[data-test="login-button"]')
-                ->pause(5000)
-                ->assertUrlIs('**/admin');
-        });
-    }
-}
+    $this->browse(function (Browser $browser) use ($user, $rememberCookie) {
+        $browser->visit('/login')
+            ->waitFor('input[name="email"]')
+            ->type('input[name="email"]', $user->email)
+            ->type('input[name="password"]', 'password')
+            ->click('label[for="remember"]')
+            ->assertChecked('remember')
+            ->press('[data-test="login-button"]')
+            ->waitForLocation('/admin')
+            ->assertPathIs('/admin')
+            ->assertAuthenticatedAs($user)
+            ->assertHasCookie($rememberCookie);
+    });
+});
