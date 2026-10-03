@@ -1,25 +1,11 @@
 <script lang="ts">
-    import type { Snippet } from 'svelte';
-    import { getContext } from 'svelte';
-    import { SHEET_CONTEXT, type SheetContext } from './context';
-
-    type TriggerProps = {
-        onclick?: (event: MouseEvent) => void;
-        'aria-expanded'?: boolean;
-        [key: string]: unknown;
-    };
-
-    let { asChild = false, children }: { asChild?: boolean; children?: Snippet<[TriggerProps]> } = $props();
-
-    const { setOpen, open } = getContext<SheetContext>(SHEET_CONTEXT);
-
-    const handleClick = () => setOpen(!open());
+import { Dialog } from 'bits-ui';
+import type { Snippet } from 'svelte';
+let { asChild = false, children }: { asChild?: boolean; children?: Snippet<[Record<string, any>]> } = $props();
 </script>
-
-{#if asChild}
-    {@render children?.({ onclick: handleClick, 'aria-expanded': open() })}
-{:else}
-    <button type="button" onclick={handleClick} aria-expanded={open()}>
-        {@render children?.({})}
-    </button>
-{/if}
+<Dialog.Trigger>
+{#snippet child({ props })}
+{#if asChild}{@render children?.({ ...props, onClick: props.onclick })}
+{:else}<button {...props} type="button">{@render children?.({})}</button>{/if}
+{/snippet}
+</Dialog.Trigger>

@@ -1,7 +1,7 @@
 <script module lang="ts">
     export const layout = {
-        title: 'Forgot password',
-        description: 'Enter your email to receive a password reset link',
+        title: 'Lupa kata sandi',
+        description: 'Masukkan email untuk menerima tautan reset kata sandi.',
     };
 </script>
 
@@ -24,10 +24,13 @@
     } = $props();
 </script>
 
-<AppHead title="Forgot password" />
+<AppHead title="Lupa kata sandi" />
 
 {#if status}
-    <div class="mb-4 text-center text-sm font-medium text-green-600">
+    <div
+        role="status"
+        class="mb-4 text-center text-sm font-medium text-success"
+    >
         {status}
     </div>
 {/if}
@@ -36,15 +39,17 @@
     <Form {...email.form()}>
         {#snippet children({ errors, processing })}
             <div class="grid gap-2">
-                <Label for="email">Email address</Label>
+                <Label for="email">Alamat email</Label>
                 <Input
                     id="email"
                     type="email"
                     name="email"
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby="email-error"
                     autocomplete="off"
                     placeholder="email@example.com"
                 />
-                <InputError message={errors.email} />
+                <InputError id="email-error" message={errors.email} />
             </div>
 
             <div class="my-6 flex items-center justify-start">
@@ -55,14 +60,14 @@
                     data-test="email-password-reset-link-button"
                 >
                     {#if processing}<Spinner />{/if}
-                    Email password reset link
+                    Kirim tautan reset
                 </Button>
             </div>
         {/snippet}
     </Form>
 
     <div class="space-x-1 text-center text-sm text-muted-foreground">
-        <span>Or, return to</span>
-        <TextLink href={login()}>log in</TextLink>
+        <span>Kembali ke</span>
+        <TextLink href={login()}>halaman masuk</TextLink>
     </div>
 </div>

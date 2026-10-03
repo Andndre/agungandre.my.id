@@ -4,6 +4,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\DuskTestCase;
 use Tests\TestCase;
 
+/** @var TestCase $this */
+uses(TestCase::class)->in('Unit');
+
 pest()->extend(DuskTestCase::class)->in('Browser');
 
 /*

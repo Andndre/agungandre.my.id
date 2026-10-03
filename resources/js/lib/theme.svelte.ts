@@ -11,6 +11,7 @@ export type ThemeState = {
 };
 
 const appearance = $state<{ value: Appearance }>({ value: 'system' });
+const systemTheme = $state({ dark: false });
 
 let themeChangeMediaQuery: MediaQueryList | null = null;
 
@@ -19,7 +20,7 @@ const prefersDark = (): boolean => {
         return false;
     }
 
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return systemTheme.dark;
 };
 
 const isDarkMode = (value: Appearance): boolean => {
@@ -54,7 +55,14 @@ const getStoredAppearance = (): Appearance => {
         return 'system';
     }
 
-    const stored = localStorage.getItem('appearance');
+    let stored: string | null =
+        document.documentElement.dataset.appearance ?? null;
+
+    try {
+        stored = localStorage.getItem('appearance') ?? stored;
+    } catch {
+        // Session theme remains usable without persistent storage.
+    }
 
     return stored === 'light' || stored === 'dark' || stored === 'system'
         ? stored
@@ -62,6 +70,9 @@ const getStoredAppearance = (): Appearance => {
 };
 
 const handleSystemThemeChange = (): void => {
+    systemTheme.dark = window.matchMedia(
+        '(prefers-color-scheme: dark)',
+    ).matches;
     applyTheme(appearance.value);
 };
 
@@ -82,11 +93,9 @@ export function initializeTheme(): () => void {
         return () => {};
     }
 
-    if (!localStorage.getItem('appearance')) {
-        localStorage.setItem('appearance', 'system');
-        setCookie('appearance', 'system');
-    }
-
+    systemTheme.dark = window.matchMedia(
+        '(prefers-color-scheme: dark)',
+    ).matches;
     appearance.value = getStoredAppearance();
     applyTheme(appearance.value);
 
@@ -101,7 +110,11 @@ export function updateAppearance(value: Appearance): void {
     appearance.value = value;
 
     if (typeof window !== 'undefined') {
-        localStorage.setItem('appearance', value);
+        try {
+            localStorage.setItem('appearance', value);
+        } catch {
+            // Cookie and in-memory preference still work.
+        }
     }
 
     setCookie('appearance', value);

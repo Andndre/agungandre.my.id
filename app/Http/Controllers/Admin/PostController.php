@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\DeletePostRequest;
+use App\Http\Requests\Admin\PreviewPostRequest;
 use App\Http\Requests\Admin\SavePostRequest;
 use App\Models\Post;
+use App\Support\PostMarkdown;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -33,7 +36,7 @@ class PostController extends Controller
 
         Post::create($data);
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Post created.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Tulisan berhasil dibuat.']);
 
         return redirect()->route('admin.posts.index');
     }
@@ -41,6 +44,11 @@ class PostController extends Controller
     public function edit(Post $post): Response
     {
         return Inertia::render('Admin/Posts/Edit', ['post' => $post]);
+    }
+
+    public function preview(PreviewPostRequest $request, PostMarkdown $markdown): JsonResponse
+    {
+        return response()->json(['contentHtml' => $markdown->render($request->validated('content'))]);
     }
 
     public function update(SavePostRequest $request, Post $post): RedirectResponse
@@ -51,7 +59,7 @@ class PostController extends Controller
 
         $post->update($data);
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Post updated.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Tulisan berhasil diperbarui.']);
 
         return redirect()->route('admin.posts.index');
     }
@@ -60,7 +68,7 @@ class PostController extends Controller
     {
         $post->delete();
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Post deleted.']);
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Tulisan berhasil dihapus.']);
 
         return redirect()->route('admin.posts.index');
     }

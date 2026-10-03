@@ -77,7 +77,7 @@ export const calloutNode = $node('blog_callout', () => ({
         [
             'strong',
             { contenteditable: 'false' },
-            node.attrs.variant === 'warning' ? 'Warning' : 'Note',
+            node.attrs.variant === 'warning' ? 'Peringatan' : 'Catatan',
         ],
         ['div', 0],
     ],

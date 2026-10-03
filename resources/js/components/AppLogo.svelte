@@ -1,14 +1,11 @@
-<script lang="ts">
-    import AppLogoIcon from '@/components/AppLogoIcon.svelte';
-</script>
-
 <div
-    class="flex aspect-square size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground"
+    class="grid size-9 shrink-0 place-items-center rounded-xl bg-primary-container font-semibold text-on-primary-container"
+    aria-hidden="true"
 >
-    <AppLogoIcon class="size-5 fill-current text-white dark:text-black" />
+    a.
 </div>
 <div class="ml-1 grid flex-1 text-left text-sm">
-    <span class="mb-0.5 truncate leading-tight font-semibold"
-        >Laravel Starter Kit</span
+    <span class="truncate font-semibold">Agung Andre</span><span
+        class="text-xs text-muted-foreground">Ruang kerja</span
     >
 </div>

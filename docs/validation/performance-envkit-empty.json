@@ -1,0 +1,906 @@
+{
+  "environment": {
+    "width": 390,
+    "cpu": 4,
+    "latency": 150,
+    "downloadBytesPerSecond": 200000,
+    "url": "https://agungandre.test/",
+    "server": "EnvKit HTTPS; inspect recorded response encoding"
+  },
+  "samples": [
+    {
+      "run": 1,
+      "metrics": {
+        "lcp": 3688,
+        "cls": 0,
+        "events": []
+      },
+      "paints": [
+        {
+          "name": "first-paint",
+          "startTime": 1940
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 3688
+        }
+      ],
+      "navigation": [
+        {
+          "ttfb": 84.19999980926514,
+          "dcl": 2392
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://agungandre.test/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "transferSize": 17160,
+          "decodedBodySize": 16860,
+          "duration": 652.2999999523163
+        },
+        {
+          "name": "https://agungandre.test/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "transferSize": 17708,
+          "decodedBodySize": 17408,
+          "duration": 649.6000001430511
+        },
+        {
+          "name": "https://agungandre.test/build/assets/app-Cu0yRn2N.css",
+          "transferSize": 114217,
+          "decodedBodySize": 113917,
+          "duration": 1667.7000000476837
+        },
+        {
+          "name": "https://agungandre.test/build/assets/app-CJNePmAC.css",
+          "transferSize": 12889,
+          "decodedBodySize": 12589,
+          "duration": 556.2999999523163
+        },
+        {
+          "name": "https://agungandre.test/build/assets/app-BsKM6mxS.js",
+          "transferSize": 193137,
+          "decodedBodySize": 192837,
+          "duration": 2042.5999999046326
+        },
+        {
+          "name": "https://agungandre.test/build/assets/Icon-DMlwMRfN.js",
+          "transferSize": 1538,
+          "decodedBodySize": 1238,
+          "duration": 215.40000009536743
+        },
+        {
+          "name": "https://agungandre.test/build/assets/arrow-up-right-CdQueTTa.js",
+          "transferSize": 705,
+          "decodedBodySize": 405,
+          "duration": 169
+        },
+        {
+          "name": "https://agungandre.test/build/assets/AppHead-ChElOaES.js",
+          "transferSize": 792,
+          "decodedBodySize": 492,
+          "duration": 183.10000014305115
+        },
+        {
+          "name": "https://agungandre.test/build/assets/blog-Bv-f9C68.js",
+          "transferSize": 2211,
+          "decodedBodySize": 1911,
+          "duration": 212
+        },
+        {
+          "name": "https://agungandre.test/build/assets/wayfinder-zo37vXJt.js",
+          "transferSize": 1198,
+          "decodedBodySize": 898,
+          "duration": 195.79999995231628
+        },
+        {
+          "name": "https://agungandre.test/build/assets/projects-BupOgdKv.js",
+          "transferSize": 1032,
+          "decodedBodySize": 732,
+          "duration": 195
+        },
+        {
+          "name": "https://agungandre.test/build/assets/ThemePicker-Ba-MKYlq.js",
+          "transferSize": 2448,
+          "decodedBodySize": 2148,
+          "duration": 327.2999999523163
+        },
+        {
+          "name": "https://agungandre.test/build/assets/admin-uqWrRfcH.js",
+          "transferSize": 4670,
+          "decodedBodySize": 4370,
+          "duration": 402.90000009536743
+        },
+        {
+          "name": "https://agungandre.test/build/assets/posts-DEPIMltf.js",
+          "transferSize": 4505,
+          "decodedBodySize": 4205,
+          "duration": 402.2000000476837
+        },
+        {
+          "name": "https://agungandre.test/build/assets/routes-DJ6niqBG.js",
+          "transferSize": 1461,
+          "decodedBodySize": 1161,
+          "duration": 355.5
+        },
+        {
+          "name": "https://agungandre.test/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+          "transferSize": 17532,
+          "decodedBodySize": 17232,
+          "duration": 413.7999999523163
+        },
+        {
+          "name": "https://agungandre.test/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "transferSize": 17312,
+          "decodedBodySize": 17012,
+          "duration": 425.5
+        }
+      ],
+      "compression": [
+        {
+          "url": "https://agungandre.test/",
+          "encoding": "gzip"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-Cu0yRn2N.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-CJNePmAC.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/Welcome-BsNiwTGh.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/PublicLayout-4Uxo9xuI.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-BsKM6mxS.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/arrow-up-right-CdQueTTa.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/AppHead-ChElOaES.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/wayfinder-zo37vXJt.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/projects-BupOgdKv.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/Icon-DMlwMRfN.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/blog-Bv-f9C68.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/ThemePicker-Ba-MKYlq.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/routes-DJ6niqBG.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/favicon.ico",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/admin-uqWrRfcH.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/posts-DEPIMltf.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "encoding": "identity"
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "metrics": {
+        "lcp": 3112,
+        "cls": 0,
+        "events": []
+      },
+      "paints": [
+        {
+          "name": "first-paint",
+          "startTime": 1944
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 3112
+        }
+      ],
+      "navigation": [
+        {
+          "ttfb": 107.29999995231628,
+          "dcl": 2332.9000000953674
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://agungandre.test/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "transferSize": 17160,
+          "decodedBodySize": 16860,
+          "duration": 610.0999999046326
+        },
+        {
+          "name": "https://agungandre.test/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "transferSize": 17708,
+          "decodedBodySize": 17408,
+          "duration": 638.7000000476837
+        },
+        {
+          "name": "https://agungandre.test/build/assets/app-Cu0yRn2N.css",
+          "transferSize": 114217,
+          "decodedBodySize": 113917,
+          "duration": 1667.7999999523163
+        },
+        {
+          "name": "https://agungandre.test/build/assets/app-CJNePmAC.css",
+          "transferSize": 12889,
+          "decodedBodySize": 12589,
+          "duration": 545.6000001430511
+        },
+        {
+          "name": "https://agungandre.test/build/assets/app-BsKM6mxS.js",
+          "transferSize": 193137,
+          "decodedBodySize": 192837,
+          "duration": 2050.2000000476837
+        },
+        {
+          "name": "https://agungandre.test/build/assets/Icon-DMlwMRfN.js",
+          "transferSize": 1538,
+          "decodedBodySize": 1238,
+          "duration": 213
+        },
+        {
+          "name": "https://agungandre.test/build/assets/arrow-up-right-CdQueTTa.js",
+          "transferSize": 705,
+          "decodedBodySize": 405,
+          "duration": 183.10000014305115
+        },
+        {
+          "name": "https://agungandre.test/build/assets/AppHead-ChElOaES.js",
+          "transferSize": 792,
+          "decodedBodySize": 492,
+          "duration": 182.79999995231628
+        },
+        {
+          "name": "https://agungandre.test/build/assets/blog-Bv-f9C68.js",
+          "transferSize": 2211,
+          "decodedBodySize": 1911,
+          "duration": 224.19999980926514
+        },
+        {
+          "name": "https://agungandre.test/build/assets/wayfinder-zo37vXJt.js",
+          "transferSize": 1198,
+          "decodedBodySize": 898,
+          "duration": 194.5
+        },
+        {
+          "name": "https://agungandre.test/build/assets/projects-BupOgdKv.js",
+          "transferSize": 1032,
+          "decodedBodySize": 732,
+          "duration": 206.79999995231628
+        },
+        {
+          "name": "https://agungandre.test/build/assets/ThemePicker-Ba-MKYlq.js",
+          "transferSize": 2448,
+          "decodedBodySize": 2148,
+          "duration": 370.7000000476837
+        },
+        {
+          "name": "https://agungandre.test/build/assets/admin-uqWrRfcH.js",
+          "transferSize": 4670,
+          "decodedBodySize": 4370,
+          "duration": 431.2999999523163
+        },
+        {
+          "name": "https://agungandre.test/build/assets/posts-DEPIMltf.js",
+          "transferSize": 4505,
+          "decodedBodySize": 4205,
+          "duration": 414.40000009536743
+        },
+        {
+          "name": "https://agungandre.test/build/assets/routes-DJ6niqBG.js",
+          "transferSize": 1461,
+          "decodedBodySize": 1161,
+          "duration": 366.5
+        },
+        {
+          "name": "https://agungandre.test/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+          "transferSize": 17532,
+          "decodedBodySize": 17232,
+          "duration": 412.90000009536743
+        },
+        {
+          "name": "https://agungandre.test/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "transferSize": 17312,
+          "decodedBodySize": 17012,
+          "duration": 426
+        }
+      ],
+      "compression": [
+        {
+          "url": "https://agungandre.test/",
+          "encoding": "gzip"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-Cu0yRn2N.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-CJNePmAC.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/Welcome-BsNiwTGh.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/PublicLayout-4Uxo9xuI.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-BsKM6mxS.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/arrow-up-right-CdQueTTa.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/AppHead-ChElOaES.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/wayfinder-zo37vXJt.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/projects-BupOgdKv.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/Icon-DMlwMRfN.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/blog-Bv-f9C68.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/ThemePicker-Ba-MKYlq.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/routes-DJ6niqBG.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/favicon.ico",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/admin-uqWrRfcH.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/posts-DEPIMltf.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/",
+          "encoding": "gzip"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-Cu0yRn2N.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-CJNePmAC.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/Welcome-BsNiwTGh.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/PublicLayout-4Uxo9xuI.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-BsKM6mxS.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/arrow-up-right-CdQueTTa.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/AppHead-ChElOaES.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/wayfinder-zo37vXJt.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/projects-BupOgdKv.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/Icon-DMlwMRfN.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/blog-Bv-f9C68.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/ThemePicker-Ba-MKYlq.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/routes-DJ6niqBG.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/favicon.ico",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/posts-DEPIMltf.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/admin-uqWrRfcH.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "encoding": "identity"
+        }
+      ]
+    },
+    {
+      "run": 3,
+      "metrics": {
+        "lcp": 3024,
+        "cls": 0,
+        "events": []
+      },
+      "paints": [
+        {
+          "name": "first-paint",
+          "startTime": 1924
+        },
+        {
+          "name": "first-contentful-paint",
+          "startTime": 3024
+        }
+      ],
+      "navigation": [
+        {
+          "ttfb": 154.5,
+          "dcl": 2318.5
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://agungandre.test/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "transferSize": 17160,
+          "decodedBodySize": 16860,
+          "duration": 642.5999999046326
+        },
+        {
+          "name": "https://agungandre.test/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "transferSize": 17708,
+          "decodedBodySize": 17408,
+          "duration": 641.3999998569489
+        },
+        {
+          "name": "https://agungandre.test/build/assets/app-Cu0yRn2N.css",
+          "transferSize": 114217,
+          "decodedBodySize": 113917,
+          "duration": 1658
+        },
+        {
+          "name": "https://agungandre.test/build/assets/app-CJNePmAC.css",
+          "transferSize": 12889,
+          "decodedBodySize": 12589,
+          "duration": 548.3999998569489
+        },
+        {
+          "name": "https://agungandre.test/build/assets/app-BsKM6mxS.js",
+          "transferSize": 193137,
+          "decodedBodySize": 192837,
+          "duration": 2039.2999999523163
+        },
+        {
+          "name": "https://agungandre.test/build/assets/Icon-DMlwMRfN.js",
+          "transferSize": 1538,
+          "decodedBodySize": 1238,
+          "duration": 216.39999985694885
+        },
+        {
+          "name": "https://agungandre.test/build/assets/arrow-up-right-CdQueTTa.js",
+          "transferSize": 705,
+          "decodedBodySize": 405,
+          "duration": 170.10000014305115
+        },
+        {
+          "name": "https://agungandre.test/build/assets/AppHead-ChElOaES.js",
+          "transferSize": 792,
+          "decodedBodySize": 492,
+          "duration": 184.30000019073486
+        },
+        {
+          "name": "https://agungandre.test/build/assets/blog-Bv-f9C68.js",
+          "transferSize": 2211,
+          "decodedBodySize": 1911,
+          "duration": 212.20000004768372
+        },
+        {
+          "name": "https://agungandre.test/build/assets/wayfinder-zo37vXJt.js",
+          "transferSize": 1198,
+          "decodedBodySize": 898,
+          "duration": 195.10000014305115
+        },
+        {
+          "name": "https://agungandre.test/build/assets/projects-BupOgdKv.js",
+          "transferSize": 1032,
+          "decodedBodySize": 732,
+          "duration": 192.90000009536743
+        },
+        {
+          "name": "https://agungandre.test/build/assets/ThemePicker-Ba-MKYlq.js",
+          "transferSize": 2448,
+          "decodedBodySize": 2148,
+          "duration": 326.2999999523163
+        },
+        {
+          "name": "https://agungandre.test/build/assets/admin-uqWrRfcH.js",
+          "transferSize": 4670,
+          "decodedBodySize": 4370,
+          "duration": 400.2000000476837
+        },
+        {
+          "name": "https://agungandre.test/build/assets/posts-DEPIMltf.js",
+          "transferSize": 4505,
+          "decodedBodySize": 4205,
+          "duration": 399.10000014305115
+        },
+        {
+          "name": "https://agungandre.test/build/assets/routes-DJ6niqBG.js",
+          "transferSize": 1461,
+          "decodedBodySize": 1161,
+          "duration": 352.2000000476837
+        },
+        {
+          "name": "https://agungandre.test/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+          "transferSize": 17532,
+          "decodedBodySize": 17232,
+          "duration": 418.39999985694885
+        },
+        {
+          "name": "https://agungandre.test/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "transferSize": 17312,
+          "decodedBodySize": 17012,
+          "duration": 431.40000009536743
+        }
+      ],
+      "compression": [
+        {
+          "url": "https://agungandre.test/",
+          "encoding": "gzip"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-Cu0yRn2N.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-CJNePmAC.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/Welcome-BsNiwTGh.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/PublicLayout-4Uxo9xuI.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-BsKM6mxS.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/arrow-up-right-CdQueTTa.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/AppHead-ChElOaES.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/wayfinder-zo37vXJt.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/projects-BupOgdKv.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/Icon-DMlwMRfN.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/blog-Bv-f9C68.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/ThemePicker-Ba-MKYlq.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/routes-DJ6niqBG.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/favicon.ico",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/admin-uqWrRfcH.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/posts-DEPIMltf.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/",
+          "encoding": "gzip"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-Cu0yRn2N.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-CJNePmAC.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/Welcome-BsNiwTGh.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/PublicLayout-4Uxo9xuI.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-BsKM6mxS.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/arrow-up-right-CdQueTTa.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/AppHead-ChElOaES.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/wayfinder-zo37vXJt.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/projects-BupOgdKv.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/Icon-DMlwMRfN.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/blog-Bv-f9C68.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/ThemePicker-Ba-MKYlq.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/routes-DJ6niqBG.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/favicon.ico",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/posts-DEPIMltf.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/admin-uqWrRfcH.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/",
+          "encoding": "gzip"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-Cu0yRn2N.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-CJNePmAC.css",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/Welcome-BsNiwTGh.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-400-normal-DRC__1Mx.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-600-normal-B7fBEWYG.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/PublicLayout-4Uxo9xuI.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/app-BsKM6mxS.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/arrow-up-right-CdQueTTa.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/AppHead-ChElOaES.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/wayfinder-zo37vXJt.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/projects-BupOgdKv.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/Icon-DMlwMRfN.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/blog-Bv-f9C68.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/ThemePicker-Ba-MKYlq.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/routes-DJ6niqBG.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/favicon.ico",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/admin-uqWrRfcH.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/posts-DEPIMltf.js",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-500-normal-Dk9ku72i.woff2",
+          "encoding": "identity"
+        },
+        {
+          "url": "https://agungandre.test/build/assets/instrument-sans-700-normal-CYfAanHo.woff2",
+          "encoding": "identity"
+        }
+      ]
+    }
+  ]
+}
