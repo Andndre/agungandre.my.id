@@ -4,6 +4,7 @@ use App\Models\Post;
 use App\Models\Project;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
+use Tests\TestCase;
 
 use function Pest\Laravel\get;
 
@@ -53,7 +54,7 @@ test('portfolio shows only the latest three published articles', function () {
 });
 
 test('only the initial welcome response preloads its featured hero cover with an ordered fallback', function () {
-     /** @var Tests\TestCase $this */
+    /** @var TestCase $this */
     $this->withoutVite();
     Project::factory()->featured()->unpublished()->create(['sort_order' => 0]);
     $first = Project::factory()->create(['is_published' => true, 'is_featured' => false, 'sort_order' => 1, 'cover_image' => 'projects/covers/first.png']);
