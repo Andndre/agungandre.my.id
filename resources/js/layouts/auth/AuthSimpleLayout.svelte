@@ -28,7 +28,7 @@
                 membangun langkah berikutnya.
             </p>
             <div
-                class="mt-12 rounded-[28px] border border-border bg-background/60 p-8"
+                class="mt-12 rounded-xl border border-border bg-background/60 p-8"
             >
                 <p class="font-mono text-xs text-primary">01 / INTERFACE</p>
                 <div class="my-4 h-px bg-border"></div>

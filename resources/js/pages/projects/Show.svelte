@@ -107,7 +107,7 @@
                         width="1600"
                         height="1000"
                         loading="lazy"
-                        class="aspect-[8/5] w-full object-contain"
+                        class="aspect-8/5 w-full object-contain"
                     />
                 </figure>{/each}
         </section>{/if}
