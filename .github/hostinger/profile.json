@@ -1,0 +1,33 @@
+{
+  "profile": "laravel-vite",
+  "output_dir": ".",
+  "web_root": "public",
+  "immutable_dirs": [
+    "public/build/assets"
+  ],
+  "protected_paths": [
+    ".env*",
+    ".git",
+    ".github",
+    "node_modules",
+    ".hostinger-ci",
+    "deploy-diagnostics",
+    "storage",
+    "database/*.sqlite*",
+    "tests",
+    "public/storage",
+    "docs"
+  ],
+  "keep_releases": 3,
+  "retention_days": 7,
+  "max_retained_files": 10000,
+  "max_retained_bytes": 536870912,
+  "php_version": "8.3",
+  "migrate": true,
+  "maintenance": true,
+  "deploy_url": "https://agungandre.my.id",
+  "page_contains": "",
+  "max_assets": 6,
+  "package_manager": "npm",
+  "build_command": "npm run build"
+}

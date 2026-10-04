@@ -40,3 +40,9 @@ _ide_helper_models.php
 
 # LSP temporary files
 /storage/framework/lsp-*.php
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
