@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Form, Link } from '@inertiajs/svelte';
+    import X from 'lucide-svelte/icons/x';
     import { onDestroy, untrack } from 'svelte';
     import InputError from '@/components/InputError.svelte';
     import { Button } from '@/components/ui/button';
@@ -295,8 +296,10 @@
                                         (techStack = techStack.filter(
                                             (item) => item !== tech,
                                         ))}
-                                    >{tech}<span aria-hidden="true">×</span
-                                    ></button
+                                    >{tech}<X
+                                        class="size-4"
+                                        aria-hidden="true"
+                                    /></button
                                 >{/each}
                         </div>
                         <InputError message={errors.tech_stack} />

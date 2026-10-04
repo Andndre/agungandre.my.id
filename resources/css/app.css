@@ -654,13 +654,25 @@
     border: 0;
 }
 .blog-link-card {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
     margin-block: 1.5rem;
     border: 1px solid var(--outline);
     border-radius: 0.75rem;
     padding: 1.25rem;
     color: var(--primary);
     text-decoration: none;
+}
+.blog-link-icon {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+}
+.blog-editor .milkdown .ProseMirror .blog-link-card {
+    margin-block: 1.5rem;
+    padding: 1.25rem;
 }
 .blog-embed-error {
     color: var(--error);
@@ -839,6 +851,9 @@
 .blog-editor .milkdown .cm-content {
     color: var(--on-surface);
     caret-color: var(--on-surface);
+}
+.blog-editor .milkdown .milkdown-slash-menu {
+    z-index: 40;
 }
 .blog-editor .milkdown .cm-line span {
     color: var(--primary);

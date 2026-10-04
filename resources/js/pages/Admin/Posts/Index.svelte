@@ -1,5 +1,8 @@
 <script lang="ts">
     import { Link, setLayoutProps } from '@inertiajs/svelte';
+    import ArrowLeft from 'lucide-svelte/icons/arrow-left';
+    import ArrowRight from 'lucide-svelte/icons/arrow-right';
+    import Plus from 'lucide-svelte/icons/plus';
     import AppHead from '@/components/AppHead.svelte';
     import { dashboard } from '@/routes/admin';
     import postsRoutes from '@/routes/admin/posts';
@@ -40,7 +43,7 @@
             </p>
         </div>
         <Link href={postsRoutes.create()} class="studio-button"
-            >+ Artikel baru</Link
+            ><Plus class="size-4" aria-hidden="true" />Artikel baru</Link
         >
     </header>
     {#if posts.data.length === 0}<div class="studio-empty">
@@ -96,10 +99,18 @@
         >
             {#if posts.prev_page_url}<Link
                     class="studio-button quiet"
-                    href={posts.prev_page_url}>← Sebelumnya</Link
+                    href={posts.prev_page_url}
+                    ><ArrowLeft
+                        class="size-4"
+                        aria-hidden="true"
+                    />Sebelumnya</Link
                 >{:else}<span></span>{/if}{#if posts.next_page_url}<Link
                     class="studio-button quiet"
-                    href={posts.next_page_url}>Berikutnya →</Link
+                    href={posts.next_page_url}
+                    >Berikutnya<ArrowRight
+                        class="size-4"
+                        aria-hidden="true"
+                    /></Link
                 >{/if}
         </nav>{/if}
 </div>

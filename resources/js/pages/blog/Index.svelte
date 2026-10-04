@@ -1,5 +1,8 @@
 <script lang="ts">
     import { Link } from '@inertiajs/svelte';
+    import ArrowLeft from 'lucide-svelte/icons/arrow-left';
+    import ArrowRight from 'lucide-svelte/icons/arrow-right';
+    import ArrowUpRight from 'lucide-svelte/icons/arrow-up-right';
     import AppHead from '@/components/AppHead.svelte';
     import { show } from '@/routes/blog';
     import type { PostPage, PostSummary } from '@/types/blog';
@@ -50,7 +53,11 @@
                     </p>
                     <Link
                         href={show({ slug: post.slug })}
-                        class="studio-link mt-auto pt-6">Read article ↗</Link
+                        class="studio-link mt-auto pt-6"
+                        >Read article<ArrowUpRight
+                            class="size-4"
+                            aria-hidden="true"
+                        /></Link
                     >
                 </article>{/each}
         </div>
@@ -60,10 +67,15 @@
         >
             {#if posts.prev_page_url}<Link
                     class="studio-button quiet"
-                    href={posts.prev_page_url}>← Previous</Link
+                    href={posts.prev_page_url}
+                    ><ArrowLeft
+                        class="size-4"
+                        aria-hidden="true"
+                    />Previous</Link
                 >{:else}<span></span>{/if}{#if posts.next_page_url}<Link
                     class="studio-button quiet"
-                    href={posts.next_page_url}>Next →</Link
+                    href={posts.next_page_url}
+                    >Next<ArrowRight class="size-4" aria-hidden="true" /></Link
                 >{/if}
         </nav>{/if}
 </div>

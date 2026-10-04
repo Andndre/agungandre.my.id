@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Form, Link, setLayoutProps } from '@inertiajs/svelte';
+    import Plus from 'lucide-svelte/icons/plus';
     import AppHead from '@/components/AppHead.svelte';
     import { Button } from '@/components/ui/button';
     import {
@@ -54,7 +55,8 @@
         </div>
         <Link
             href={projectsRoutes.create()}
-            class="studio-button studio-button-primary">+ Proyek baru</Link
+            class="studio-button studio-button-primary"
+            ><Plus class="size-4" aria-hidden="true" />Proyek baru</Link
         >
     </header>
     {#if projects.length === 0}<div class="studio-empty">

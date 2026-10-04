@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Link } from '@inertiajs/svelte';
     import ArrowDown from 'lucide-svelte/icons/arrow-down';
+    import ArrowRight from 'lucide-svelte/icons/arrow-right';
     import ArrowUpRight from 'lucide-svelte/icons/arrow-up-right';
     import { onMount } from 'svelte';
     import AppHead from '@/components/AppHead.svelte';
@@ -140,7 +141,8 @@
     {#if intro}<button
             type="button"
             class="studio-link absolute right-0 bottom-3"
-            onclick={finishIntro}>Skip intro →</button
+            onclick={finishIntro}
+            >Skip intro<ArrowRight class="size-4" aria-hidden="true" /></button
         >{/if}
 </section>
 <section id="work" class="studio-section" aria-labelledby="work-title">

@@ -110,7 +110,7 @@ try {
     );
     await boot("localStorage.removeItem('portfolio:intro:v1');");
     await navigate(client, base + '/');
-    await button('Skip intro →');
+    await button('Skip intro');
     await check(
         'Skip ends intro without moving focus',
         "!document.querySelector('.intro-frame') && !document.body.style.overflow",

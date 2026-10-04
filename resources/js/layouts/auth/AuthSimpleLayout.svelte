@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Link } from '@inertiajs/svelte';
+    import ArrowLeft from 'lucide-svelte/icons/arrow-left';
     import type { Snippet } from 'svelte';
     import ThemePicker from '@/components/ThemePicker.svelte';
     import { home } from '@/routes';
@@ -55,8 +56,9 @@
             {@render children?.()}
         </div>
         <Link
-            class="mt-12 self-start text-sm text-muted-foreground hover:text-primary"
-            href={home()}>← Kembali ke portfolio</Link
+            class="mt-12 inline-flex min-h-11 items-center gap-2 self-start text-sm text-muted-foreground hover:text-primary"
+            href={home()}
+            ><ArrowLeft class="size-4" aria-hidden="true" />Kembali ke portfolio</Link
         >
     </div>
 </div>

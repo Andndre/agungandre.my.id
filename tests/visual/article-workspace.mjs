@@ -206,6 +206,14 @@ try {
         "['Catatan','Peringatan','Sematan','Gambar','Tabel'].every(text=>[...document.querySelectorAll('.milkdown-slash-menu [data-index]')].some(el=>el.textContent.trim()===text))",
     );
     await client.evaluate(
+        "document.querySelector('.milkdown-slash-menu .menu-group:last-child').scrollIntoView({block:'nearest'})",
+    );
+    await pause(150);
+    await verify(
+        'block menu remains clickable above the sticky actionbar',
+        "(() => { const menu=document.querySelector('.milkdown-slash-menu'); const r=menu.getBoundingClientRect(); return Boolean(document.elementFromPoint(r.x+r.width/2, Math.max(0,r.y)+30)?.closest('.milkdown-slash-menu')); })()",
+    );
+    await client.evaluate(
         "(() => { const el=[...document.querySelectorAll('.milkdown-slash-menu [data-index]')].find(el=>el.textContent.trim()==='Sematan'); el.dispatchEvent(new PointerEvent('pointerup', {bubbles:true})); })()",
     );
     await waitFor(client, "Boolean(document.querySelector('#embed-url'))");
@@ -221,6 +229,10 @@ try {
     await verify(
         'embed restores document focus and inserts at selection',
         "Boolean(document.activeElement.closest('.ProseMirror')) && Boolean(document.querySelector('.ProseMirror a[href=\"https://example.com/page\"]'))",
+    );
+    await verify(
+        'embed uses a trusted Lucide SVG with an escaped link',
+        "(() => { const link=document.querySelector('.ProseMirror a[href=\"https://example.com/page\"]'); const icon=link.querySelector('svg'); return icon instanceof SVGElement && icon.getAttribute('aria-hidden')==='true' && icon.querySelectorAll('path').length===2 && !link.textContent.includes('↗'); })()",
     );
 
     await button('Tambah blok');
@@ -371,6 +383,17 @@ try {
     await waitFor(
         client,
         "document.querySelector('.article-actionbar [role=status]').textContent.includes('Artikel tersimpan')",
+    );
+    await client.call('Emulation.setDeviceMetricsOverride', {
+        width: 720,
+        height: 450,
+        deviceScaleFactor: 2,
+        mobile: false,
+    });
+    await pause(150);
+    await verify(
+        '200% desktop zoom reflows without overflow and retains settings access',
+        "document.documentElement.scrollWidth<=innerWidth && Boolean(document.querySelector('button[aria-label=\"Pengaturan artikel\"]')) && document.querySelector('.article-title').getBoundingClientRect().width>0",
     );
     await navigate(client, base + '/admin/blog/1/edit');
     await waitFor(
