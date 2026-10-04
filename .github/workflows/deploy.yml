@@ -58,6 +58,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [verify]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    concurrency:
+      group: production-deploy
+      cancel-in-progress: false
 
     steps:
       - name: Checkout Code
@@ -118,12 +121,24 @@ jobs:
             }
             echo "Production image runtime ready.\n";
             PHP
+            mkdir -p "${{ secrets.HOSTINGER_TARGET_DIR }}/public/build/assets"
+
+      - name: Upload Versioned Assets Before Application
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+          ARGS: "-rlgoDzvcO --delay-updates"
+          SOURCE: "public/build/assets/"
+          REMOTE_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+          REMOTE_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
+          REMOTE_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+          TARGET: ${{ secrets.HOSTINGER_TARGET_DIR }}/public/build/assets/
 
       - name: Deploy via Rsync over SSH
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
-          ARGS: "-rlgoDzvcO --delete --exclude=.env --exclude=node_modules --exclude=.git --exclude=.github --exclude=storage/** --exclude=database/*.sqlite* --exclude=tests --exclude=/docs/"
+          ARGS: "-rlgoDzvcO --delete-delay --delay-updates --exclude=/public/build/assets/ --exclude=.env --exclude=node_modules --exclude=.git --exclude=.github --exclude=storage/** --exclude=database/*.sqlite* --exclude=tests --exclude=/docs/"
           REMOTE_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
           REMOTE_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
           REMOTE_USER: ${{ secrets.HOSTINGER_SSH_USER }}
