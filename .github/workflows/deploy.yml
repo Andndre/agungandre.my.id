@@ -123,7 +123,7 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
-          ARGS: "-rlgoDzvcO --delete --exclude=.env --exclude=node_modules --exclude=.git --exclude=.github --exclude=storage/** --exclude=database/*.sqlite* --exclude=tests"
+          ARGS: "-rlgoDzvcO --delete --exclude=.env --exclude=node_modules --exclude=.git --exclude=.github --exclude=storage/** --exclude=database/*.sqlite* --exclude=tests --exclude=/docs/"
           REMOTE_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
           REMOTE_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
           REMOTE_USER: ${{ secrets.HOSTINGER_SSH_USER }}
