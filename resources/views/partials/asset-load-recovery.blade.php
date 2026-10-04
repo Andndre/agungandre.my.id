@@ -144,8 +144,23 @@
             errors.add(event.payload);
             show();
         });
+        const isAppScript = (element) => {
+            if (!(element instanceof HTMLScriptElement) || element.type !== 'module') return false;
+            const src = element.src;
+            if (!src) return false;
+            try {
+                const url = new URL(src, window.location.href);
+                if (url.protocol !== 'http:' && url.protocol !== 'https:') return false;
+                if (url.origin === window.location.origin) {
+                    return url.pathname.includes('/build/') || url.pathname.includes('/@' + 'vite/');
+                }
+                return url.pathname.includes('/@' + 'vite/') || url.pathname.includes('/resources/');
+            } catch (_) {
+                return false;
+            }
+        };
         window.addEventListener('error', (event) => {
-            if (event.target instanceof HTMLScriptElement && event.target.type === 'module') show();
+            if (isAppScript(event.target)) show();
         }, true);
         document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('asset-recovery-reload').addEventListener('click', () => location.reload());

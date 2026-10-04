@@ -9,6 +9,7 @@ test('initial HTML includes independent asset recovery outside the Inertia mount
         ->assertSeeInOrder(['vite:preloadError', 'id="asset-load-recovery"', 'id="app"'], false)
         ->assertSee('hidden data-page-component="'.$component.'" aria-label="'.$label.'"', false)
         ->assertSee('role="alert" aria-atomic="true"', false)
+        ->assertSee('isAppScript', false)
         ->assertSee('id="asset-recovery-reload"', false)
         ->assertSee('id="asset-recovery-close"', false);
 })->with([
