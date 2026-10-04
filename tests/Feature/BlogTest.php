@@ -174,7 +174,7 @@ test('owner can upload a validated article image', function () {
 
     $filename = basename(Storage::disk('s3')->allFiles('blog/images')[0]);
     get(route('blog.media.show', $filename))->assertOk()
-        ->assertHeader('content-type', 'image/jpeg');
+        ->assertHeader('content-type', 'image/webp');
     get(route('blog.media.show', 'missing.jpg'))->assertNotFound();
     get('/media/blog/images/../missing.jpg')->assertNotFound();
 

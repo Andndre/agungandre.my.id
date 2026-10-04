@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\StaticWebImage;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
 
@@ -15,7 +16,16 @@ class UploadPostImageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => ['required', 'file', 'mimes:jpg,jpeg,png,webp,gif', 'max:10240'],
+            'image' => ['bail', 'required', 'file', 'max:10240', new StaticWebImage],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'image.required' => 'Pilih gambar untuk diunggah.',
+            'image.file' => 'Pilih berkas gambar JPEG, PNG, atau WebP statis.',
+            'image.max' => 'Ukuran gambar maksimal 10 MB.',
         ];
     }
 }
