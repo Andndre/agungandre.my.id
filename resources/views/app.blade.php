@@ -59,6 +59,8 @@
 
     @fonts
 
+    @include('partials.asset-load-recovery')
+
     @vite(['resources/css/app.css', 'resources/js/app.ts'])
     <x-inertia::head>
         <title>{{ config('app.name', 'Laravel') }}</title>
@@ -66,6 +68,19 @@
 </head>
 
 <body class="font-sans antialiased">
+    <aside id="asset-load-recovery" hidden data-page-component="{{ $page['component'] ?? '' }}" aria-label="{{ str_starts_with($page['component'] ?? '', 'auth/') || str_starts_with($page['component'] ?? '', 'admin/') || str_starts_with($page['component'] ?? '', 'settings/') ? 'Pemulihan halaman' : 'Page recovery' }}">
+        <div class="asset-recovery-panel">
+            <div role="alert" aria-atomic="true">
+                <h2 id="asset-recovery-title"></h2>
+                <p id="asset-recovery-message"></p>
+                <p id="asset-recovery-unsaved" hidden></p>
+            </div>
+            <div class="asset-recovery-actions">
+                <button type="button" id="asset-recovery-reload" aria-describedby="asset-recovery-title asset-recovery-message asset-recovery-unsaved"></button>
+                <button type="button" id="asset-recovery-close"></button>
+            </div>
+        </div>
+    </aside>
     <x-inertia::app />
 </body>
 

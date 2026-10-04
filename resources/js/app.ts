@@ -1,8 +1,25 @@
-import { createInertiaApp } from '@inertiajs/svelte';
+import { createInertiaApp, router } from '@inertiajs/svelte';
 import type { Component } from 'svelte';
 import '@/lib/public-motion.svelte';
 import { initializeFlashToast } from '@/lib/flash-toast';
 import { initializeTheme } from '@/lib/theme.svelte';
+
+declare global {
+    interface Window {
+        __assetLoadRecovery?: {
+            hasError: (error: unknown) => boolean;
+            ready: () => void;
+            reset: () => void;
+        };
+    }
+}
+
+router.on('networkError', (event) => {
+    if (window.__assetLoadRecovery?.hasError(event.detail.error)) {
+        event.preventDefault();
+    }
+});
+router.on('navigate', () => window.__assetLoadRecovery?.reset());
 
 const pages = import.meta.glob<{ default: Component; layout?: any }>(
     './pages/**/*.svelte',
@@ -72,6 +89,12 @@ createInertiaApp({
             : appLayout;
     },
     progress: { color: '#6250d9' },
-});
+})
+    .then(() => window.__assetLoadRecovery?.ready())
+    .catch((error: unknown) => {
+        if (!window.__assetLoadRecovery?.hasError(error)) {
+            throw error;
+        }
+    });
 initializeTheme();
 initializeFlashToast();
