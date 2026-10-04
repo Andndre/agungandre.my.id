@@ -79,7 +79,7 @@
                         href={projects.edit({ project: project.id })}
                         class="flex min-h-20 flex-wrap items-center justify-between gap-3 rounded-xl py-4 hover:bg-muted"
                         ><div class="min-w-0">
-                            <h3 class="break-words font-medium">
+                            <h3 class="wrap-break-word font-medium">
                                 {project.title}
                             </h3>
                             <p class="mt-1 text-xs text-muted-foreground">

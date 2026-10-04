@@ -62,7 +62,7 @@
                     <div class="min-w-0 flex-1">
                         <Link
                             href={postsRoutes.edit({ post: post.id })}
-                            class="block break-words font-semibold hover:text-primary"
+                            class="block wrap-break-word font-semibold hover:text-primary"
                             >{post.title}</Link
                         >
                         <div class="mt-3 flex flex-wrap items-center gap-3">

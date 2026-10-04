@@ -26,7 +26,7 @@
         <div>
             <p class="section-kicker">Portfolio / Proyek</p>
             <h1 class="cms-title">Edit proyek</h1>
-            <p class="mt-2 break-words text-muted-foreground">
+            <p class="mt-2 wrap-break-word text-muted-foreground">
                 {project.title}
             </p>
         </div>
