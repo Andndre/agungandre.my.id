@@ -444,8 +444,10 @@ test('PNG text containing animation chunk names is still a static image', functi
 });
 
 test('deployment preflight runs independently before application transfer', function (bool $withExtensions) {
-    $workflow = file_get_contents(base_path('.github/workflows/deploy.yml'));
-    preg_match("/php <<'PHP'\\R(.*?)\\R\\s+PHP\\R/s", $workflow, $matches);
+    $script = file_exists(base_path('.github/hostinger/remote-deploy.sh'))
+        ? file_get_contents(base_path('.github/hostinger/remote-deploy.sh'))
+        : file_get_contents(base_path('.github/workflows/deploy.yml'));
+    preg_match("/php <<'PHP'\\R(.*?)\\R(?:PHP|\\s+PHP)\\R/s", $script, $matches);
     $source = preg_replace('/^ {12}/m', '', $matches[1]);
     $process = new Process($withExtensions ? [PHP_BINARY] : [PHP_BINARY, '-n']);
     $process->setInput($source)->run();
