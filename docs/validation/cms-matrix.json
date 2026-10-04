@@ -1,0 +1,984 @@
+[
+  {
+    "name": "qa-dashboard",
+    "theme": "light",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Selamat datang kembali.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 300,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-dashboard-light-360.png"
+  },
+  {
+    "name": "qa-dashboard",
+    "theme": "light",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Selamat datang kembali.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 284,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-dashboard-light-390.png"
+  },
+  {
+    "name": "qa-dashboard",
+    "theme": "light",
+    "width": 768,
+    "scrollWidth": 753,
+    "title": "Selamat datang kembali.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 228,
+      "cls": 0.000010845506861443115,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-dashboard-light-768.png"
+  },
+  {
+    "name": "qa-dashboard",
+    "theme": "light",
+    "width": 1024,
+    "scrollWidth": 1009,
+    "title": "Selamat datang kembali.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 300,
+      "cls": 0.000007219464855939754,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-dashboard-light-1024.png"
+  },
+  {
+    "name": "qa-dashboard",
+    "theme": "light",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "title": "Selamat datang kembali.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 252,
+      "cls": 0.000003619575253924284,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-dashboard-light-1440.png"
+  },
+  {
+    "name": "qa-dashboard",
+    "theme": "dark",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Selamat datang kembali.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 180,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-dashboard-dark-360.png"
+  },
+  {
+    "name": "qa-dashboard",
+    "theme": "dark",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Selamat datang kembali.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 244,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-dashboard-dark-390.png"
+  },
+  {
+    "name": "qa-dashboard",
+    "theme": "dark",
+    "width": 768,
+    "scrollWidth": 753,
+    "title": "Selamat datang kembali.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 180,
+      "cls": 0.000010845506861443115,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-dashboard-dark-768.png"
+  },
+  {
+    "name": "qa-dashboard",
+    "theme": "dark",
+    "width": 1024,
+    "scrollWidth": 1009,
+    "title": "Selamat datang kembali.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 264,
+      "cls": 0.000007219464855939754,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-dashboard-dark-1024.png"
+  },
+  {
+    "name": "qa-dashboard",
+    "theme": "dark",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "title": "Selamat datang kembali.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 228,
+      "cls": 0.000003619575253924284,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-dashboard-dark-1440.png"
+  },
+  {
+    "name": "qa-admin-projects",
+    "theme": "light",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Proyek",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 232,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-projects-light-360.png"
+  },
+  {
+    "name": "qa-admin-projects",
+    "theme": "light",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Proyek",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 320,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-projects-light-390.png"
+  },
+  {
+    "name": "qa-admin-projects",
+    "theme": "light",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "Proyek",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 192,
+      "cls": 0.001164771412037037,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-projects-light-768.png"
+  },
+  {
+    "name": "qa-admin-projects",
+    "theme": "light",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "Proyek",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 264,
+      "cls": 0.000756848653157552,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-projects-light-1024.png"
+  },
+  {
+    "name": "qa-admin-projects",
+    "theme": "light",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "Proyek",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 308,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-projects-light-1440.png"
+  },
+  {
+    "name": "qa-admin-projects",
+    "theme": "dark",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Proyek",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 216,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-projects-dark-360.png"
+  },
+  {
+    "name": "qa-admin-projects",
+    "theme": "dark",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Proyek",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 252,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-projects-dark-390.png"
+  },
+  {
+    "name": "qa-admin-projects",
+    "theme": "dark",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "Proyek",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 192,
+      "cls": 0.001164771412037037,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-projects-dark-768.png"
+  },
+  {
+    "name": "qa-admin-projects",
+    "theme": "dark",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "Proyek",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 272,
+      "cls": 0.000756848653157552,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-projects-dark-1024.png"
+  },
+  {
+    "name": "qa-admin-projects",
+    "theme": "dark",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "Proyek",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 256,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-projects-dark-1440.png"
+  },
+  {
+    "name": "qa-project-editor",
+    "theme": "light",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Edit proyek",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "750",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "600",
+        "height": "400",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 280,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-editor-light-360.png"
+  },
+  {
+    "name": "qa-project-editor",
+    "theme": "light",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Edit proyek",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "750",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "600",
+        "height": "400",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 256,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-editor-light-390.png"
+  },
+  {
+    "name": "qa-project-editor",
+    "theme": "light",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "Edit proyek",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "750",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "600",
+        "height": "400",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 264,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-editor-light-768.png"
+  },
+  {
+    "name": "qa-project-editor",
+    "theme": "light",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "Edit proyek",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "750",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "600",
+        "height": "400",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 384,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-editor-light-1024.png"
+  },
+  {
+    "name": "qa-project-editor",
+    "theme": "light",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "Edit proyek",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "750",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "600",
+        "height": "400",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 284,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-editor-light-1440.png"
+  },
+  {
+    "name": "qa-project-editor",
+    "theme": "dark",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Edit proyek",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "750",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "600",
+        "height": "400",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 256,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-editor-dark-360.png"
+  },
+  {
+    "name": "qa-project-editor",
+    "theme": "dark",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Edit proyek",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "750",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "600",
+        "height": "400",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 316,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-editor-dark-390.png"
+  },
+  {
+    "name": "qa-project-editor",
+    "theme": "dark",
+    "width": 768,
+    "scrollWidth": 753,
+    "title": "Edit proyek",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "750",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "600",
+        "height": "400",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 248,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-editor-dark-768.png"
+  },
+  {
+    "name": "qa-project-editor",
+    "theme": "dark",
+    "width": 1024,
+    "scrollWidth": 1009,
+    "title": "Edit proyek",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "750",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "600",
+        "height": "400",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 336,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-editor-dark-1024.png"
+  },
+  {
+    "name": "qa-project-editor",
+    "theme": "dark",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "title": "Edit proyek",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "750",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "600",
+        "height": "400",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 316,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-editor-dark-1440.png"
+  },
+  {
+    "name": "qa-admin-writing",
+    "theme": "light",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Tulisan",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 212,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-writing-light-360.png"
+  },
+  {
+    "name": "qa-admin-writing",
+    "theme": "light",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Tulisan",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 232,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-writing-light-390.png"
+  },
+  {
+    "name": "qa-admin-writing",
+    "theme": "light",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "Tulisan",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 196,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-writing-light-768.png"
+  },
+  {
+    "name": "qa-admin-writing",
+    "theme": "light",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "Tulisan",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 264,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-writing-light-1024.png"
+  },
+  {
+    "name": "qa-admin-writing",
+    "theme": "light",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "Tulisan",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 260,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-writing-light-1440.png"
+  },
+  {
+    "name": "qa-admin-writing",
+    "theme": "dark",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Tulisan",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 204,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-writing-dark-360.png"
+  },
+  {
+    "name": "qa-admin-writing",
+    "theme": "dark",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Tulisan",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 244,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-writing-dark-390.png"
+  },
+  {
+    "name": "qa-admin-writing",
+    "theme": "dark",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "Tulisan",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 192,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-writing-dark-768.png"
+  },
+  {
+    "name": "qa-admin-writing",
+    "theme": "dark",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "Tulisan",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 312,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-writing-dark-1024.png"
+  },
+  {
+    "name": "qa-admin-writing",
+    "theme": "dark",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "Tulisan",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 232,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-admin-writing-dark-1440.png"
+  },
+  {
+    "name": "qa-article-editor",
+    "theme": "light",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Edit artikel",
+    "overflow": [
+      {
+        "tag": "DIV",
+        "class": "cm-content",
+        "left": 116.796875,
+        "right": 423.890625
+      },
+      {
+        "tag": "DIV",
+        "class": "cm-line cm-activeLine",
+        "left": 116.796875,
+        "right": 423.890625
+      }
+    ],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 556,
+      "cls": 0.0006471264146090534,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-editor-light-360.png"
+  },
+  {
+    "name": "qa-article-editor",
+    "theme": "light",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Edit artikel",
+    "overflow": [
+      {
+        "tag": "DIV",
+        "class": "cm-content",
+        "left": 116.796875,
+        "right": 423.890625
+      },
+      {
+        "tag": "DIV",
+        "class": "cm-line cm-activeLine",
+        "left": 116.796875,
+        "right": 423.890625
+      }
+    ],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 448,
+      "cls": 0.002191771130104463,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-editor-light-390.png"
+  },
+  {
+    "name": "qa-article-editor",
+    "theme": "light",
+    "width": 768,
+    "scrollWidth": 753,
+    "title": "Edit artikel",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 424,
+      "cls": 0.011927541992523731,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-editor-light-768.png"
+  },
+  {
+    "name": "qa-article-editor",
+    "theme": "light",
+    "width": 1024,
+    "scrollWidth": 1009,
+    "title": "Edit artikel",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 556,
+      "cls": 0.007452881685821986,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-editor-light-1024.png"
+  },
+  {
+    "name": "qa-article-editor",
+    "theme": "light",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "title": "Edit artikel",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 464,
+      "cls": 0.006120558898464484,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-editor-light-1440.png"
+  },
+  {
+    "name": "qa-article-editor",
+    "theme": "dark",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Edit artikel",
+    "overflow": [
+      {
+        "tag": "DIV",
+        "class": "cm-content",
+        "left": 116.796875,
+        "right": 423.890625
+      },
+      {
+        "tag": "DIV",
+        "class": "cm-line cm-activeLine",
+        "left": 116.796875,
+        "right": 423.890625
+      }
+    ],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 436,
+      "cls": 0.0006471264146090534,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-editor-dark-360.png"
+  },
+  {
+    "name": "qa-article-editor",
+    "theme": "dark",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Edit artikel",
+    "overflow": [
+      {
+        "tag": "DIV",
+        "class": "cm-content",
+        "left": 116.796875,
+        "right": 423.890625
+      },
+      {
+        "tag": "DIV",
+        "class": "cm-line cm-activeLine",
+        "left": 116.796875,
+        "right": 423.890625
+      }
+    ],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 416,
+      "cls": 0.002191771130104463,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-editor-dark-390.png"
+  },
+  {
+    "name": "qa-article-editor",
+    "theme": "dark",
+    "width": 768,
+    "scrollWidth": 753,
+    "title": "Edit artikel",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 464,
+      "cls": 0.011927541992523731,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-editor-dark-768.png"
+  },
+  {
+    "name": "qa-article-editor",
+    "theme": "dark",
+    "width": 1024,
+    "scrollWidth": 1009,
+    "title": "Edit artikel",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 564,
+      "cls": 0.007452881685821986,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-editor-dark-1024.png"
+  },
+  {
+    "name": "qa-article-editor",
+    "theme": "dark",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "title": "Edit artikel",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 456,
+      "cls": 0.006120558898464484,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-editor-dark-1440.png"
+  }
+]

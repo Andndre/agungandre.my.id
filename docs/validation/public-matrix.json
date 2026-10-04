@@ -1,0 +1,1512 @@
+[
+  {
+    "name": "qa-home",
+    "theme": "light",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Thoughtful interfaces.Solid systems.",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 1184,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-home-light-360.png"
+  },
+  {
+    "name": "qa-home",
+    "theme": "light",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Thoughtful interfaces.Solid systems.",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 212,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-home-light-390.png"
+  },
+  {
+    "name": "qa-home",
+    "theme": "light",
+    "width": 768,
+    "scrollWidth": 753,
+    "title": "Thoughtful interfaces.Solid systems.",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 264,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-home-light-768.png"
+  },
+  {
+    "name": "qa-home",
+    "theme": "light",
+    "width": 1024,
+    "scrollWidth": 1009,
+    "title": "Thoughtful interfaces.Solid systems.",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 236,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-home-light-1024.png"
+  },
+  {
+    "name": "qa-home",
+    "theme": "light",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "title": "Thoughtful interfaces.Solid systems.",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 232,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-home-light-1440.png"
+  },
+  {
+    "name": "qa-home",
+    "theme": "dark",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Thoughtful interfaces.Solid systems.",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 220,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-home-dark-360.png"
+  },
+  {
+    "name": "qa-home",
+    "theme": "dark",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Thoughtful interfaces.Solid systems.",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 200,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-home-dark-390.png"
+  },
+  {
+    "name": "qa-home",
+    "theme": "dark",
+    "width": 768,
+    "scrollWidth": 753,
+    "title": "Thoughtful interfaces.Solid systems.",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 208,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-home-dark-768.png"
+  },
+  {
+    "name": "qa-home",
+    "theme": "dark",
+    "width": 1024,
+    "scrollWidth": 1009,
+    "title": "Thoughtful interfaces.Solid systems.",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 256,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-home-dark-1024.png"
+  },
+  {
+    "name": "qa-home",
+    "theme": "dark",
+    "width": 1440,
+    "scrollWidth": 1425,
+    "title": "Thoughtful interfaces.Solid systems.",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1200",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 252,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-home-dark-1440.png"
+  },
+  {
+    "name": "login",
+    "theme": "light",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Selamat datang kembali",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 256,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/login-light-360.png"
+  },
+  {
+    "name": "login",
+    "theme": "light",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Selamat datang kembali",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 200,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/login-light-390.png"
+  },
+  {
+    "name": "login",
+    "theme": "light",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "Selamat datang kembali",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 152,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/login-light-768.png"
+  },
+  {
+    "name": "login",
+    "theme": "light",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "Selamat datang kembali",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 164,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/login-light-1024.png"
+  },
+  {
+    "name": "login",
+    "theme": "light",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "Selamat datang kembali",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 196,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/login-light-1440.png"
+  },
+  {
+    "name": "login",
+    "theme": "dark",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Selamat datang kembali",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 172,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/login-dark-360.png"
+  },
+  {
+    "name": "login",
+    "theme": "dark",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Selamat datang kembali",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 184,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/login-dark-390.png"
+  },
+  {
+    "name": "login",
+    "theme": "dark",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "Selamat datang kembali",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 180,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/login-dark-768.png"
+  },
+  {
+    "name": "login",
+    "theme": "dark",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "Selamat datang kembali",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 168,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/login-dark-1024.png"
+  },
+  {
+    "name": "login",
+    "theme": "dark",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "Selamat datang kembali",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 160,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/login-dark-1440.png"
+  },
+  {
+    "name": "qa-project",
+    "theme": "light",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "[QA] Orbit workspace",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "1600",
+        "height": "1000",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 192,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-light-360.png"
+  },
+  {
+    "name": "qa-project",
+    "theme": "light",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "[QA] Orbit workspace",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "1600",
+        "height": "1000",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 148,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-light-390.png"
+  },
+  {
+    "name": "qa-project",
+    "theme": "light",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "[QA] Orbit workspace",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "1600",
+        "height": "1000",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 164,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-light-768.png"
+  },
+  {
+    "name": "qa-project",
+    "theme": "light",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "[QA] Orbit workspace",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "1600",
+        "height": "1000",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 216,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-light-1024.png"
+  },
+  {
+    "name": "qa-project",
+    "theme": "light",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "[QA] Orbit workspace",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "1600",
+        "height": "1000",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 192,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-light-1440.png"
+  },
+  {
+    "name": "qa-project",
+    "theme": "dark",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "[QA] Orbit workspace",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "1600",
+        "height": "1000",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 164,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-dark-360.png"
+  },
+  {
+    "name": "qa-project",
+    "theme": "dark",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "[QA] Orbit workspace",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "1600",
+        "height": "1000",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 176,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-dark-390.png"
+  },
+  {
+    "name": "qa-project",
+    "theme": "dark",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "[QA] Orbit workspace",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "1600",
+        "height": "1000",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 208,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-dark-768.png"
+  },
+  {
+    "name": "qa-project",
+    "theme": "dark",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "[QA] Orbit workspace",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "1600",
+        "height": "1000",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 192,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-dark-1024.png"
+  },
+  {
+    "name": "qa-project",
+    "theme": "dark",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "[QA] Orbit workspace",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-orbit.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      },
+      {
+        "src": "/.qa/projects/qa-orbit-detail.png",
+        "width": "1600",
+        "height": "1000",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 196,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-project-dark-1440.png"
+  },
+  {
+    "name": "qa-writing",
+    "theme": "light",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Writing & experiments.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 236,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-writing-light-360.png"
+  },
+  {
+    "name": "qa-writing",
+    "theme": "light",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Writing & experiments.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 156,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-writing-light-390.png"
+  },
+  {
+    "name": "qa-writing",
+    "theme": "light",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "Writing & experiments.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 176,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-writing-light-768.png"
+  },
+  {
+    "name": "qa-writing",
+    "theme": "light",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "Writing & experiments.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 152,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-writing-light-1024.png"
+  },
+  {
+    "name": "qa-writing",
+    "theme": "light",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "Writing & experiments.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 196,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-writing-light-1440.png"
+  },
+  {
+    "name": "qa-writing",
+    "theme": "dark",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "Writing & experiments.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 148,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-writing-dark-360.png"
+  },
+  {
+    "name": "qa-writing",
+    "theme": "dark",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "Writing & experiments.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 160,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-writing-dark-390.png"
+  },
+  {
+    "name": "qa-writing",
+    "theme": "dark",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "Writing & experiments.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 184,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-writing-dark-768.png"
+  },
+  {
+    "name": "qa-writing",
+    "theme": "dark",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "Writing & experiments.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 196,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-writing-dark-1024.png"
+  },
+  {
+    "name": "qa-writing",
+    "theme": "dark",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "Writing & experiments.",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 180,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-writing-dark-1440.png"
+  },
+  {
+    "name": "qa-article",
+    "theme": "light",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "[QA] Notes on building clear product interfaces",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 392,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-light-360.png"
+  },
+  {
+    "name": "qa-article",
+    "theme": "light",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "[QA] Notes on building clear product interfaces",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 192,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-light-390.png"
+  },
+  {
+    "name": "qa-article",
+    "theme": "light",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "[QA] Notes on building clear product interfaces",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 180,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-light-768.png"
+  },
+  {
+    "name": "qa-article",
+    "theme": "light",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "[QA] Notes on building clear product interfaces",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 188,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-light-1024.png"
+  },
+  {
+    "name": "qa-article",
+    "theme": "light",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "[QA] Notes on building clear product interfaces",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 184,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-light-1440.png"
+  },
+  {
+    "name": "qa-article",
+    "theme": "dark",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "[QA] Notes on building clear product interfaces",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 148,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-dark-360.png"
+  },
+  {
+    "name": "qa-article",
+    "theme": "dark",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "[QA] Notes on building clear product interfaces",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 316,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-dark-390.png"
+  },
+  {
+    "name": "qa-article",
+    "theme": "dark",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "[QA] Notes on building clear product interfaces",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 144,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-dark-768.png"
+  },
+  {
+    "name": "qa-article",
+    "theme": "dark",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "[QA] Notes on building clear product interfaces",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 164,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-dark-1024.png"
+  },
+  {
+    "name": "qa-article",
+    "theme": "dark",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "[QA] Notes on building clear product interfaces",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 152,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-article-dark-1440.png"
+  },
+  {
+    "name": "qa-long-title",
+    "theme": "light",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "[QA] A deliberately long project title for a scheduling workspace that keeps complex delivery plans readable across small and large screens",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 208,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-long-title-light-360.png"
+  },
+  {
+    "name": "qa-long-title",
+    "theme": "light",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "[QA] A deliberately long project title for a scheduling workspace that keeps complex delivery plans readable across small and large screens",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 144,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-long-title-light-390.png"
+  },
+  {
+    "name": "qa-long-title",
+    "theme": "light",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "[QA] A deliberately long project title for a scheduling workspace that keeps complex delivery plans readable across small and large screens",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 160,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-long-title-light-768.png"
+  },
+  {
+    "name": "qa-long-title",
+    "theme": "light",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "[QA] A deliberately long project title for a scheduling workspace that keeps complex delivery plans readable across small and large screens",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 156,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-long-title-light-1024.png"
+  },
+  {
+    "name": "qa-long-title",
+    "theme": "light",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "[QA] A deliberately long project title for a scheduling workspace that keeps complex delivery plans readable across small and large screens",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 280,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-long-title-light-1440.png"
+  },
+  {
+    "name": "qa-long-title",
+    "theme": "dark",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "[QA] A deliberately long project title for a scheduling workspace that keeps complex delivery plans readable across small and large screens",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 140,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-long-title-dark-360.png"
+  },
+  {
+    "name": "qa-long-title",
+    "theme": "dark",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "[QA] A deliberately long project title for a scheduling workspace that keeps complex delivery plans readable across small and large screens",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 160,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-long-title-dark-390.png"
+  },
+  {
+    "name": "qa-long-title",
+    "theme": "dark",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "[QA] A deliberately long project title for a scheduling workspace that keeps complex delivery plans readable across small and large screens",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 176,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-long-title-dark-768.png"
+  },
+  {
+    "name": "qa-long-title",
+    "theme": "dark",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "[QA] A deliberately long project title for a scheduling workspace that keeps complex delivery plans readable across small and large screens",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 192,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-long-title-dark-1024.png"
+  },
+  {
+    "name": "qa-long-title",
+    "theme": "dark",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "[QA] A deliberately long project title for a scheduling workspace that keeps complex delivery plans readable across small and large screens",
+    "overflow": [],
+    "images": [
+      {
+        "src": "/.qa/projects/qa-schedule.png",
+        "width": "1600",
+        "height": "900",
+        "loaded": true
+      }
+    ],
+    "errors": [],
+    "metrics": {
+      "lcp": 152,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-long-title-dark-1440.png"
+  },
+  {
+    "name": "qa-missing-image",
+    "theme": "light",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "[QA] Missing image fallback",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 332,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-missing-image-light-360.png"
+  },
+  {
+    "name": "qa-missing-image",
+    "theme": "light",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "[QA] Missing image fallback",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 168,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-missing-image-light-390.png"
+  },
+  {
+    "name": "qa-missing-image",
+    "theme": "light",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "[QA] Missing image fallback",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 160,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-missing-image-light-768.png"
+  },
+  {
+    "name": "qa-missing-image",
+    "theme": "light",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "[QA] Missing image fallback",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 180,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-missing-image-light-1024.png"
+  },
+  {
+    "name": "qa-missing-image",
+    "theme": "light",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "[QA] Missing image fallback",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 188,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-missing-image-light-1440.png"
+  },
+  {
+    "name": "qa-missing-image",
+    "theme": "dark",
+    "width": 360,
+    "scrollWidth": 360,
+    "title": "[QA] Missing image fallback",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 192,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-missing-image-dark-360.png"
+  },
+  {
+    "name": "qa-missing-image",
+    "theme": "dark",
+    "width": 390,
+    "scrollWidth": 390,
+    "title": "[QA] Missing image fallback",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 168,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-missing-image-dark-390.png"
+  },
+  {
+    "name": "qa-missing-image",
+    "theme": "dark",
+    "width": 768,
+    "scrollWidth": 768,
+    "title": "[QA] Missing image fallback",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 212,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-missing-image-dark-768.png"
+  },
+  {
+    "name": "qa-missing-image",
+    "theme": "dark",
+    "width": 1024,
+    "scrollWidth": 1024,
+    "title": "[QA] Missing image fallback",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 172,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-missing-image-dark-1024.png"
+  },
+  {
+    "name": "qa-missing-image",
+    "theme": "dark",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "title": "[QA] Missing image fallback",
+    "overflow": [],
+    "images": [],
+    "errors": [],
+    "metrics": {
+      "lcp": 172,
+      "cls": 0,
+      "events": []
+    },
+    "file": "storage/app/qa/qa-missing-image-dark-1440.png"
+  }
+]

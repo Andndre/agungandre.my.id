@@ -4,12 +4,12 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, dev ]
   workflow_dispatch:
 
 jobs:
   verify:
-    name: Code Quality & Tests (Pint, ESLint, Pest)
+    name: Code Quality & Tests (Pint, ESLint, Svelte, Pest)
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, bcmath, curl, zip
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, bcmath, curl, zip, gd, exif
           coverage: none
 
       - name: Setup Node.js
@@ -38,6 +38,7 @@ jobs:
         run: |
           cp .env.example .env
           php artisan key:generate
+          php artisan media:check-image-runtime
           npm run build
 
       - name: Check PHP Code Style (Pint)
@@ -45,6 +46,9 @@ jobs:
 
       - name: Check Frontend Lint (ESLint)
         run: npm run lint:check
+
+      - name: Check Frontend Types (Svelte)
+        run: npm run types:check
 
       - name: Run Automated Tests (Pest)
         run: ./vendor/bin/pest
@@ -63,7 +67,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, bcmath, curl, zip
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, bcmath, curl, zip, gd, exif
           coverage: none
 
       - name: Setup Node.js
@@ -80,6 +84,40 @@ jobs:
         run: |
           npm ci
           npm run build
+
+      - name: Verify Production Image Runtime Before Transfer
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOSTINGER_SSH_HOST }}
+          port: ${{ secrets.HOSTINGER_SSH_PORT }}
+          username: ${{ secrets.HOSTINGER_SSH_USER }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          script: |
+            set -eu
+            php <<'PHP'
+            <?php
+            if (!extension_loaded('gd') || !extension_loaded('exif')) {
+                file_put_contents('php://stderr', "Production requires PHP GD and EXIF.\n");
+                exit(1);
+            }
+            $support = gd_info();
+            foreach (['JPEG Support', 'PNG Support', 'WebP Support'] as $feature) {
+                if (!($support[$feature] ?? false)) {
+                    file_put_contents('php://stderr', "Production GD is missing: {$feature}.\n");
+                    exit(1);
+                }
+            }
+            $image = imagecreatetruecolor(2, 2);
+            ob_start();
+            $encoded = imagewebp($image, null, 82);
+            $bytes = ob_get_clean();
+            $decoded = $encoded && is_string($bytes) && $bytes !== '' ? @imagecreatefromstring($bytes) : false;
+            if ($decoded === false) {
+                file_put_contents('php://stderr', "Production WebP encode/decode check failed.\n");
+                exit(1);
+            }
+            echo "Production image runtime ready.\n";
+            PHP
 
       - name: Deploy via Rsync over SSH
         uses: easingthemes/ssh-deploy@main

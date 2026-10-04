@@ -4,7 +4,7 @@
     export const layout = {
         breadcrumbs: [
             {
-                title: 'Security settings',
+                title: 'Pengaturan keamanan',
                 href: edit(),
             },
         ],
@@ -45,15 +45,15 @@
     onDestroy(() => twoFactorAuth.clearTwoFactorAuthData());
 </script>
 
-<AppHead title="Security settings" />
+<AppHead title="Pengaturan keamanan" />
 
-<h1 class="sr-only">Security settings</h1>
+<h1 class="sr-only">Pengaturan keamanan</h1>
 
 <div class="space-y-6">
     <Heading
         variant="small"
-        title="Update password"
-        description="Ensure your account is using a long, random password to stay secure"
+        title="Ubah kata sandi"
+        description="Gunakan kata sandi panjang dan unik untuk menjaga keamanan akun."
     />
 
     <Form
@@ -65,41 +65,53 @@
     >
         {#snippet children({ errors, processing })}
             <div class="grid gap-2">
-                <Label for="current_password">Current password</Label>
+                <Label for="current_password">Kata sandi saat ini</Label>
                 <PasswordInput
                     id="current_password"
                     name="current_password"
+                    aria-invalid={Boolean(errors.current_password)}
+                    aria-describedby="current-password-error"
                     class="mt-1 block w-full"
                     autocomplete="current-password"
-                    placeholder="Current password"
+                    placeholder="Kata sandi saat ini"
                 />
-                <InputError message={errors.current_password} />
+                <InputError
+                    id="current-password-error"
+                    message={errors.current_password}
+                />
             </div>
 
             <div class="grid gap-2">
-                <Label for="password">New password</Label>
+                <Label for="password">Kata sandi baru</Label>
                 <PasswordInput
                     id="password"
                     name="password"
+                    aria-invalid={Boolean(errors.password)}
+                    aria-describedby="new-password-error"
                     class="mt-1 block w-full"
                     autocomplete="new-password"
-                    placeholder="New password"
+                    placeholder="Kata sandi baru"
                     passwordrules={passwordRules}
                 />
-                <InputError message={errors.password} />
+                <InputError id="new-password-error" message={errors.password} />
             </div>
 
             <div class="grid gap-2">
-                <Label for="password_confirmation">Confirm password</Label>
+                <Label for="password_confirmation">Konfirmasi kata sandi</Label>
                 <PasswordInput
                     id="password_confirmation"
                     name="password_confirmation"
+                    aria-invalid={Boolean(errors.password_confirmation)}
+                    aria-describedby="password-confirmation-error"
                     class="mt-1 block w-full"
                     autocomplete="new-password"
-                    placeholder="Confirm password"
+                    placeholder="Konfirmasi kata sandi"
                     passwordrules={passwordRules}
                 />
-                <InputError message={errors.password_confirmation} />
+                <InputError
+                    id="password-confirmation-error"
+                    message={errors.password_confirmation}
+                />
             </div>
 
             <div class="flex items-center gap-4">
@@ -108,7 +120,7 @@
                     disabled={processing}
                     data-test="update-password-button"
                 >
-                    Save password
+                    Simpan kata sandi
                 </Button>
             </div>
         {/snippet}
@@ -119,22 +131,21 @@
     <div class="space-y-6">
         <Heading
             variant="small"
-            title="Two-factor authentication"
-            description="Manage your two-factor authentication settings"
+            title="Autentikasi dua faktor"
+            description="Kelola autentikasi dua faktor Anda."
         />
 
         {#if !twoFactorEnabled}
             <div class="flex flex-col items-start justify-start space-y-4">
                 <p class="text-muted-foreground text-sm">
-                    When you enable two-factor authentication, you will be
-                    prompted for a secure pin during login. This pin can be
-                    retrieved from a TOTP-supported application on your phone.
+                    Setelah 2FA aktif, masukkan kode dari aplikasi autentikator
+                    di ponsel Anda saat login.
                 </p>
 
                 <div>
                     {#if twoFactorAuth.hasSetupData()}
                         <Button onclick={() => (showSetupModal = true)}>
-                            <ShieldCheck class="size-4" />Continue setup
+                            <ShieldCheck class="size-4" />Lanjutkan pengaturan
                         </Button>
                     {:else}
                         <Form
@@ -143,7 +154,7 @@
                         >
                             {#snippet children({ processing })}
                                 <Button type="submit" disabled={processing}>
-                                    Enable 2FA
+                                    Aktifkan 2FA
                                 </Button>
                             {/snippet}
                         </Form>
@@ -153,9 +164,8 @@
         {:else}
             <div class="flex flex-col items-start justify-start space-y-4">
                 <p class="text-muted-foreground text-sm">
-                    You will be prompted for a secure, random pin during login,
-                    which you can retrieve from the TOTP-supported application
-                    on your phone.
+                    Akun dilindungi oleh kode dari aplikasi autentikator di
+                    ponsel Anda saat login.
                 </p>
 
                 <div class="relative inline">
@@ -166,7 +176,7 @@
                                 type="submit"
                                 disabled={processing}
                             >
-                                Disable 2FA
+                                Nonaktifkan 2FA
                             </Button>
                         {/snippet}
                     </Form>

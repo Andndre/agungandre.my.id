@@ -1,19 +1,11 @@
 <script lang="ts">
-    import type { Snippet } from 'svelte';
-    import { getContext } from 'svelte';
-    import { SHEET_CONTEXT, type SheetContext } from './context';
-
-    let { asChild = false, children }: { asChild?: boolean; children?: Snippet<[Record<string, unknown>]> } = $props();
-
-    const { setOpen } = getContext<SheetContext>(SHEET_CONTEXT);
-
-    const handleClick = () => setOpen(false);
+import { Dialog } from 'bits-ui';
+import type { Snippet } from 'svelte';
+let { asChild = false, children }: { asChild?: boolean; children?: Snippet<[Record<string, any>]> } = $props();
 </script>
-
-{#if asChild}
-    {@render children?.({ onClick: handleClick })}
-{:else}
-    <button type="button" onclick={handleClick}>
-        {@render children?.({})}
-    </button>
-{/if}
+<Dialog.Close>
+{#snippet child({ props })}
+{#if asChild}{@render children?.({ ...props, onClick: props.onclick })}
+{:else}<button {...props} type="button">{@render children?.({})}</button>{/if}
+{/snippet}
+</Dialog.Close>

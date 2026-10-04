@@ -49,9 +49,9 @@
     data-slot="input-otp"
     class={cn('relative flex items-center gap-2 has-disabled:opacity-50', className)}
     role="group"
-    {...rest}
 >
     <input
+        {...rest}
         bind:this={inputRef}
         {id}
         {disabled}

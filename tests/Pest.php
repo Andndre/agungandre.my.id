@@ -1,8 +1,12 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Fortify\Features;
 use Tests\DuskTestCase;
 use Tests\TestCase;
+
+/** @var TestCase $this */
+uses(TestCase::class)->in('Unit');
 
 pest()->extend(DuskTestCase::class)->in('Browser');
 
@@ -47,7 +51,9 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function skipUnlessFortifyHas(string $feature, ?string $message = null): void
 {
-    // ..
+    if (! Features::enabled($feature)) {
+        test()->markTestSkipped($message ?? "Fortify feature [{$feature}] is not enabled.");
+    }
 }

@@ -1,0 +1,4171 @@
+{
+  "samples": [
+    {
+      "name": "first visit intro, content and CTA already visible",
+      "events": []
+    },
+    {
+      "name": "Escape ends intro",
+      "events": [
+        {
+          "name": "keydown",
+          "duration": 32,
+          "id": 883
+        }
+      ]
+    },
+    {
+      "name": "repeat visit skips intro",
+      "events": []
+    },
+    {
+      "name": "Skip ends intro without moving focus",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 32,
+          "id": 9055
+        },
+        {
+          "name": "mousedown",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 32,
+          "id": 9055
+        },
+        {
+          "name": "mouseup",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 32,
+          "id": 9055
+        },
+        {
+          "name": "pointerover",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        }
+      ]
+    },
+    {
+      "name": "reduced motion starts at final state",
+      "events": []
+    },
+    {
+      "name": "mobile menu is labeled",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 1509
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 32,
+          "id": 1509
+        },
+        {
+          "name": "mouseup",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 32,
+          "id": 1509
+        },
+        {
+          "name": "pointerout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        }
+      ]
+    },
+    {
+      "name": "mobile menu traps keyboard focus",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 1509
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 32,
+          "id": 1509
+        },
+        {
+          "name": "mouseup",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 32,
+          "id": 1509
+        },
+        {
+          "name": "pointerout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "keydown",
+          "duration": 40,
+          "id": 1516
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1523
+        },
+        {
+          "name": "keyup",
+          "duration": 24,
+          "id": 1523
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1530
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1537
+        },
+        {
+          "name": "keyup",
+          "duration": 24,
+          "id": 1537
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1544
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1565
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1579
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1593
+        }
+      ]
+    },
+    {
+      "name": "mobile menu returns focus",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 1509
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 32,
+          "id": 1509
+        },
+        {
+          "name": "mouseup",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 32,
+          "id": 1509
+        },
+        {
+          "name": "pointerout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "keydown",
+          "duration": 40,
+          "id": 1516
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1523
+        },
+        {
+          "name": "keyup",
+          "duration": 24,
+          "id": 1523
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1530
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1537
+        },
+        {
+          "name": "keyup",
+          "duration": 24,
+          "id": 1537
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1544
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1565
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1579
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1593
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1600
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        }
+      ]
+    },
+    {
+      "name": "detail has one shared screenshot transition name",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 1509
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 32,
+          "id": 1509
+        },
+        {
+          "name": "mouseup",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 32,
+          "id": 1509
+        },
+        {
+          "name": "pointerout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "keydown",
+          "duration": 40,
+          "id": 1516
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1523
+        },
+        {
+          "name": "keyup",
+          "duration": 24,
+          "id": 1523
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1530
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1537
+        },
+        {
+          "name": "keyup",
+          "duration": 24,
+          "id": 1537
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1544
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1565
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1579
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1593
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1600
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 1607
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        }
+      ]
+    },
+    {
+      "name": "return restores project focus and scroll",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 1509
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 32,
+          "id": 1509
+        },
+        {
+          "name": "mouseup",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 32,
+          "id": 1509
+        },
+        {
+          "name": "pointerout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "keydown",
+          "duration": 40,
+          "id": 1516
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1523
+        },
+        {
+          "name": "keyup",
+          "duration": 24,
+          "id": 1523
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1530
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1537
+        },
+        {
+          "name": "keyup",
+          "duration": 24,
+          "id": 1537
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1544
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1565
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1579
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1593
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1600
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 1607
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        }
+      ]
+    },
+    {
+      "name": "return navigation does not restart intro",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 1509
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 32,
+          "id": 1509
+        },
+        {
+          "name": "mouseup",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 32,
+          "id": 1509
+        },
+        {
+          "name": "pointerout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "keydown",
+          "duration": 40,
+          "id": 1516
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1523
+        },
+        {
+          "name": "keyup",
+          "duration": 24,
+          "id": 1523
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1530
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1537
+        },
+        {
+          "name": "keyup",
+          "duration": 24,
+          "id": 1537
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1544
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1565
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1579
+        },
+        {
+          "name": "keydown",
+          "duration": 24,
+          "id": 1593
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 1600
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 1607
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        }
+      ]
+    },
+    {
+      "name": "no View Transitions API navigation fallback",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 2790
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 16,
+          "id": 2790
+        },
+        {
+          "name": "mouseup",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 16,
+          "id": 2790
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        }
+      ]
+    },
+    {
+      "name": "storage denied still supports theme and visible content",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 24,
+          "id": 5083
+        },
+        {
+          "name": "mousedown",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 24,
+          "id": 5083
+        },
+        {
+          "name": "mouseup",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 24,
+          "id": 5083
+        }
+      ]
+    },
+    {
+      "name": "storage denied in-memory intro guard",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 24,
+          "id": 5083
+        },
+        {
+          "name": "mousedown",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 24,
+          "id": 5083
+        },
+        {
+          "name": "mouseup",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 24,
+          "id": 5083
+        },
+        {
+          "name": "pointerout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 5090
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 16,
+          "id": 5090
+        },
+        {
+          "name": "mouseup",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 16,
+          "id": 5090
+        },
+        {
+          "name": "pointerout",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "pointerout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        }
+      ]
+    },
+    {
+      "name": "system theme follows dark preference before app paint",
+      "events": []
+    },
+    {
+      "name": "system theme follows live preference change",
+      "events": []
+    },
+    {
+      "name": "explicit theme ignores system changes",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 40,
+          "id": 1792
+        },
+        {
+          "name": "mousedown",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 32,
+          "id": 1792
+        },
+        {
+          "name": "mouseup",
+          "duration": 32,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 32,
+          "id": 1792
+        }
+      ]
+    },
+    {
+      "name": "missing cover has readable fallback",
+      "events": []
+    },
+    {
+      "name": "idle has no running animation loop",
+      "events": []
+    },
+    {
+      "name": "200% desktop equivalent layout has no overflow",
+      "events": []
+    },
+    {
+      "name": "filter empty state differs from no content",
+      "events": []
+    },
+    {
+      "name": "local preview escapes description",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 56,
+          "id": 9336
+        },
+        {
+          "name": "mousedown",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 56,
+          "id": 9336
+        },
+        {
+          "name": "mouseup",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 56,
+          "id": 9336
+        },
+        {
+          "name": "pointerout",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 40,
+          "id": 0
+        }
+      ]
+    },
+    {
+      "name": "project preview traps focus",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 56,
+          "id": 9336
+        },
+        {
+          "name": "mousedown",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 56,
+          "id": 9336
+        },
+        {
+          "name": "mouseup",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 56,
+          "id": 9336
+        },
+        {
+          "name": "pointerout",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 40,
+          "id": 0
+        }
+      ]
+    },
+    {
+      "name": "project preview returns focus",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 56,
+          "id": 9336
+        },
+        {
+          "name": "mousedown",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 56,
+          "id": 9336
+        },
+        {
+          "name": "mouseup",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 56,
+          "id": 9336
+        },
+        {
+          "name": "pointerout",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 9427
+        }
+      ]
+    },
+    {
+      "name": "validation error keeps unsaved values and association",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 56,
+          "id": 9336
+        },
+        {
+          "name": "mousedown",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 56,
+          "id": 9336
+        },
+        {
+          "name": "mouseup",
+          "duration": 56,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 56,
+          "id": 9336
+        },
+        {
+          "name": "pointerout",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 9427
+        }
+      ]
+    },
+    {
+      "name": "editor initially clean",
+      "events": []
+    },
+    {
+      "name": "server article preview renders current form",
+      "events": [
+        {
+          "name": "pointerup",
+          "duration": 40,
+          "id": 4676
+        },
+        {
+          "name": "mouseup",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 40,
+          "id": 4676
+        },
+        {
+          "name": "pointerout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        }
+      ]
+    },
+    {
+      "name": "article preview returns focus and keeps dirty state",
+      "events": [
+        {
+          "name": "pointerup",
+          "duration": 40,
+          "id": 4676
+        },
+        {
+          "name": "mouseup",
+          "duration": 40,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 40,
+          "id": 4676
+        },
+        {
+          "name": "pointerout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "keydown",
+          "duration": 48,
+          "id": 4683
+        },
+        {
+          "name": "pointerout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        }
+      ]
+    },
+    {
+      "name": "CMS mobile sidebar returns focus",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 9803
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 80,
+          "id": 9803
+        },
+        {
+          "name": "mouseup",
+          "duration": 80,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 80,
+          "id": 9803
+        },
+        {
+          "name": "pointerout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 9810
+        },
+        {
+          "name": "keyup",
+          "duration": 16,
+          "id": 9810
+        }
+      ]
+    },
+    {
+      "name": "no runtime errors in final CMS navigation",
+      "events": [
+        {
+          "name": "pointerover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerdown",
+          "duration": 16,
+          "id": 9803
+        },
+        {
+          "name": "mousedown",
+          "duration": 16,
+          "id": 0
+        },
+        {
+          "name": "pointerup",
+          "duration": 80,
+          "id": 9803
+        },
+        {
+          "name": "mouseup",
+          "duration": 80,
+          "id": 0
+        },
+        {
+          "name": "click",
+          "duration": 80,
+          "id": 9803
+        },
+        {
+          "name": "pointerout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerleave",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "pointerenter",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseout",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "mouseover",
+          "duration": 24,
+          "id": 0
+        },
+        {
+          "name": "keydown",
+          "duration": 16,
+          "id": 9810
+        },
+        {
+          "name": "keyup",
+          "duration": 16,
+          "id": 9810
+        }
+      ]
+    }
+  ],
+  "maxObservedDuration": 80,
+  "note": "Event Timing durations from trusted input in scripted lab interactions; not field INP."
+}

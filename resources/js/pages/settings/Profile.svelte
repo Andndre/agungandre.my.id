@@ -4,7 +4,7 @@
     export const layout = {
         breadcrumbs: [
             {
-                title: 'Profile settings',
+                title: 'Pengaturan profil',
                 href: edit(),
             },
         ],
@@ -35,9 +35,9 @@
     const user = $derived(page.props.auth.user);
 </script>
 
-<AppHead title="Profile settings" />
+<AppHead title="Pengaturan profil" />
 
-<h1 class="sr-only">Profile settings</h1>
+<h1 class="sr-only">Pengaturan profil</h1>
 
 <div class="flex flex-col space-y-6">
     <Heading
@@ -53,47 +53,62 @@
     >
         {#snippet children({ errors, processing })}
             <div class="grid gap-2">
-                <Label for="name">Name</Label>
+                <Label for="name">Nama</Label>
                 <Input
                     id="name"
                     name="name"
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby="profile-name-error"
                     class="mt-1 block w-full"
                     value={user.name}
                     required
                     autocomplete="name"
-                    placeholder="Full name"
+                    placeholder="Nama lengkap"
                 />
-                <InputError class="mt-2" message={errors.name} />
+                <InputError
+                    id="profile-name-error"
+                    class="mt-2"
+                    message={errors.name}
+                />
             </div>
 
             <div class="grid gap-2">
-                <Label for="email">Email address</Label>
+                <Label for="email">Alamat email</Label>
                 <Input
                     id="email"
                     type="email"
                     name="email"
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby="profile-email-error"
                     class="mt-1 block w-full"
                     value={user.email}
                     required
                     autocomplete="username"
-                    placeholder="Email address"
+                    placeholder="Alamat email"
                 />
-                <InputError class="mt-2" message={errors.email} />
+                <InputError
+                    id="profile-email-error"
+                    class="mt-2"
+                    message={errors.email}
+                />
             </div>
 
             {#if mustVerifyEmail && !user.email_verified_at}
                 <div>
                     <p class="-mt-4 text-sm text-muted-foreground">
-                        Your email address is unverified.
+                        Alamat email Anda belum diverifikasi.
                         <TextLink href={send()} as="button">
-                            Click here to resend the verification email.
+                            Kirim ulang email verifikasi.
                         </TextLink>
                     </p>
 
                     {#if status === 'verification-link-sent'}
-                        <div class="mt-2 text-sm font-medium text-green-600">
-                            A new verification link has been sent to your email
-                            address.
+                        <div
+                            role="status"
+                            class="mt-2 text-sm font-medium text-success"
+                        >
+                            Tautan verifikasi baru telah dikirim ke alamat email
+                            Anda.
                         </div>
                     {/if}
                 </div>
@@ -103,7 +118,7 @@
                 <Button
                     type="submit"
                     disabled={processing}
-                    data-test="update-profile-button">Save</Button
+                    data-test="update-profile-button">Simpan</Button
                 >
             </div>
         {/snippet}
