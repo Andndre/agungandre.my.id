@@ -2,8 +2,11 @@
     import { Crepe } from '@milkdown/crepe';
     import { commandsCtx, editorViewCtx } from '@milkdown/kit/core';
     import { clearTextInCurrentBlockCommand } from '@milkdown/kit/preset/commonmark';
-    import type { SelectionBookmark } from '@milkdown/kit/prose/state';
-    import { TextSelection } from '@milkdown/kit/prose/state';
+    import type {
+        Selection,
+        SelectionBookmark,
+    } from '@milkdown/kit/prose/state';
+    import { NodeSelection, TextSelection } from '@milkdown/kit/prose/state';
     import { insert, replaceAll } from '@milkdown/kit/utils';
     import Plus from 'lucide-svelte/icons/plus';
     import { onMount, tick } from 'svelte';
@@ -46,6 +49,7 @@
     let bookmark: SelectionBookmark | null = null;
     let syncing = false;
     let error = $state('');
+    let showImageHelp = $state(false);
     const svg = (paths: string): string =>
         `<svg class="article-block-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
     const icons = {
@@ -354,7 +358,20 @@
         instance.editor
             .config(configureBlogImages)
             .use([...blogBlockRemark, calloutNode, embedNode]);
+        function updateImageHelp(selection: Selection | undefined): void {
+            showImageHelp =
+                selection instanceof NodeSelection &&
+                selection.node.type.name === 'image-block' &&
+                !selection.node.attrs.src;
+        }
+
         instance.on((listener) => {
+            listener.updated((ctx) =>
+                updateImageHelp(ctx.get(editorViewCtx).state?.selection),
+            );
+            listener.selectionUpdated((_ctx, selection) =>
+                updateImageHelp(selection),
+            );
             listener.markdownUpdated((_ctx, markdown) => {
                 if (!syncing && mode === 'visual') {
                     value = markdown;
@@ -414,11 +431,11 @@
                 ><Plus class="size-4" aria-hidden="true" />Tambah blok</Button
             >{/if}
     </div>
-    <p class="cms-help">
-        Gambar JPEG, PNG, atau WebP statis otomatis dioptimasi menjadi WebP
-        dengan sisi terpanjang maksimal 1600 piksel. Maksimal 10 MB dan 12
-        megapiksel per upload. Gambar beranimasi tidak didukung.
-    </p>
+    {#if mode === 'visual' && showImageHelp}
+        <p class="cms-help py-2">
+            JPEG, PNG, WebP · Maks. 10 MB / 12 MP · Tanpa animasi
+        </p>
+    {/if}
     {#if !editor && !error}<div
             class="min-h-48 animate-pulse py-8 text-sm text-muted-foreground"
             role="status"
