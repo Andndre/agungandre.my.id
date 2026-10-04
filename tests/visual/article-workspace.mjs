@@ -273,10 +273,10 @@ try {
     });
     await waitFor(
         client,
-        "document.querySelector('.article-editor').textContent.includes('Gambar gagal diunggah')",
+        "document.querySelector('.article-editor [role=alert]')?.textContent.includes('QA invalid file')",
     );
     await verify(
-        'upload failure keeps document and allows selecting same file again',
+        'server upload validation keeps document and allows selecting same file again',
         "Boolean(document.querySelector('.blog-callout-info [data-callout-content] strong')) && document.querySelector('.milkdown-image-block input[type=file]').value===''",
     );
     from = client.events.length;
@@ -295,7 +295,11 @@ try {
     );
     await verify(
         'upload retry inserts image and clears error',
-        "!document.querySelector('.article-editor').textContent.includes('Gambar gagal diunggah') && document.querySelectorAll('.ProseMirror img').length===2",
+        "!document.querySelector('.article-editor [role=alert]') && document.querySelectorAll('.ProseMirror img').length===2",
+    );
+    await verify(
+        'upload retry inserts a readable optimized WebP',
+        "(() => { const image = document.querySelector('.ProseMirror img[src*=\"/.qa/blog/images/\"]'); return image?.src.endsWith('.webp') && image.complete && image.naturalWidth > 0; })()",
     );
 
     from = await intercept('*8010/admin/blog/preview');

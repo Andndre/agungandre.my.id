@@ -65,7 +65,8 @@ test('project URLs use the configured S3 public base instead of local storage', 
 test('failed S3 cover upload does not create a project', function () {
     config()->set('filesystems.project_media_disk', 's3');
     $disk = Mockery::mock(FilesystemAdapter::class);
-    $disk->shouldReceive('putFileAs')->once()->andReturn(false);
+    $disk->shouldReceive('put')->once()->andReturn(false);
+    $disk->shouldReceive('delete')->once()->andReturn(true);
     Storage::shouldReceive('disk')->with('s3')->once()->andReturn($disk);
 
     actingAs(User::factory()->createOne())

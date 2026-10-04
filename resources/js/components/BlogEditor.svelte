@@ -80,6 +80,9 @@
             'meta[name="csrf-token"]',
         )?.content;
 
+        let uploadError =
+            'Gambar gagal diunggah. Coba lagi atau pilih gambar lain.';
+
         try {
             const response = await fetch(uploadImage().url, {
                 method: 'POST',
@@ -92,9 +95,13 @@
             });
 
             if (!response.ok) {
-                throw new Error(
-                    'Gambar gagal diunggah. Periksa jenis file dan pengaturan penyimpanan.',
-                );
+                if (response.status === 422) {
+                    const validation: { errors?: { image?: string[] } } =
+                        await response.json();
+                    uploadError = validation.errors?.image?.[0] ?? uploadError;
+                }
+
+                throw new Error(uploadError);
             }
 
             const result: { url: string } = await response.json();
@@ -102,7 +109,7 @@
 
             return result.url;
         } catch (cause) {
-            error = 'Gambar gagal diunggah. Periksa jenis file dan coba lagi.';
+            error = uploadError;
             root.querySelectorAll<HTMLInputElement>(
                 'input[type="file"]',
             ).forEach((input) => (input.value = ''));
@@ -407,6 +414,11 @@
                 ><Plus class="size-4" aria-hidden="true" />Tambah blok</Button
             >{/if}
     </div>
+    <p class="cms-help">
+        Gambar JPEG, PNG, atau WebP statis otomatis dioptimasi menjadi WebP
+        dengan sisi terpanjang maksimal 1600 piksel. Maksimal 10 MB dan 12
+        megapiksel per upload. Gambar beranimasi tidak didukung.
+    </p>
     {#if !editor && !error}<div
             class="min-h-48 animate-pulse py-8 text-sm text-muted-foreground"
             role="status"

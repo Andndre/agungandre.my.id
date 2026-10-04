@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use App\Models\Project;
+use App\Rules\StaticWebImage;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -30,9 +31,9 @@ class SaveProjectRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'slug' => ['required', 'string', 'max:255', 'regex:/\A[a-z0-9]+(?:-[a-z0-9]+)*\z/', Rule::unique(Project::class, 'slug')->ignore($project)],
-            'cover_image' => [$project ? 'nullable' : 'required', 'image', 'max:2048'],
+            'cover_image' => ['bail', $project ? 'nullable' : 'required', 'file', 'max:2048', new StaticWebImage],
             'images' => ['nullable', 'array', 'max:10'],
-            'images.*' => ['image', 'max:2048'],
+            'images.*' => ['bail', 'file', 'max:2048', new StaticWebImage],
             'tech_stack' => ['nullable', 'array', 'max:20'],
             'tech_stack.*' => ['string', 'max:50'],
             'live_url' => ['nullable', 'url', 'max:500'],
@@ -49,10 +50,10 @@ class SaveProjectRequest extends FormRequest
             'required' => ':attribute wajib diisi.',
             'slug.unique' => 'Slug sudah digunakan oleh proyek lain.',
             'slug.regex' => 'Slug hanya boleh berisi huruf kecil, angka, dan tanda hubung.',
-            'cover_image.image' => 'Cover harus berupa gambar.',
+            'cover_image.file' => 'Cover harus berupa berkas gambar.',
             'cover_image.max' => 'Ukuran cover maksimal 2 MB.',
             'images.max' => 'Galeri maksimal 10 gambar.',
-            'images.*.image' => 'Setiap berkas galeri harus berupa gambar.',
+            'images.*.file' => 'Setiap berkas galeri harus berupa berkas gambar.',
             'images.*.max' => 'Ukuran setiap gambar maksimal 2 MB.',
             'tech_stack.max' => 'Maksimal 20 teknologi per proyek.',
             'is_featured.boolean' => 'Pilihan unggulan tidak valid.',

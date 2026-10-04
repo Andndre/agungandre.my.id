@@ -171,8 +171,10 @@
                     <div>
                         <h2 class="font-semibold">Media</h2>
                         <p class="cms-help mt-1">
-                            Gunakan screenshot karya asli. Target cover WebP
-                            ≤200 KB untuk pemuatan awal.
+                            Gunakan screenshot karya asli. Gambar otomatis
+                            dioptimasi menjadi WebP dengan sisi terpanjang
+                            maksimal 1600 piksel. Target cover ≤200 KB; ukuran
+                            hasil dapat lebih besar agar detail tetap jelas.
                         </p>
                     </div>
                     <div class="cms-field">
@@ -189,15 +191,16 @@
                             id="project-cover"
                             name="cover_image"
                             type="file"
-                            accept="image/jpeg,image/png,image/webp,image/gif"
+                            accept="image/jpeg,image/png,image/webp"
                             required={!project}
                             onchange={(event) => previewFiles(event, true)}
                             aria-describedby="cover-help cover-error"
                             aria-invalid={Boolean(errors.cover_image)}
                         />
                         <p id="cover-help" class="cms-help">
-                            JPEG, PNG, WebP, atau GIF. Maksimal 2 MB. Kosongkan
-                            untuk mempertahankan cover saat edit.
+                            JPEG, PNG, atau WebP statis. Maksimal 2 MB dan 12
+                            megapiksel. Kosongkan untuk mempertahankan cover
+                            saat edit.
                         </p>
                         <InputError
                             id="cover-error"
@@ -212,7 +215,7 @@
                             id="project-gallery"
                             name="images[]"
                             type="file"
-                            accept="image/jpeg,image/png,image/webp,image/gif"
+                            accept="image/jpeg,image/png,image/webp"
                             multiple
                             onchange={(event) => previewFiles(event, false)}
                             aria-describedby={'gallery-help gallery-error ' +
@@ -230,9 +233,10 @@
                             )}
                         />
                         <p id="gallery-help" class="cms-help">
-                            Maksimal 10 gambar, 2 MB per gambar. Pilihan baru
-                            menggantikan seluruh galeri. Tanpa pilihan baru,
-                            galeri lama tetap disimpan.
+                            Maksimal 10 gambar statis, 2 MB dan 12 megapiksel
+                            per gambar. Pilihan baru menggantikan seluruh
+                            galeri. Tanpa pilihan baru, galeri lama tetap
+                            disimpan.
                         </p>
                         <InputError
                             id="gallery-error"
