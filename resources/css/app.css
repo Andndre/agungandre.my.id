@@ -716,6 +716,160 @@
     letter-spacing: -0.04em;
     line-height: 1.2;
 }
+.article-page {
+    width: 100%;
+    min-width: 0;
+}
+.article-actionbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--outline-variant);
+    background: var(--surface);
+}
+.article-columns {
+    display: grid;
+    min-width: 0;
+    min-height: calc(100svh - 10rem);
+}
+.article-canvas {
+    width: 100%;
+    max-width: calc(72ch + 5rem);
+    min-width: 0;
+    margin-inline: auto;
+    padding: 3rem 2.5rem;
+}
+.article-title {
+    display: block;
+    width: 100%;
+    field-sizing: content;
+    resize: none;
+    border: 0;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0;
+    background: transparent;
+    color: var(--on-surface);
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: var(--tracking-heading);
+}
+.article-title::placeholder {
+    color: var(--on-surface-variant);
+}
+.article-title:focus-visible,
+.article-source:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 6px;
+}
+.article-editor-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    padding-block: 0.75rem;
+    border-bottom: 1px solid var(--outline-variant);
+}
+.article-canvas .blog-editor .milkdown {
+    background: var(--surface);
+    --crepe-color-background: var(--surface);
+}
+.article-canvas .blog-editor .milkdown .ProseMirror {
+    padding: 1.5rem 0;
+    min-height: 55svh;
+}
+.article-source {
+    width: 100%;
+    min-height: 55svh;
+    margin-top: 1.5rem;
+    resize: vertical;
+    border: 0;
+    border-radius: 0.25rem;
+    background: var(--surface);
+    color: var(--on-surface);
+    font-family: ui-monospace, monospace;
+    font-size: 0.875rem;
+    line-height: 1.8;
+}
+.article-settings {
+    min-width: 0;
+    padding: 1.5rem;
+    border-left: 1px solid var(--outline-variant);
+    background: var(--surface-container-low);
+}
+.blog-editor .milkdown .ProseMirror .blog-callout {
+    margin-block: 1.5rem;
+    padding: 1rem 1.25rem;
+    line-height: 1.65;
+}
+.blog-editor .milkdown .ProseMirror .blog-callout-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+.blog-editor .milkdown .ProseMirror [data-callout-content] > :first-child {
+    margin-top: 0;
+}
+.blog-editor .milkdown .ProseMirror [data-callout-content] > :last-child {
+    margin-bottom: 0;
+}
+.blog-editor
+    .milkdown
+    .milkdown-slash-menu
+    .menu-group
+    li
+    svg.article-block-icon {
+    fill: none;
+    color: var(--on-surface-variant);
+    width: 1.25rem;
+    height: 1.25rem;
+}
+.blog-editor .milkdown .milkdown-slash-menu .menu-group h6,
+.blog-editor .milkdown .cm-foldGutter {
+    color: var(--on-surface-variant);
+}
+.blog-editor .milkdown .cm-content {
+    color: var(--on-surface);
+    caret-color: var(--on-surface);
+}
+.blog-editor .milkdown .cm-line span {
+    color: var(--primary);
+}
+.blog-editor .milkdown .cm-gutterElement {
+    color: var(--on-surface-variant);
+}
+.blog-editor .milkdown .cm-activeLine,
+.blog-editor .milkdown .cm-activeLineGutter {
+    background: var(--surface-container);
+}
+@media (min-width: 1280px) {
+    .article-columns {
+        grid-template-columns: minmax(0, 1fr) 18rem;
+    }
+}
+@media (max-width: 639px) {
+    .article-actionbar {
+        padding: 0.75rem 1rem;
+    }
+    .article-actionbar > div:last-child {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .article-canvas {
+        padding: 2rem 1.25rem;
+    }
+    .article-title {
+        font-size: 2rem;
+    }
+}
 .intro-frame {
     animation: studio-enter var(--motion-reveal) var(--ease-standard) both;
 }

@@ -34,11 +34,11 @@ class PostController extends Controller
         $data['published_at'] = $this->publicationDate($data);
         unset($data['publication']);
 
-        Post::create($data);
+        $post = Post::create($data);
 
         Inertia::flash('toast', ['type' => 'success', 'message' => 'Tulisan berhasil dibuat.']);
 
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.edit', $post);
     }
 
     public function edit(Post $post): Response
@@ -61,7 +61,7 @@ class PostController extends Controller
 
         Inertia::flash('toast', ['type' => 'success', 'message' => 'Tulisan berhasil diperbarui.']);
 
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.edit', $post);
     }
 
     public function destroy(DeletePostRequest $request, Post $post): RedirectResponse

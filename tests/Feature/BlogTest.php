@@ -95,23 +95,55 @@ test('owner can create, schedule, update, unpublish and delete a post', function
     actingAs(User::factory()->createOne(['email' => 'owner@example.com']));
     $data = ['title' => 'Release Notes', 'excerpt' => 'What changed', 'content' => 'One useful update', 'publication' => 'draft'];
 
-    post(route('admin.posts.store'), $data)->assertRedirect(route('admin.posts.index'));
+    $response = post(route('admin.posts.store'), $data);
     $post = Post::firstOrFail();
+    $response->assertRedirect(route('admin.posts.edit', $post));
     expect($post->published_at)->toBeNull();
 
     put(route('admin.posts.update', $post), [...$data, 'publication' => 'scheduled', 'published_at' => now()->addDay()->toIso8601String()])
-        ->assertRedirect(route('admin.posts.index'));
+        ->assertRedirect(route('admin.posts.edit', $post));
     expect($post->fresh()->published_at->isFuture())->toBeTrue();
 
     put(route('admin.posts.update', $post), [...$data, 'publication' => 'now'])
-        ->assertRedirect(route('admin.posts.index'));
+        ->assertRedirect(route('admin.posts.edit', $post));
     expect($post->fresh()->published_at->isPast())->toBeTrue();
 
-    put(route('admin.posts.update', $post), $data)->assertRedirect(route('admin.posts.index'));
+    put(route('admin.posts.update', $post), $data)->assertRedirect(route('admin.posts.edit', $post));
     expect($post->fresh()->published_at)->toBeNull();
 
     delete(route('admin.posts.destroy', $post))->assertRedirect(route('admin.posts.index'));
     assertDatabaseMissing('posts', ['id' => $post->id]);
+});
+
+test('creating and updating an article preserves formatted multiline callout markdown', function () {
+    config()->set('blog.owner_email', 'owner@example.com');
+    actingAs(User::factory()->createOne(['email' => 'owner@example.com']));
+    $content = "Before the note.\n\n```callout:info\n**Useful** note\n\n- First item\n- Second item\n\n[Read more](https://example.com/guide)\n```\n\nAfter the note.";
+    $data = ['title' => 'Callout article', 'excerpt' => 'A formatted note', 'content' => $content, 'publication' => 'draft'];
+
+    $response = post(route('admin.posts.store'), $data);
+    $post = Post::firstOrFail();
+    $response->assertRedirect(route('admin.posts.edit', $post));
+    expect($post->content)->toBe($content);
+    get(route('admin.posts.edit', $post))->assertOk()->assertInertia(fn (Assert $page) => $page
+        ->component('Admin/Posts/Edit')
+        ->where('post.content', $content));
+
+    $updatedContent = str_replace('callout:info', 'callout:warning', $content);
+    put(route('admin.posts.update', $post), [...$data, 'content' => $updatedContent, 'publication' => 'now'])
+        ->assertRedirect(route('admin.posts.edit', $post));
+    expect($post->fresh()->content)->toBe($updatedContent);
+    get(route('admin.posts.edit', $post))->assertOk()->assertInertia(fn (Assert $page) => $page
+        ->component('Admin/Posts/Edit')
+        ->where('post.content', $updatedContent));
+    get('/blog/'.$post->slug)->assertOk()->assertInertia(fn (Assert $page) => $page
+        ->where('contentHtml', fn (string $html) => str_contains($html, 'blog-callout-warning')
+            && str_contains($html, '<strong>Useful</strong>')
+            && str_contains($html, '<li>First item</li>')
+            && str_contains($html, '<li>Second item</li>')
+            && str_contains($html, 'href="https://example.com/guide"')
+            && str_contains($html, 'After the note.'))
+        ->etc());
 });
 
 test('invalid embed URL is rejected when saving', function () {

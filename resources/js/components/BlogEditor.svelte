@@ -1,8 +1,27 @@
 <script lang="ts">
     import { Crepe } from '@milkdown/crepe';
-    import { insert } from '@milkdown/kit/utils';
-    import { onMount } from 'svelte';
-    import { blogBlockRemark, calloutNode, embedNode } from '@/lib/blog-blocks';
+    import { commandsCtx, editorViewCtx } from '@milkdown/kit/core';
+    import { clearTextInCurrentBlockCommand } from '@milkdown/kit/preset/commonmark';
+    import type { SelectionBookmark } from '@milkdown/kit/prose/state';
+    import { TextSelection } from '@milkdown/kit/prose/state';
+    import { insert, replaceAll } from '@milkdown/kit/utils';
+    import Plus from 'lucide-svelte/icons/plus';
+    import { onMount, tick } from 'svelte';
+    import { Button } from '@/components/ui/button';
+    import {
+        Dialog,
+        DialogContent,
+        DialogTitle,
+        DialogDescription,
+    } from '@/components/ui/dialog';
+    import { Input } from '@/components/ui/input';
+    import { Label } from '@/components/ui/label';
+    import {
+        blogBlockRemark,
+        calloutNode,
+        configureBlogImages,
+        embedNode,
+    } from '@/lib/blog-blocks';
     import { store as uploadImage } from '@/routes/admin/posts/images';
     import '@milkdown/crepe/theme/common/style.css';
     import '@milkdown/crepe/theme/frame.css';
@@ -10,10 +29,49 @@
     let {
         value = $bindable(''),
         onReady,
-    }: { value?: string; onReady?: (markdown: string) => void } = $props();
+        invalid = false,
+        errorId = 'post-content-error',
+    }: {
+        value?: string;
+        onReady?: (markdown: string) => void;
+        invalid?: boolean;
+        errorId?: string;
+    } = $props();
     let root: HTMLDivElement;
-    let editor: Crepe | null = null;
+    let editor = $state.raw<Crepe | null>(null);
+    let mode = $state<'visual' | 'markdown'>('visual');
+    let embedOpen = $state(false);
+    let embedUrl = $state('');
+    let embedError = $state('');
+    let bookmark: SelectionBookmark | null = null;
+    let syncing = false;
     let error = $state('');
+    const svg = (paths: string): string =>
+        `<svg class="article-block-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths}</svg>`;
+    const icons = {
+        'callout:info': svg(
+            '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/>',
+        ),
+        'callout:warning': svg(
+            '<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4m0 4h.01"/>',
+        ),
+        embed: svg(
+            '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71m2.25 5.82a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
+        ),
+    };
+    $effect(() => {
+        editor?.editor.action((ctx) =>
+            ctx.get(editorViewCtx).setProps({
+                attributes: {
+                    role: 'textbox',
+                    'aria-label': 'Konten artikel',
+                    'aria-multiline': 'true',
+                    'aria-invalid': String(invalid),
+                    'aria-describedby': errorId,
+                },
+            }),
+        );
+    });
 
     async function upload(file: File): Promise<string> {
         const body = new FormData();
@@ -21,25 +79,40 @@
         const token = document.querySelector<HTMLMetaElement>(
             'meta[name="csrf-token"]',
         )?.content;
-        const response = await fetch(uploadImage().url, {
-            method: 'POST',
-            body,
-            headers: {
-                'X-CSRF-TOKEN': token ?? '',
-                Accept: 'application/json',
-            },
-            credentials: 'same-origin',
-        });
 
-        if (!response.ok) {
-            throw new Error(
-                'Gambar gagal diunggah. Periksa jenis file dan pengaturan penyimpanan.',
-            );
+        try {
+            const response = await fetch(uploadImage().url, {
+                method: 'POST',
+                body,
+                headers: {
+                    'X-CSRF-TOKEN': token ?? '',
+                    Accept: 'application/json',
+                },
+                credentials: 'same-origin',
+            });
+
+            if (!response.ok) {
+                throw new Error(
+                    'Gambar gagal diunggah. Periksa jenis file dan pengaturan penyimpanan.',
+                );
+            }
+
+            const result: { url: string } = await response.json();
+            error = '';
+
+            return result.url;
+        } catch (cause) {
+            error = 'Gambar gagal diunggah. Periksa jenis file dan coba lagi.';
+            root.querySelectorAll<HTMLInputElement>(
+                'input[type="file"]',
+            ).forEach((input) => (input.value = ''));
+
+            throw cause;
         }
+    }
 
-        const result: { url: string } = await response.json();
-
-        return result.url;
+    export function currentMarkdown(): string {
+        return mode === 'visual' && editor ? editor.getMarkdown() : value;
     }
 
     function insertBlock(
@@ -50,33 +123,14 @@
         }
 
         if (kind === 'embed') {
-            const url = window.prompt(
-                'URL HTTPS untuk video YouTube atau kartu tautan',
-            );
+            editor.editor.action((ctx) => {
+                bookmark = ctx.get(editorViewCtx).state.selection.getBookmark();
+            });
+            embedUrl = '';
+            embedError = '';
+            embedOpen = true;
 
-            if (!url) {
-                return;
-            }
-
-            try {
-                const parsed = new URL(url);
-
-                if (
-                    parsed.protocol !== 'https:' ||
-                    parsed.username ||
-                    parsed.password
-                ) {
-                    throw new Error();
-                }
-            } catch {
-                error = 'Masukkan URL HTTPS yang valid.';
-
-                return;
-            }
-
-            editor.editor.action(
-                insert(`\n\n\`\`\`embed\n${url.trim()}\n\`\`\`\n`),
-            );
+            return;
         } else {
             editor.editor.action(
                 insert(
@@ -87,6 +141,119 @@
 
         value = editor.getMarkdown();
         error = '';
+        editor.editor.action((ctx) => ctx.get(editorViewCtx).focus());
+    }
+
+    function showMenu(): void {
+        editor?.editor.action((ctx) => {
+            const view = ctx.get(editorViewCtx);
+            const { $from: selectionFrom } = view.state.selection;
+
+            if (
+                selectionFrom.parent.content.size ||
+                !selectionFrom.parent.isTextblock
+            ) {
+                const position = selectionFrom.depth
+                    ? selectionFrom.after(1)
+                    : view.state.doc.content.size;
+                const transaction = view.state.tr.insert(
+                    position,
+                    view.state.schema.nodes.paragraph.create(),
+                );
+                transaction.setSelection(
+                    TextSelection.create(transaction.doc, position + 1),
+                );
+                view.dispatch(transaction);
+            }
+
+            view.focus();
+            (ctx.get('menuAPICtx') as { show: (pos: number) => void }).show(
+                view.state.selection.from,
+            );
+        });
+    }
+
+    function addEmbed(event: SubmitEvent): void {
+        event.preventDefault();
+
+        try {
+            const parsed = new URL(embedUrl.trim());
+
+            if (
+                parsed.protocol !== 'https:' ||
+                parsed.username ||
+                parsed.password ||
+                /\s/.test(embedUrl.trim())
+            ) {
+                throw new Error();
+            }
+        } catch {
+            embedError =
+                'Masukkan satu URL HTTPS yang valid, tanpa kredensial.';
+
+            return;
+        }
+
+        editor?.editor.action((ctx) => {
+            const view = ctx.get(editorViewCtx);
+
+            if (bookmark) {
+                view.dispatch(
+                    view.state.tr.setSelection(
+                        bookmark.resolve(view.state.doc),
+                    ),
+                );
+            }
+        });
+        editor?.editor.action(
+            insert(`\n\n\`\`\`embed\n${embedUrl.trim()}\n\`\`\`\n`),
+        );
+
+        if (editor) {
+            value = editor.getMarkdown();
+        }
+
+        embedOpen = false;
+        error = '';
+    }
+
+    async function changeMode(next: 'visual' | 'markdown'): Promise<void> {
+        if (mode === next) {
+            return;
+        }
+
+        if (next === 'visual') {
+            if (!editor) {
+                return;
+            }
+
+            try {
+                syncing = true;
+                editor.editor.action(replaceAll(value));
+                value = editor.getMarkdown();
+                error = '';
+            } catch {
+                error =
+                    'Markdown tidak dapat dibuka di editor visual. Isi Anda tetap tersedia; periksa Markdown lalu coba lagi.';
+
+                return;
+            } finally {
+                syncing = false;
+            }
+        } else if (editor) {
+            value = editor.getMarkdown();
+        }
+
+        mode = next;
+        await tick();
+
+        if (next === 'visual') {
+            editor?.editor.action((ctx) => ctx.get(editorViewCtx).focus());
+        } else {
+            root.parentElement
+                ?.querySelector<HTMLTextAreaElement>('textarea')
+                ?.focus();
+        }
     }
 
     onMount(() => {
@@ -95,7 +262,9 @@
             root,
             defaultValue: value,
             featureConfigs: {
-                placeholder: { text: 'Mulai menulis…' },
+                placeholder: {
+                    text: 'Mulai menulis, atau ketik / untuk menambah blok…',
+                },
                 'image-block': {
                     onUpload: upload,
                     inlineUploadButton: 'Unggah',
@@ -122,6 +291,31 @@
                         previewOnly ? 'Edit' : 'Sembunyikan',
                 },
                 'block-edit': {
+                    buildMenu: (builder) => {
+                        const group = builder.addGroup('article', 'Artikel');
+
+                        for (const kind of [
+                            'callout:info',
+                            'callout:warning',
+                            'embed',
+                        ] as const) {
+                            group.addItem(kind, {
+                                label:
+                                    kind === 'callout:info'
+                                        ? 'Catatan'
+                                        : kind === 'callout:warning'
+                                          ? 'Peringatan'
+                                          : 'Sematan',
+                                icon: icons[kind],
+                                onRun: (ctx) => {
+                                    ctx.get(commandsCtx).call(
+                                        clearTextInCurrentBlockCommand.key,
+                                    );
+                                    insertBlock(kind);
+                                },
+                            });
+                        }
+                    },
                     textGroup: {
                         label: 'Teks',
                         text: { label: 'Paragraf' },
@@ -150,10 +344,14 @@
                 },
             },
         });
-        instance.editor.use([...blogBlockRemark, calloutNode, embedNode]);
+        instance.editor
+            .config(configureBlogImages)
+            .use([...blogBlockRemark, calloutNode, embedNode]);
         instance.on((listener) => {
             listener.markdownUpdated((_ctx, markdown) => {
-                value = markdown;
+                if (!syncing && mode === 'visual') {
+                    value = markdown;
+                }
             });
         });
         void instance
@@ -169,9 +367,12 @@
                 value = instance.getMarkdown();
                 onReady?.(value);
             })
-            .catch(() => {
+            .catch((cause: unknown) => {
+                console.error('Article editor initialization failed', cause);
+
                 if (active) {
                     error = 'Editor tidak dapat dimulai.';
+                    mode = 'markdown';
                 }
             });
 
@@ -182,27 +383,87 @@
     });
 </script>
 
-<div class="space-y-3">
-    <div class="flex flex-wrap gap-2">
-        <button
-            type="button"
-            class="min-h-11 rounded-md border px-3 text-sm hover:bg-muted"
-            onclick={() => insertBlock('callout:info')}>+ Catatan</button
-        >
-        <button
-            type="button"
-            class="min-h-11 rounded-md border px-3 text-sm hover:bg-muted"
-            onclick={() => insertBlock('callout:warning')}>+ Peringatan</button
-        >
-        <button
-            type="button"
-            class="min-h-11 rounded-md border px-3 text-sm hover:bg-muted"
-            onclick={() => insertBlock('embed')}>+ Sematan</button
-        >
+<div class="article-editor">
+    <div class="article-editor-tools">
+        <div class="flex gap-1" role="group" aria-label="Mode editor">
+            <Button
+                variant={mode === 'visual' ? 'secondary' : 'ghost'}
+                aria-pressed={mode === 'visual'}
+                disabled={!editor}
+                onclick={() => changeMode('visual')}>Visual</Button
+            >
+            <Button
+                variant={mode === 'markdown' ? 'secondary' : 'ghost'}
+                aria-pressed={mode === 'markdown'}
+                disabled={!editor && !error}
+                onclick={() => changeMode('markdown')}>Markdown</Button
+            >
+        </div>
+        {#if mode === 'visual'}<Button
+                variant="ghost"
+                disabled={!editor}
+                onpointerdown={(event: PointerEvent) => event.preventDefault()}
+                onclick={showMenu}
+                ><Plus class="size-4" aria-hidden="true" />Tambah blok</Button
+            >{/if}
     </div>
+    {#if !editor && !error}<div
+            class="min-h-48 animate-pulse py-8 text-sm text-muted-foreground"
+            role="status"
+        >
+            Menyiapkan editor…
+        </div>{/if}
     <div
         bind:this={root}
-        class="blog-editor min-h-96 overflow-hidden rounded-xl border bg-background"
+        class="blog-editor"
+        hidden={mode === 'markdown'}
     ></div>
+    {#if mode === 'markdown'}<textarea
+            id="post-markdown"
+            aria-label="Konten Markdown"
+            aria-invalid={invalid}
+            aria-describedby={errorId}
+            class="article-source"
+            spellcheck="false"
+            bind:value
+        ></textarea>{/if}
     {#if error}<p class="text-sm text-destructive" role="alert">{error}</p>{/if}
 </div>
+<Dialog bind:open={embedOpen}>
+    <DialogContent
+        onCloseAutoFocus={(event) => {
+            event.preventDefault();
+            editor?.editor.action((ctx) => ctx.get(editorViewCtx).focus());
+        }}
+    >
+        <DialogTitle>Tambah sematan</DialogTitle>
+        <DialogDescription
+            >Tempel tautan video YouTube atau halaman HTTPS untuk ditampilkan
+            sebagai kartu tautan.</DialogDescription
+        >
+        <form class="mt-5 space-y-4" onsubmit={addEmbed}>
+            <div class="space-y-2">
+                <Label for="embed-url">URL sematan</Label><Input
+                    id="embed-url"
+                    type="url"
+                    required
+                    bind:value={embedUrl}
+                    aria-invalid={Boolean(embedError)}
+                    aria-describedby="embed-url-error"
+                    placeholder="https://…"
+                />{#if embedError}<p
+                        id="embed-url-error"
+                        class="text-sm text-destructive"
+                        role="alert"
+                    >
+                        {embedError}
+                    </p>{/if}
+            </div>
+            <div class="flex justify-end gap-2">
+                <Button variant="outline" onclick={() => (embedOpen = false)}
+                    >Batal</Button
+                ><Button type="submit">Tambahkan</Button>
+            </div>
+        </form>
+    </DialogContent>
+</Dialog>

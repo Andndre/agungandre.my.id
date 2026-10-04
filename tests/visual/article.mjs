@@ -11,7 +11,7 @@ const contrast = `(rootSelector) => {
     const context = canvas.getContext('2d');
     const rgba = value => { context.clearRect(0, 0, 1, 1); context.fillStyle = value; context.fillRect(0, 0, 1, 1); return [...context.getImageData(0, 0, 1, 1).data]; };
     const luminance = color => color.slice(0, 3).map(v => { v /= 255; return v <= .04045 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }).reduce((sum, v, i) => sum + v * [.2126, .7152, .0722][i], 0);
-    return [...root.querySelectorAll('h1,h2,h3,p,strong,a,li,code,th,td,blockquote,button,input')].filter(el => el.getClientRects().length && el.textContent.trim()).map(el => {
+    return [...root.querySelectorAll('h1,h2,h3,p,strong,a,li,code,th,td,blockquote,button,input,span,.cm-line,.cm-gutterElement')].filter(el => el.getClientRects().length && el.textContent.trim()).map(el => {
         const style = getComputedStyle(el);
         const layers = []; let parent = el;
         while (parent) { layers.unshift(rgba(getComputedStyle(parent).backgroundColor)); parent = parent.parentElement; }
@@ -64,6 +64,17 @@ try {
         "Boolean(document.querySelector('.ProseMirror'))",
         20000,
     );
+    await client.evaluate(
+        "[...document.querySelectorAll('button')].find(el=>el.textContent.trim()==='Markdown').click()",
+    );
+    const extra =
+        '\n\n[Contrast link](https://example.com)\n\n> A readable quote.\n\n| Name | Value |\n| --- | --- |\n| QA | 1 |\n\n```callout:warning\n**Warning** paragraph with a [link](https://example.com).\n```\n';
+    await client.evaluate(
+        `(() => { const el=document.querySelector('#post-markdown'); el.value+=${JSON.stringify(extra)}; el.dispatchEvent(new Event('input',{bubbles:true})); })()`,
+    );
+    await client.evaluate(
+        "[...document.querySelectorAll('button')].find(el=>el.textContent.trim()==='Visual').click()",
+    );
 
     for (const theme of ['light', 'dark']) {
         await client.evaluate(
@@ -82,6 +93,24 @@ try {
             'document.querySelector(\'[role=dialog] button[aria-label="Tutup"]\').click()',
         );
         await waitFor(client, "!document.querySelector('[role=dialog]')");
+        await client.evaluate(
+            "[...document.querySelectorAll('button')].find(el=>el.textContent.trim()==='Tambah blok').click()",
+        );
+        await waitFor(
+            client,
+            "Boolean(document.querySelector('.milkdown-slash-menu [data-index]'))",
+        );
+        await checkContrast('block menu ' + theme, '.milkdown-slash-menu');
+        await client.call('Input.dispatchKeyEvent', {
+            type: 'keyDown',
+            key: 'Escape',
+            code: 'Escape',
+        });
+        await client.call('Input.dispatchKeyEvent', {
+            type: 'keyUp',
+            key: 'Escape',
+            code: 'Escape',
+        });
     }
 
     assert.deepEqual(

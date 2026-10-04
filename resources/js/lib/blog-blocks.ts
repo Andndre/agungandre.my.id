@@ -1,4 +1,8 @@
+import { imageBlockSchema } from '@milkdown/kit/component/image-block';
+import { remarkCtx } from '@milkdown/kit/core';
+import type { Ctx } from '@milkdown/kit/ctx';
 import type { Node as MarkdownNode } from '@milkdown/kit/transformer';
+import { SerializerState } from '@milkdown/kit/transformer';
 import { $node, $remark } from '@milkdown/kit/utils';
 
 type BlogMarkdownNode = MarkdownNode & {
@@ -7,22 +11,74 @@ type BlogMarkdownNode = MarkdownNode & {
     children?: BlogMarkdownNode[];
 };
 
-function transformBlogBlocks(node: BlogMarkdownNode): void {
+export function configureBlogImages(ctx: Ctx): void {
+    ctx.update(imageBlockSchema.key, (previous) => (context) => {
+        const schema = previous(context);
+
+        return {
+            ...schema,
+            attrs: {
+                ...schema.attrs,
+                alt: { default: '', validate: 'string' },
+            },
+            parseMarkdown: {
+                ...schema.parseMarkdown,
+                runner: (state, node, type) => {
+                    const alt = String(node.alt ?? '');
+                    const ratio = Number(alt);
+                    state.addNode(type, {
+                        src: String(node.url ?? ''),
+                        caption: String(node.title ?? ''),
+                        alt,
+                        ratio: Number.isFinite(ratio) && ratio > 0 ? ratio : 1,
+                    });
+                },
+            },
+            toMarkdown: {
+                ...schema.toMarkdown,
+                runner: (state, node) => {
+                    state.openNode('paragraph');
+                    state.addNode('image', undefined, undefined, {
+                        title: node.attrs.caption || undefined,
+                        url: node.attrs.src,
+                        alt: node.attrs.alt || node.attrs.caption,
+                    });
+                    state.closeNode();
+                },
+            },
+        };
+    });
+}
+
+function transformBlogBlocks(
+    node: BlogMarkdownNode,
+    parse: (markdown: string) => MarkdownNode,
+): void {
     if (node.type === 'code') {
         if (['callout:info', 'callout:warning'].includes(String(node.lang))) {
             node.type = 'blog_callout';
+            node.children =
+                (parse(String(node.value ?? '')) as BlogMarkdownNode)
+                    .children ?? [];
+
+            if (!node.children.length) {
+                node.children = [{ type: 'paragraph', children: [] }];
+            }
         } else if (node.lang === 'embed') {
             node.type = 'blog_embed';
         }
     }
 
-    node.children?.forEach(transformBlogBlocks);
+    node.children?.forEach((child) => transformBlogBlocks(child, parse));
 }
 
 export const blogBlockRemark = $remark(
     'blogBlockRemark',
-    () => () => (tree: MarkdownNode) =>
-        transformBlogBlocks(tree as BlogMarkdownNode),
+    (ctx) => () => (tree: MarkdownNode) =>
+        transformBlogBlocks(
+            tree as BlogMarkdownNode,
+            (markdown) => ctx.get(remarkCtx).parse(markdown) as MarkdownNode,
+        ),
 );
 
 const youtubeEmbed = (value: string): string | null => {
@@ -54,8 +110,8 @@ const youtubeEmbed = (value: string): string | null => {
     }
 };
 
-export const calloutNode = $node('blog_callout', () => ({
-    content: 'text*',
+export const calloutNode = $node('blog_callout', (ctx) => ({
+    content: 'block+',
     group: 'block',
     defining: true,
     priority: 100,
@@ -63,6 +119,7 @@ export const calloutNode = $node('blog_callout', () => ({
     parseDOM: [
         {
             tag: 'aside[data-blog-callout]',
+            contentElement: '[data-callout-content]',
             getAttrs: (dom) => ({
                 variant: (dom as HTMLElement).dataset.blogCallout,
             }),
@@ -76,10 +133,10 @@ export const calloutNode = $node('blog_callout', () => ({
         },
         [
             'strong',
-            { contenteditable: 'false' },
+            { contenteditable: 'false', class: 'blog-callout-label' },
             node.attrs.variant === 'warning' ? 'Peringatan' : 'Catatan',
         ],
-        ['div', 0],
+        ['div', { 'data-callout-content': '' }, 0],
     ],
     parseMarkdown: {
         match: (node) =>
@@ -88,19 +145,24 @@ export const calloutNode = $node('blog_callout', () => ({
         runner: (state, node, type) => {
             state.openNode(type, { variant: String(node.lang).split(':')[1] });
 
-            if (node.value) {
-                state.addText(String(node.value));
-            }
-
+            state.next(node.children);
             state.closeNode();
         },
     },
     toMarkdown: {
         match: (node) => node.type.name === 'blog_callout',
         runner: (state, node) =>
-            state.addNode('code', undefined, node.textContent, {
-                lang: `callout:${node.attrs.variant}`,
-            }),
+            state.addNode(
+                'code',
+                undefined,
+                new SerializerState(node.type.schema)
+                    .run(node.type.schema.nodes.doc.create(null, node.content))
+                    .toString(ctx.get(remarkCtx))
+                    .trimEnd(),
+                {
+                    lang: `callout:${node.attrs.variant}`,
+                },
+            ),
     },
 }));
 
