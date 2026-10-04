@@ -73,7 +73,7 @@ case "$phase" in
       if [[ -n "$php_expected" ]]; then
         [[ "$(php -r 'echo PHP_MAJOR_VERSION, ".", PHP_MINOR_VERSION;')" == "$php_expected" ]] || fail "PHP CLI must match configured version $php_expected"
       fi
-      php <<'PHP_CHECK' || fail 'Production PHP GD/EXIF/WebP image runtime validation failed'
+      php <<'PHP'
 <?php
 if (!extension_loaded('gd') || !extension_loaded('exif')) {
     file_put_contents('php://stderr', "Production requires PHP GD and EXIF.\n");
@@ -95,8 +95,8 @@ if ($decoded === false) {
     file_put_contents('php://stderr', "Production WebP encode/decode check failed.\n");
     exit(1);
 }
-echo "Production image runtime ready (GD, EXIF, WebP).\n";
-PHP_CHECK
+echo "Production image runtime ready.\n";
+PHP
       if [[ "$maintenance" == true && -f artisan ]]; then
         echo 'Entering maintenance mode during deployment'
         php artisan down --retry=15 2>/dev/null || true
