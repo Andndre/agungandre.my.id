@@ -12,9 +12,9 @@ test('only the configured owner can preview an article', function () {
     $data = ['content' => 'Draft text'];
 
     postJson(route('admin.posts.preview'), $data)->assertUnauthorized();
-    actingAs(User::factory()->create(['email' => 'other@example.com']))
+    actingAs(User::factory()->createOne(['email' => 'other@example.com']))
         ->postJson(route('admin.posts.preview'), $data)->assertForbidden();
-    actingAs(User::factory()->create(['email' => 'owner@example.com']))
+    actingAs(User::factory()->createOne(['email' => 'owner@example.com']))
         ->postJson(route('admin.posts.preview'), $data)->assertSuccessful();
 
     config()->set('blog.owner_email', '');
@@ -23,7 +23,7 @@ test('only the configured owner can preview an article', function () {
 
 test('article preview shares sanitized markdown rendering without saving content', function () {
     config()->set('blog.owner_email', 'owner@example.com');
-    actingAs(User::factory()->create(['email' => 'owner@example.com']));
+    actingAs(User::factory()->createOne(['email' => 'owner@example.com']));
     $post = Post::factory()->create(['title' => 'Existing post', 'content' => 'Original content']);
     $original = $post->refresh()->getAttributes();
     $content = "<script>alert(1)</script>\n\n[bad](javascript:alert(1))\n\n```callout:info\n**Useful** note\n```\n\n```embed\nhttps://youtu.be/dQw4w9WgXcQ\n```";
@@ -39,7 +39,7 @@ test('article preview shares sanitized markdown rendering without saving content
 
 test('article preview rejects empty content and invalid embed URLs', function (mixed $content) {
     config()->set('blog.owner_email', 'owner@example.com');
-    actingAs(User::factory()->create(['email' => 'owner@example.com']));
+    actingAs(User::factory()->createOne(['email' => 'owner@example.com']));
 
     postJson(route('admin.posts.preview'), ['content' => $content])
         ->assertUnprocessable()->assertJsonValidationErrors('content');

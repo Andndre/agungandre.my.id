@@ -8,6 +8,11 @@ use Tests\TestCase;
 
 use function Pest\Laravel\get;
 
+beforeEach(function () {
+    config()->set('filesystems.project_media_disk', 's3');
+    Storage::fake('s3');
+});
+
 test('portfolio exposes published projects in their configured order without storage paths', function () {
     Project::factory()->unpublished()->create(['sort_order' => 0, 'is_featured' => true]);
     $older = Project::factory()->create(['is_published' => true, 'sort_order' => 2, 'created_at' => now()->subDays(2)]);
@@ -25,7 +30,7 @@ test('portfolio exposes published projects in their configured order without sto
         ->where('projects.0.id', $first->id)
         ->where('projects.1.id', $newer->id)
         ->where('projects.2.id', $older->id)
-        ->where('projects.0.cover_image_url', Storage::disk('public')->url($first->cover_image))
+        ->where('projects.0.cover_image_url', Storage::disk('s3')->url($first->cover_image))
         ->where('projects.0.tech_stack', ['Laravel', 'Svelte'])
         ->where('projects.0.is_featured', true)
         ->missing('projects.0.cover_image')
@@ -60,7 +65,7 @@ test('only the initial welcome response preloads its featured hero cover with an
     $first = Project::factory()->create(['is_published' => true, 'is_featured' => false, 'sort_order' => 1, 'cover_image' => 'projects/covers/first.png']);
     $featured = Project::factory()->featured()->create(['sort_order' => 2, 'cover_image' => 'projects/covers/featured.png']);
     $laterFeatured = Project::factory()->featured()->create(['sort_order' => 3, 'cover_image' => 'projects/covers/later-featured.png']);
-    $preload = fn (Project $project): string => '<link rel="preload" as="image" href="'.e(Storage::disk('public')->url($project->cover_image)).'" fetchpriority="high">';
+    $preload = fn (Project $project): string => '<link rel="preload" as="image" href="'.e(Storage::disk('s3')->url($project->cover_image)).'" fetchpriority="high">';
 
     get(route('home'))->assertSuccessful()
         ->assertSee($preload($featured), false)
@@ -105,8 +110,8 @@ test('public project detail uses the slug and returns media URLs with plain text
         ->component('projects/Show', false)
         ->where('project.slug', $project->slug)
         ->where('project.description', $project->description)
-        ->where('project.cover_image_url', Storage::disk('public')->url($project->cover_image))
-        ->where('project.gallery_urls', array_map(fn (string $path): string => Storage::disk('public')->url($path), $project->images))
+        ->where('project.cover_image_url', Storage::disk('s3')->url($project->cover_image))
+        ->where('project.gallery_urls', array_map(fn (string $path): string => Storage::disk('s3')->url($path), $project->images))
         ->missing('project.cover_image')->missing('project.images')->missing('contentHtml')
         ->etc());
 
