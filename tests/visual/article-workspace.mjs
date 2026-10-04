@@ -126,6 +126,10 @@ try {
         20000,
     );
     await verify(
+        'writing canvas keeps image requirements out of the way',
+        "!document.querySelector('.article-editor .cms-help')",
+    );
+    await verify(
         'initial editor stays clean after Markdown normalization',
         "document.querySelector('.article-actionbar [role=status]').textContent.includes('Tidak ada perubahan')",
     );
@@ -135,6 +139,10 @@ try {
     );
 
     await button('Markdown');
+    await verify(
+        'Markdown mode keeps image requirements out of the writing area',
+        "!document.querySelector('.article-editor .cms-help')",
+    );
     await input('#post-markdown', content);
     await button('Visual');
     await verify(
@@ -247,6 +255,14 @@ try {
         client,
         "Boolean(document.querySelector('.milkdown-image-block input[type=file]'))",
     );
+    await waitFor(
+        client,
+        "Boolean(document.querySelector('.article-editor .cms-help'))",
+    );
+    await verify(
+        'empty image selection shows concise upload requirements',
+        "['JPEG, PNG, WebP', '10 MB', '12 MP', 'Tanpa animasi'].every(text => document.querySelector('.article-editor .cms-help').textContent.includes(text))",
+    );
     await client.call('DOM.enable');
     const documentNode = await client.call('DOM.getDocument');
     const fileInput = await client.call('DOM.querySelector', {
@@ -292,6 +308,14 @@ try {
     await waitFor(
         client,
         'Boolean(document.querySelector(\'.ProseMirror img[src*="/.qa/blog/images/"]\'))',
+    );
+    await waitFor(
+        client,
+        "!document.querySelector('.article-editor .cms-help')",
+    );
+    await verify(
+        'successful upload hides image requirements',
+        "!document.querySelector('.article-editor .cms-help')",
     );
     await verify(
         'upload retry inserts image and clears error',
