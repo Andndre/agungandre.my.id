@@ -31,7 +31,7 @@ function deploymentAssetTransfers(): array
         $transfers[] = [
             'source' => $dir.'/',
             'target_suffix' => '/'.$dir.'/',
-            'args' => ['-rlz', '--delay-updates'],
+            'args' => ['-rlz', '--checksum', '--delay-updates'],
         ];
     }
 
@@ -44,7 +44,7 @@ function deploymentAssetTransfers(): array
     $transfers[] = [
         'source' => '',
         'target_suffix' => '/',
-        'args' => ['-rlz', '--delay-updates', '--delete-delay', ...$excludes],
+        'args' => ['-rlz', '--checksum', '--delay-updates', '--delete-delay', ...$excludes],
     ];
 
     return $transfers;
