@@ -592,23 +592,35 @@
         padding: 3rem;
         border-right: 1px solid var(--outline-variant);
     }
-    .studio-prose {
-        --tw-prose-body: var(--on-surface);
-        --tw-prose-headings: var(--on-surface);
-        --tw-prose-links: var(--primary);
-        --tw-prose-bold: var(--on-surface);
-        --tw-prose-counters: var(--on-surface-variant);
-        --tw-prose-bullets: var(--on-surface-variant);
-        --tw-prose-quotes: var(--on-surface);
-        --tw-prose-quote-borders: var(--outline-variant);
-        --tw-prose-code: var(--primary);
-        --tw-prose-pre-code: var(--on-surface);
-        --tw-prose-pre-bg: var(--surface-container-low);
-        --tw-prose-th-borders: var(--outline);
-        --tw-prose-td-borders: var(--outline-variant);
-    }
+}
+/* Keep semantic typography above the typography plugin's utility layer. */
+.studio-prose {
+    --tw-prose-body: var(--on-surface);
+    --tw-prose-lead: var(--on-surface-variant);
+    --tw-prose-headings: var(--on-surface);
+    --tw-prose-links: var(--primary);
+    --tw-prose-bold: var(--on-surface);
+    --tw-prose-counters: var(--on-surface-variant);
+    --tw-prose-bullets: var(--on-surface-variant);
+    --tw-prose-quotes: var(--on-surface);
+    --tw-prose-quote-borders: var(--outline-variant);
+    --tw-prose-code: var(--primary);
+    --tw-prose-pre-code: var(--on-surface);
+    --tw-prose-pre-bg: var(--surface-container-low);
+    --tw-prose-captions: var(--on-surface-variant);
+    --tw-prose-hr: var(--outline-variant);
+    --tw-prose-th-borders: var(--outline);
+    --tw-prose-td-borders: var(--outline-variant);
 }
 .blog-callout {
+    --tw-prose-body: var(--on-primary-container);
+    --tw-prose-headings: var(--on-primary-container);
+    --tw-prose-bold: var(--on-primary-container);
+    --tw-prose-links: var(--on-primary-container);
+    --tw-prose-code: var(--on-primary-container);
+    --tw-prose-quotes: var(--on-primary-container);
+    --tw-prose-bullets: var(--on-primary-container);
+    --tw-prose-counters: var(--on-primary-container);
     margin-block: 1.5rem;
     border-left: 3px solid var(--primary);
     border-radius: 0.75rem;
@@ -617,6 +629,14 @@
     padding: 1rem 1.25rem;
 }
 .blog-callout-warning {
+    --tw-prose-body: var(--warning);
+    --tw-prose-headings: var(--warning);
+    --tw-prose-bold: var(--warning);
+    --tw-prose-links: var(--warning);
+    --tw-prose-code: var(--warning);
+    --tw-prose-quotes: var(--warning);
+    --tw-prose-bullets: var(--warning);
+    --tw-prose-counters: var(--warning);
     border-color: var(--warning);
     background: var(--warning-container);
     color: var(--warning);
@@ -652,9 +672,37 @@
     --crepe-color-background: var(--surface-container-lowest);
     --crepe-color-on-background: var(--on-surface);
     --crepe-color-surface: var(--surface-container-low);
+    --crepe-color-surface-low: var(--surface-container);
     --crepe-color-on-surface: var(--on-surface);
+    --crepe-color-on-surface-variant: var(--on-surface-variant);
     --crepe-color-primary: var(--primary);
     --crepe-color-outline: var(--outline);
+    --crepe-color-secondary: var(--primary-container);
+    --crepe-color-on-secondary: var(--on-primary-container);
+    --crepe-color-inverse: var(--surface-container-high);
+    --crepe-color-on-inverse: var(--on-surface);
+    --crepe-color-inline-code: var(--primary);
+    --crepe-color-error: var(--error);
+    --crepe-color-hover: var(--surface-container);
+    --crepe-color-selected: var(--primary-container);
+    --crepe-color-inline-area: var(--surface-container);
+    --crepe-font-title: var(--font-sans);
+    --crepe-font-default: var(--font-sans);
+    --crepe-shadow-1: var(--elevation-menu);
+    --crepe-shadow-2: var(--elevation-dialog);
+}
+.blog-editor
+    .milkdown
+    .ProseMirror
+    .blog-callout
+    :is(p, strong, em, a, code, li, h1, h2, h3, h4, blockquote) {
+    color: inherit;
+}
+.blog-callout > :first-child {
+    margin-top: 0;
+}
+.blog-callout > :last-child {
+    margin-bottom: 0;
 }
 .blog-editor .milkdown img {
     max-width: 100%;

@@ -93,6 +93,8 @@ try {
         await capture('qa-article', '/blog/qa-published-notes');
         await capture('qa-long-title', '/projects/qa-scheduling-workspace');
         await capture('qa-missing-image', '/projects/qa-missing-image');
+    } else if (phase === 'article') {
+        await capture('qa-article', '/blog/qa-published-notes');
     } else if (phase === 'empty') {
         await client.call('Network.clearBrowserCookies');
         await capture('empty-home', '/');
