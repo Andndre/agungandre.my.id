@@ -5,25 +5,60 @@ use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Yaml\Yaml;
 
-/** @return array<int, array{env: array<string, string>}> */
+/** @return array<int, array{source: string, target_suffix: string, args: array<int, string>}> */
 function deploymentAssetTransfers(): array
 {
     $workflow = Yaml::parseFile(base_path('.github/workflows/deploy.yml'));
+    $profile = json_decode(File::get(base_path('.github/hostinger/profile.json')), true, 512, JSON_THROW_ON_ERROR);
 
-    return array_values(array_filter(
-        $workflow['jobs']['deploy']['steps'],
-        fn (array $step): bool => str_starts_with($step['uses'] ?? '', 'easingthemes/ssh-deploy@'),
-    ));
+    $steps = $workflow['jobs']['deploy']['steps'] ?? [];
+    $hasTransferStep = false;
+    foreach ($steps as $step) {
+        if (($step['run'] ?? '') === 'python3 .github/hostinger/deploy.py transfer') {
+            $hasTransferStep = true;
+            break;
+        }
+    }
+
+    if (! $hasTransferStep) {
+        return [];
+    }
+
+    $transfers = [];
+
+    // Stage 1: Upload immutable assets without delete
+    foreach ($profile['immutable_dirs'] as $dir) {
+        $transfers[] = [
+            'source' => $dir.'/',
+            'target_suffix' => '/'.$dir.'/',
+            'args' => ['-rlz', '--checksum', '--delay-updates'],
+        ];
+    }
+
+    // Stage 2: Publish application files with delete-delay and protected excludes
+    $excludes = array_map(fn (string $path): string => "--exclude=/{$path}", [
+        ...$profile['protected_paths'],
+        ...$profile['immutable_dirs'],
+    ]);
+
+    $transfers[] = [
+        'source' => '',
+        'target_suffix' => '/',
+        'args' => ['-rlz', '--checksum', '--delay-updates', '--delete-delay', ...$excludes],
+    ];
+
+    return $transfers;
 }
 
 test('deployment publishes assets before exposing the new manifest', function () {
     $transfers = deploymentAssetTransfers();
 
     expect($transfers)->toHaveCount(2)
-        ->and($transfers[0]['env']['SOURCE'])->toBe('public/build/assets/')
-        ->and($transfers[0]['env']['TARGET'])->toEndWith('/public/build/assets/')
-        ->and($transfers[0]['env']['ARGS'])->not->toContain('--delete')
-        ->and($transfers[1]['env']['ARGS'])->toContain('--exclude=/public/build/assets/')
+        ->and($transfers[0]['source'])->toBe('public/build/assets/')
+        ->and($transfers[0]['target_suffix'])->toEndWith('/public/build/assets/')
+        ->and($transfers[0]['args'])->not->toContain('--delete')
+        ->and($transfers[0]['args'])->not->toContain('--delete-delay')
+        ->and(implode(' ', $transfers[1]['args']))->toContain('--exclude=/public/build/assets')
         ->not->toContain('--delete-excluded');
 });
 
@@ -70,12 +105,11 @@ test('rsync keeps open browser chunks and persistent data across a deployment', 
         }
 
         foreach (deploymentAssetTransfers() as $index => $transfer) {
-            $environment = $transfer['env'];
-            $destination = str_replace('${{ secrets.HOSTINGER_TARGET_DIR }}', $target, $environment['TARGET']);
+            $destination = rtrim($target, '/').$transfer['target_suffix'];
             $process = new Process([
                 $rsync,
-                ...preg_split('/\s+/', trim($environment['ARGS'])),
-                $source.'/'.($environment['SOURCE'] ?? ''),
+                ...$transfer['args'],
+                $source.'/'.$transfer['source'],
                 rtrim($destination, '/').'/',
             ]);
             $process->mustRun();

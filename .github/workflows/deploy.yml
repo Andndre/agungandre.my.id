@@ -7,6 +7,12 @@ on:
     branches: [ main, dev ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+env:
+  CI: 'true'
+
 jobs:
   verify:
     name: Code Quality & Tests (Pint, ESLint, Svelte, Pest)
@@ -57,10 +63,17 @@ jobs:
     name: Deploy to Hostinger
     runs-on: ubuntu-latest
     needs: [verify]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     concurrency:
       group: production-deploy
       cancel-in-progress: false
+    env:
+      HOSTINGER_SSH_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+      HOSTINGER_SSH_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+      HOSTINGER_SSH_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
+      HOSTINGER_SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+      HOSTINGER_SSH_KNOWN_HOSTS: ${{ secrets.HOSTINGER_SSH_KNOWN_HOSTS }}
+      HOSTINGER_TARGET_DIR: ${{ secrets.HOSTINGER_TARGET_DIR }}
 
     steps:
       - name: Checkout Code
@@ -79,82 +92,42 @@ jobs:
           node-version: 22
           cache: 'npm'
 
-      - name: Install Composer Dependencies
+      - name: Install Dependencies and Build
         run: |
           composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
-
-      - name: Build Frontend Assets
-        run: |
           npm ci
           npm run build
 
-      - name: Verify Production Image Runtime Before Transfer
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.HOSTINGER_SSH_HOST }}
-          port: ${{ secrets.HOSTINGER_SSH_PORT }}
-          username: ${{ secrets.HOSTINGER_SSH_USER }}
-          key: ${{ secrets.HOSTINGER_SSH_KEY }}
-          script: |
-            set -eu
-            php <<'PHP'
-            <?php
-            if (!extension_loaded('gd') || !extension_loaded('exif')) {
-                file_put_contents('php://stderr', "Production requires PHP GD and EXIF.\n");
-                exit(1);
-            }
-            $support = gd_info();
-            foreach (['JPEG Support', 'PNG Support', 'WebP Support'] as $feature) {
-                if (!($support[$feature] ?? false)) {
-                    file_put_contents('php://stderr', "Production GD is missing: {$feature}.\n");
-                    exit(1);
-                }
-            }
-            $image = imagecreatetruecolor(2, 2);
-            ob_start();
-            $encoded = imagewebp($image, null, 82);
-            $bytes = ob_get_clean();
-            $decoded = $encoded && is_string($bytes) && $bytes !== '' ? @imagecreatefromstring($bytes) : false;
-            if ($decoded === false) {
-                file_put_contents('php://stderr', "Production WebP encode/decode check failed.\n");
-                exit(1);
-            }
-            echo "Production image runtime ready.\n";
-            PHP
-            mkdir -p "${{ secrets.HOSTINGER_TARGET_DIR }}/public/build/assets"
+      - name: Upload Immutable Assets, Then Publish Application
+        id: transfer
+        run: python3 .github/hostinger/deploy.py transfer
 
-      - name: Upload Versioned Assets Before Application
-        uses: easingthemes/ssh-deploy@main
+      - name: Verify Deployed HTML and JS/CSS
+        id: verify
+        run: python3 .github/hostinger/check-deploy.py
+
+      - name: Clean Expired Deployment Assets
+        id: cleanup
+        if: ${{ !cancelled() && steps.transfer.outcome == 'success' }}
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
-          ARGS: "-rlgoDzvcO --delay-updates"
-          SOURCE: "public/build/assets/"
-          REMOTE_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
-          REMOTE_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
-          REMOTE_USER: ${{ secrets.HOSTINGER_SSH_USER }}
-          TARGET: ${{ secrets.HOSTINGER_TARGET_DIR }}/public/build/assets/
+          HOSTINGER_HTTP_VERIFIED: ${{ steps.verify.outcome == 'success' }}
+        run: python3 .github/hostinger/deploy.py cleanup
 
-      - name: Deploy via Rsync over SSH
-        uses: easingthemes/ssh-deploy@main
+      - name: Summarize Deployment Stages
+        if: always()
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
-          ARGS: "-rlgoDzvcO --delete-delay --delay-updates --exclude=/public/build/assets/ --exclude=.env --exclude=node_modules --exclude=.git --exclude=.github --exclude=storage/** --exclude=database/*.sqlite* --exclude=tests --exclude=/docs/"
-          REMOTE_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
-          REMOTE_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
-          REMOTE_USER: ${{ secrets.HOSTINGER_SSH_USER }}
-          TARGET: ${{ secrets.HOSTINGER_TARGET_DIR }}
+          TRANSFER_OUTCOME: ${{ steps.transfer.outcome }}
+          VERIFY_OUTCOME: ${{ steps.verify.outcome }}
+          CLEANUP_OUTCOME: ${{ steps.cleanup.outcome }}
+        run: |
+          printf '## Deployment results\n\n| Stage | Result |\n|---|---|\n| Transfer and optimization | %s |\n| Public HTTP verification | %s |\n| Asset cleanup | %s |\n\n' "$TRANSFER_OUTCOME" "$VERIFY_OUTCOME" "$CLEANUP_OUTCOME" >> "$GITHUB_STEP_SUMMARY"
+          printf 'A failed HTTP check does not establish whether application publication failed. Review its response evidence; no automatic rollback was performed.\n' >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Post-Deploy Optimization
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Save HTTP Diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          host: ${{ secrets.HOSTINGER_SSH_HOST }}
-          port: ${{ secrets.HOSTINGER_SSH_PORT }}
-          username: ${{ secrets.HOSTINGER_SSH_USER }}
-          key: ${{ secrets.HOSTINGER_SSH_KEY }}
-          script: |
-            cd ${{ secrets.HOSTINGER_TARGET_DIR }}
-            php artisan optimize:clear
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
-            php artisan migrate --force
+          name: deploy-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: deploy-diagnostics/
+          if-no-files-found: ignore
+          retention-days: 14
