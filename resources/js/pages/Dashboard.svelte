@@ -1,5 +1,8 @@
 <script lang="ts">
     import { Link, page, setLayoutProps } from '@inertiajs/svelte';
+    import ArrowRight from 'lucide-svelte/icons/arrow-right';
+    import ExternalLink from 'lucide-svelte/icons/external-link';
+    import Plus from 'lucide-svelte/icons/plus';
     import AppHead from '@/components/AppHead.svelte';
     import { home } from '@/routes';
     import { dashboard } from '@/routes/admin';
@@ -38,7 +41,8 @@
                 Lanjutkan karya Anda, satu langkah pada satu waktu.
             </p>
         </div>
-        <Link href={projects.create()} class="studio-button">+ Proyek baru</Link
+        <Link href={projects.create()} class="studio-button"
+            ><Plus class="size-4" aria-hidden="true" />Proyek baru</Link
         >
     </header>
     <div
@@ -64,7 +68,10 @@
                 </p>
             </div>
             <Link href={projects.index()} class="studio-button quiet"
-                >Semua proyek →</Link
+                >Semua proyek<ArrowRight
+                    class="size-4"
+                    aria-hidden="true"
+                /></Link
             >
         </div>
         {#if recentProjects.length}<div class="divide-y divide-border">
@@ -90,9 +97,10 @@
                                     : 'Draf'}</span
                             >{#if project.is_featured}<span
                                     class="status-label featured">Unggulan</span
-                                >{/if}<span aria-hidden="true" class="px-3"
-                                >→</span
-                            >
+                                >{/if}<ArrowRight
+                                class="mx-3 size-4"
+                                aria-hidden="true"
+                            />
                         </div></Link
                     >{/each}
             </div>
@@ -114,7 +122,10 @@
                 href={posts.create()}
                 class="studio-button quiet">Tulis artikel</Link
             >{/if}<Link href={home()} class="studio-button quiet"
-            >Buka portfolio ↗</Link
+            >Buka portfolio<ExternalLink
+                class="size-4"
+                aria-hidden="true"
+            /></Link
         >
     </div>
 </div>

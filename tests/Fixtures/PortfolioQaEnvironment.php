@@ -55,6 +55,7 @@ class PortfolioQaEnvironment
         $app['config']->set('filesystems.disks.public.root', $app->publicPath('.qa'));
         $app['config']->set('filesystems.disks.public.url', '/.qa');
         $app['config']->set('blog.media_disk', 'public');
+        $app['config']->set('filesystems.project_media_disk', 'public');
         Storage::forgetDisk('public');
     }
 }

@@ -33,13 +33,13 @@ class ProjectData
 
     private static function coverUrl(Project $project): ?string
     {
-        return $project->cover_image ? Storage::disk('public')->url($project->cover_image) : null;
+        return $project->cover_image ? Storage::disk((string) config('filesystems.project_media_disk'))->url($project->cover_image) : null;
     }
 
     private static function galleryUrls(Project $project): array
     {
         return array_map(
-            static fn (string $path): string => Storage::disk('public')->url($path),
+            static fn (string $path): string => Storage::disk((string) config('filesystems.project_media_disk'))->url($path),
             $project->images ?? [],
         );
     }

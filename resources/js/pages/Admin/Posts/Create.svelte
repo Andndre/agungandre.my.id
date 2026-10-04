@@ -12,15 +12,6 @@
 </script>
 
 <AppHead title="Artikel Baru" />
-<div class="cms-page">
-    <div class="cms-header">
-        <div>
-            <p class="cms-eyebrow">Tulisan</p>
-            <h1 class="cms-title">Artikel baru</h1>
-            <p class="cms-description">
-                Tulis, lihat preview, lalu pilih waktu publikasi.
-            </p>
-        </div>
-    </div>
+<div class="article-page">
     <PostForm />
 </div>

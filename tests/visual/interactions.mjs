@@ -110,7 +110,7 @@ try {
     );
     await boot("localStorage.removeItem('portfolio:intro:v1');");
     await navigate(client, base + '/');
-    await button('Skip intro →');
+    await button('Skip intro');
     await check(
         'Skip ends intro without moving focus',
         "!document.querySelector('.intro-frame') && !document.body.style.overflow",
@@ -306,7 +306,7 @@ try {
     );
     await check(
         'editor initially clean',
-        "document.querySelector('.cms-actionbar [role=status]').textContent.includes('Tidak ada perubahan')",
+        "document.querySelector('.article-actionbar [role=status]').textContent.includes('Tidak ada perubahan')",
     );
     await input('#post-title', 'QA unsaved article title');
     await button('Preview');
@@ -322,8 +322,12 @@ try {
     await pause(300);
     await check(
         'article preview returns focus and keeps dirty state',
-        "document.activeElement.textContent.trim()==='Preview' && document.querySelector('.cms-actionbar [role=status]').textContent.includes('Perubahan belum disimpan')",
+        "document.activeElement.textContent.trim()==='Preview' && document.querySelector('.article-actionbar [role=status]').textContent.includes('Perubahan belum disimpan')",
     );
+    await click('a[aria-label="Kembali ke daftar tulisan"]');
+    await waitFor(client, "Boolean(document.querySelector('[role=dialog]'))");
+    await button('Tinggalkan');
+    await waitFor(client, "location.pathname==='/admin/blog'");
     await navigate(client, base + '/admin');
     await click('[data-sidebar="trigger"]');
     await waitFor(client, "Boolean(document.querySelector('[role=dialog]'))");

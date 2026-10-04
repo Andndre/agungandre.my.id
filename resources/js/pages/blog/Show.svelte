@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Link } from '@inertiajs/svelte';
+    import ArrowLeft from 'lucide-svelte/icons/arrow-left';
     import AppHead from '@/components/AppHead.svelte';
     import { index } from '@/routes/blog';
     import type { PostSummary } from '@/types/blog';
@@ -18,7 +19,9 @@
 <AppHead title={post.title} description={post.excerpt} />
 <div class="studio-shell py-12 sm:py-20">
     <div class="mx-auto max-w-3xl">
-        <Link href={index()} class="studio-link">← All writing</Link>
+        <Link href={index()} class="studio-link"
+            ><ArrowLeft class="size-4" aria-hidden="true" />All writing</Link
+        >
         <article class="mt-10">
             <div class="flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <time datetime={post.published_at}

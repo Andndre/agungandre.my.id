@@ -30,7 +30,7 @@ class ProjectController extends Controller
     {
         Project::create([
             ...$request->safe()->except(['cover_image', 'images']),
-            'cover_image' => $request->file('cover_image')->store('projects/covers', 'public'),
+            'cover_image' => $this->storeImage($request->file('cover_image'), 'projects/covers'),
             'images' => $this->storeImages($request->file('images', [])),
         ]);
 
@@ -50,7 +50,7 @@ class ProjectController extends Controller
         $replacedPaths = [];
 
         if ($request->hasFile('cover_image')) {
-            $data['cover_image'] = $request->file('cover_image')->store('projects/covers', 'public');
+            $data['cover_image'] = $this->storeImage($request->file('cover_image'), 'projects/covers');
             $replacedPaths[] = $project->cover_image;
         }
 
@@ -60,7 +60,7 @@ class ProjectController extends Controller
         }
 
         $project->update($data);
-        Storage::disk('public')->delete(array_filter($replacedPaths));
+        Storage::disk((string) config('filesystems.project_media_disk'))->delete(array_filter($replacedPaths));
 
         Inertia::flash('toast', ['type' => 'success', 'message' => 'Proyek berhasil diperbarui.']);
 
@@ -69,7 +69,7 @@ class ProjectController extends Controller
 
     public function destroy(Project $project): RedirectResponse
     {
-        Storage::disk('public')->delete(array_filter([$project->cover_image, ...($project->images ?? [])]));
+        Storage::disk((string) config('filesystems.project_media_disk'))->delete(array_filter([$project->cover_image, ...($project->images ?? [])]));
         $project->delete();
 
         Inertia::flash('toast', ['type' => 'success', 'message' => 'Proyek berhasil dihapus.']);
@@ -80,6 +80,15 @@ class ProjectController extends Controller
     /** @param array<UploadedFile> $images */
     private function storeImages(array $images): array
     {
-        return array_map(static fn (UploadedFile $image): string => $image->store('projects/gallery', 'public'), $images);
+        return array_map(fn (UploadedFile $image): string => $this->storeImage($image, 'projects/gallery'), $images);
+    }
+
+    private function storeImage(UploadedFile $image, string $directory): string
+    {
+        $path = $image->store($directory, (string) config('filesystems.project_media_disk'));
+
+        abort_unless($path, 500, 'Image upload failed.');
+
+        return $path;
     }
 }

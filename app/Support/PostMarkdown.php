@@ -79,7 +79,7 @@ class PostMarkdown
                 $safeUrl = htmlspecialchars($url, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
                 $safeHost = htmlspecialchars($host, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 
-                return '<a class="blog-link-card" href="'.$safeUrl.'" rel="noopener noreferrer" target="_blank">'.$safeHost.' ↗</a>';
+                return '<a class="blog-link-card" href="'.$safeUrl.'" rel="noopener noreferrer" target="_blank">'.$safeHost.' <svg class="blog-link-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a>';
             }
         }, 10);
 
