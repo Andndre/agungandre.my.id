@@ -84,6 +84,14 @@ npm run build                # Kompilasi aset Vite untuk production
 
 ## 4. Alur Branch dan Pull Request
 
+* **Setiap branch `feature/*` baru wajib dibuat dari `origin/dev` terbaru**, termasuk setelah PR sebelumnya selesai. Branch fitur lain, `main`, atau checkout lama tidak boleh menjadi titik awal.
+* Mulai dengan working tree bersih, lalu sinkronkan referensi remote dan buat branch tanpa mewarisi upstream `dev`:
+  ```bash
+  git fetch origin dev
+  git switch --no-track -c feature/<nama-fitur> origin/dev
+  ```
+* Sebelum mulai mengedit, jalankan `git rev-parse HEAD origin/dev`. Kedua hash harus sama untuk memastikan branch baru berawal tepat dari `dev` terbaru.
+* Saat pertama kali push, tetapkan upstream branch fitur sendiri: `git push -u origin feature/<nama-fitur>`.
 * Kerjakan perubahan di branch `feature/*`, lalu buat PR ke `dev`. CI menjalankan build, Pint, ESLint, pemeriksaan tipe Svelte, dan Pest untuk PR ini.
 * Setelah perubahan di `dev` selesai diperbaiki dan diverifikasi, pemilik membuat PR dari `dev` ke `main`.
 * Deploy produksi hanya berjalan pada push ke `main` setelah pemeriksaan CI lulus. Jangan arahkan PR fitur langsung ke `main`.
