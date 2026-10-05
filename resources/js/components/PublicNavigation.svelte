@@ -7,13 +7,14 @@
         SheetTitle,
         SheetDescription,
     } from '@/components/ui/sheet';
+    import type { PublicNavigationLink } from '@/types/public-navigation';
     let {
         open = $bindable(false),
         links,
         onClosed,
     }: {
         open?: boolean;
-        links: { label: string; href: string }[];
+        links: PublicNavigationLink[];
         onClosed: () => void;
     } = $props();
 </script>
@@ -30,12 +31,27 @@
             >Work, ideas, and ways to connect.</SheetDescription
         >
         <nav class="mt-6 flex flex-col gap-2" aria-label="Mobile navigation">
-            {#each links as link (link.label)}<Link
-                    href={link.href}
-                    class="studio-link"
-                    onclick={() => (open = false)}
-                    >{link.label}<ArrowUpRight class="size-4" /></Link
-                >{/each}
+            {#each links as link (link.label)}
+                {#if link.documentNavigation}
+                    <a
+                        href={link.href}
+                        class="studio-link"
+                        onclick={() => (open = false)}
+                        >{link.label}<ArrowUpRight
+                            class="size-4"
+                            aria-hidden="true"
+                        /></a
+                    >
+                {:else}<Link
+                        href={link.href}
+                        class="studio-link"
+                        onclick={() => (open = false)}
+                        >{link.label}<ArrowUpRight
+                            class="size-4"
+                            aria-hidden="true"
+                        /></Link
+                    >{/if}
+            {/each}
         </nav>
     </SheetContent></Sheet
 >

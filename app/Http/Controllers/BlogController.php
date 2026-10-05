@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Support\PostMarkdown;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Inertia\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 class BlogController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): View|Response
     {
-        return Inertia::render('blog/Index', [
+        if ($request->header('X-Inertia')) {
+            return Inertia::location($request->fullUrl());
+        }
+
+        return view('blog.index', [
             'posts' => Post::published()
                 ->orderByDesc('published_at')
                 ->orderByDesc('id')
@@ -19,12 +25,16 @@ class BlogController extends Controller
         ]);
     }
 
-    public function show(string $slug, PostMarkdown $markdown): Response
+    public function show(Request $request, string $slug, PostMarkdown $markdown): View|Response
     {
         $post = Post::published()->where('slug', $slug)->firstOrFail();
 
-        return Inertia::render('blog/Show', [
-            'post' => $post->only('title', 'slug', 'excerpt', 'reading_time', 'published_at'),
+        if ($request->header('X-Inertia')) {
+            return Inertia::location($request->fullUrl());
+        }
+
+        return view('blog.show', [
+            'post' => $post,
             'contentHtml' => $markdown->render($post->content),
         ]);
     }

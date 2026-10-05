@@ -32,18 +32,10 @@ let settingsLayout: Component;
 async function loadLayouts(name: string): Promise<void> {
     if (typeof document !== 'undefined') {
         document.documentElement.lang =
-            name === 'Welcome' ||
-            name.startsWith('blog/') ||
-            name.startsWith('projects/')
-                ? 'en'
-                : 'id';
+            name === 'Welcome' || name.startsWith('projects/') ? 'en' : 'id';
     }
 
-    if (
-        name === 'Welcome' ||
-        name.startsWith('blog/') ||
-        name.startsWith('projects/')
-    ) {
+    if (name === 'Welcome' || name.startsWith('projects/')) {
         publicLayout ??= (await import('@/layouts/PublicLayout.svelte'))
             .default;
     } else if (name.startsWith('auth/')) {
@@ -72,11 +64,7 @@ createInertiaApp({
         return component;
     },
     layout: (name) => {
-        if (
-            name === 'Welcome' ||
-            name.startsWith('blog/') ||
-            name.startsWith('projects/')
-        ) {
+        if (name === 'Welcome' || name.startsWith('projects/')) {
             return publicLayout;
         }
 

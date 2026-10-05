@@ -223,8 +223,8 @@
     <div class="studio-shell">
         <div class="mb-8 flex flex-wrap items-end justify-between gap-5">
             <h2 id="writing-title" class="section-title">Writing</h2>
-            <Link href={writing()} class="studio-link"
-                >All writing <ArrowUpRight class="size-4" /></Link
+            <a href={writing().url} class="studio-link"
+                >All writing <ArrowUpRight class="size-4" /></a
             >
         </div>
         {#if latestPosts.length === 0}<p class="text-muted-foreground">
@@ -237,9 +237,9 @@
                             {date(post.published_at)} / {post.reading_time} min read
                         </p>
                         <h3 class="mt-3 text-xl font-semibold">
-                            <Link
-                                href={article({ slug: post.slug })}
-                                class="hover:text-primary">{post.title}</Link
+                            <a
+                                href={article({ slug: post.slug }).url}
+                                class="hover:text-primary">{post.title}</a
                             >
                         </h3>
                         <p
@@ -248,10 +248,10 @@
                             {post.excerpt}
                         </p>
                     </div>
-                    <Link
-                        href={article({ slug: post.slug })}
+                    <a
+                        href={article({ slug: post.slug }).url}
                         class="studio-link"
-                        >Read article <ArrowUpRight class="size-4" /></Link
+                        >Read article <ArrowUpRight class="size-4" /></a
                     >
                 </article>{/each}{/if}
     </div>
