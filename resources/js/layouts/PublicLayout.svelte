@@ -39,7 +39,7 @@
     const links = $derived([
         { label: 'Work', href: home().url + '#work' },
         { label: 'About', href: home().url + '#about' },
-        { label: 'Writing', href: writing().url },
+        { label: 'Writing', href: writing().url, documentNavigation: true },
         { label: 'Contact', href: home().url + '#contact' },
     ]);
     $effect(() => {
@@ -64,11 +64,19 @@
             class="hidden items-center gap-7 text-sm md:flex"
             aria-label="Main navigation"
         >
-            {#each links as link (link.label)}<Link
-                    href={link.href}
-                    class="inline-flex min-h-11 items-center text-muted-foreground hover:text-foreground"
-                    >{link.label}</Link
-                >{/each}
+            {#each links as link (link.label)}
+                {#if link.documentNavigation}
+                    <a
+                        href={link.href}
+                        class="inline-flex min-h-11 items-center text-muted-foreground hover:text-foreground"
+                        >{link.label}</a
+                    >
+                {:else}<Link
+                        href={link.href}
+                        class="inline-flex min-h-11 items-center text-muted-foreground hover:text-foreground"
+                        >{link.label}</Link
+                    >{/if}
+            {/each}
         </nav>
         <div class="flex items-center gap-2">
             <ThemePicker />

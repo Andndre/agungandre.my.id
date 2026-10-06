@@ -2,7 +2,6 @@
 
 use App\Models\Post;
 use App\Models\User;
-use Inertia\Testing\AssertableInertia as Assert;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseCount;
@@ -74,7 +73,7 @@ test('preview and public link cards allow only the trusted application SVG', fun
     assertDatabaseCount('posts', 1);
     expect($post->fresh()->getAttributes())->toBe($original);
 
-    get(route('blog.show', $post->slug))->assertOk()->assertInertia(fn (Assert $page) => $page
-        ->where('contentHtml', $html)
-        ->etc());
+    get(route('blog.show', $post->slug))->assertOk()->assertViewIs('blog.show')
+        ->assertViewHas('contentHtml', $html)
+        ->assertSee($html, false);
 });

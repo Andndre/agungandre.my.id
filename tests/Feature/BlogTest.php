@@ -2,8 +2,11 @@
 
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 use Inertia\Testing\AssertableInertia as Assert;
 
 use function Pest\Laravel\actingAs;
@@ -15,40 +18,104 @@ use function Pest\Laravel\post;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\put;
 
-test('published blog index and article are available', function () {
-    $post = Post::factory()->create(['title' => 'A first devlog']);
+test('published blog index and article contain readable HTML without JavaScript', function () {
+    $post = Post::factory()->create([
+        'title' => 'A first devlog',
+        'excerpt' => 'A useful introduction',
+        'content' => "## Getting started\n\nAn article paragraph.\n\n```php\necho 'Hello';\n```",
+    ]);
 
-    get('/blog')->assertOk()->assertInertia(fn (Assert $page) => $page
-        ->component('blog/Index')
-        ->has('posts.data', 1));
-    get('/blog/'.$post->slug)->assertOk()->assertInertia(fn (Assert $page) => $page
-        ->component('blog/Show')
-        ->where('post.slug', $post->slug)
-        ->etc());
+    get('/blog')->assertOk()->assertViewIs('blog.index')
+        ->assertViewHas('posts', fn (LengthAwarePaginator $posts) => $posts->count() === 1)
+        ->assertSee('<article', false)
+        ->assertSee($post->title)
+        ->assertSee('href="'.route('blog.show', $post->slug).'"', false)
+        ->assertDontSee('data-page=', false);
+
+    get('/blog/'.$post->slug)->assertOk()->assertViewIs('blog.show')
+        ->assertViewHas('post', fn (Post $article) => $article->is($post))
+        ->assertSee('<article', false)
+        ->assertSee('<h1', false)
+        ->assertSee($post->title)
+        ->assertSee('<h2>Getting started</h2>', false)
+        ->assertSee('<p>An article paragraph.</p>', false)
+        ->assertSee('<pre><code class="language-php">', false)
+        ->assertSee('<meta name="description" content="'.$post->excerpt.'">', false)
+        ->assertDontSee('data-page=', false);
 });
 
 test('draft, future and missing posts are hidden', function () {
     $draft = Post::factory()->create(['published_at' => null]);
     $future = Post::factory()->create(['published_at' => now()->addDay()]);
 
-    get('/blog')->assertOk()->assertInertia(fn (Assert $page) => $page
-        ->component('blog/Index')
-        ->has('posts.data', 0));
+    get('/blog')->assertOk()->assertViewIs('blog.index')
+        ->assertViewHas('posts', fn (LengthAwarePaginator $posts) => $posts->isEmpty())
+        ->assertSee('Notes are on the way.')
+        ->assertDontSee($draft->title)
+        ->assertDontSee($future->title);
     get('/blog/'.$draft->slug)->assertNotFound();
     get('/blog/'.$future->slug)->assertNotFound();
     get('/blog/does-not-exist')->assertNotFound();
 });
 
 test('blog index paginates ten posts newest first', function () {
-    Post::factory()->count(10)->create(['published_at' => now()->subDays(2)]);
+    $older = Post::factory()->count(10)
+        ->sequence(fn (Sequence $sequence): array => ['title' => 'Older post '.$sequence->index])
+        ->create(['published_at' => now()->subDays(2)]);
     $newest = Post::factory()->create(['title' => 'Newest post', 'published_at' => now()->subDay()]);
 
-    get('/blog')->assertOk()->assertInertia(fn (Assert $page) => $page
-        ->component('blog/Index')
-        ->has('posts.data', 10)
-        ->where('posts.total', 11)
-        ->where('posts.data.0.slug', $newest->slug)
-        ->etc());
+    get('/blog')->assertOk()->assertViewIs('blog.index')
+        ->assertViewHas('posts', fn (LengthAwarePaginator $posts) => $posts->count() === 10
+            && $posts->total() === 11
+            && $posts->first()->is($newest)
+            && $posts->getCollection()->get(1)->is($older->last()))
+        ->assertSee('href="'.route('blog.index', ['page' => 2]).'"', false)
+        ->assertDontSee($older->first()->title);
+
+    get('/blog?page=2')->assertOk()->assertViewIs('blog.index')
+        ->assertViewHas('posts', fn (LengthAwarePaginator $posts) => $posts->currentPage() === 2
+            && $posts->count() === 1
+            && $posts->first()->is($older->first()))
+        ->assertSee($older->first()->title)
+        ->assertDontSee($newest->title);
+});
+
+test('blog titles and excerpts are escaped in server rendered markup', function () {
+    $post = Post::factory()->create([
+        'title' => '<img src=x onerror=alert(1)>',
+        'excerpt' => '"><script>alert(2)</script>',
+        'content' => 'Safe body.',
+    ]);
+
+    foreach ([route('blog.index'), route('blog.show', $post->slug)] as $url) {
+        get($url)->assertOk()->assertSee($post->title)->assertSee($post->excerpt)
+            ->assertDontSee($post->title, false)
+            ->assertDontSee('<script>alert(2)</script>', false);
+    }
+});
+
+test('stale Inertia blog visits reload the document at the same URL', function () {
+    $post = Post::factory()->create();
+    get(route('blog.index'))->assertOk();
+    $headers = ['X-Inertia' => 'true', 'X-Inertia-Version' => Inertia::getVersion() ?? ''];
+
+    foreach ([route('blog.index', ['page' => 2]), route('blog.show', $post->slug)] as $url) {
+        get($url, $headers)->assertConflict()
+            ->assertHeader('X-Inertia-Location', $url);
+        get($url)->assertOk()->assertHeaderMissing('X-Inertia-Location');
+    }
+});
+
+test('stale Inertia article visits still reject hidden and missing posts', function () {
+    $draft = Post::factory()->create(['published_at' => null]);
+    $future = Post::factory()->create(['published_at' => now()->addDay()]);
+    get(route('blog.index'))->assertOk();
+    $headers = ['X-Inertia' => 'true', 'X-Inertia-Version' => Inertia::getVersion() ?? ''];
+
+    foreach ([$draft->slug, $future->slug, 'does-not-exist'] as $slug) {
+        get(route('blog.show', $slug), $headers)->assertNotFound()
+            ->assertHeaderMissing('X-Inertia-Location');
+    }
 });
 
 test('slug is unique and stable while reading time follows content', function () {
@@ -69,12 +136,14 @@ test('markdown HTML and unsafe links are removed while custom blocks render safe
         'content' => "<script>alert(1)</script>\n\n[bad](javascript:alert(1))\n\n```callout:info\n**Safe** note\n```\n\n```embed\nhttps://youtu.be/dQw4w9WgXcQ\n```",
     ]);
 
-    get('/blog/'.$post->slug)->assertOk()->assertInertia(fn (Assert $page) => $page
-        ->where('contentHtml', fn (string $html) => ! str_contains($html, '<script>')
+    get('/blog/'.$post->slug)->assertOk()->assertViewHas('contentHtml', fn (string $html) => ! str_contains($html, '<script>')
             && ! str_contains($html, 'href="javascript:')
             && str_contains($html, 'blog-callout-info')
             && str_contains($html, 'youtube-nocookie.com/embed/'))
-        ->etc());
+        ->assertDontSee('<script>alert(1)</script>', false)
+        ->assertDontSee('href="javascript:', false)
+        ->assertSee('blog-callout-info', false)
+        ->assertSee('youtube-nocookie.com/embed/', false);
 });
 
 test('only the configured owner can manage posts', function () {
@@ -84,7 +153,8 @@ test('only the configured owner can manage posts', function () {
 
     get(route('admin.posts.index'))->assertRedirect(route('login'));
     actingAs($other)->get(route('admin.posts.index'))->assertForbidden();
-    actingAs($owner)->get(route('admin.posts.index'))->assertOk();
+    actingAs($owner)->get(route('admin.posts.index'))->assertOk()
+        ->assertInertia(fn (Assert $page) => $page->component('Admin/Posts/Index'));
 
     config()->set('blog.owner_email', '');
     get(route('admin.posts.index'))->assertForbidden();
@@ -136,14 +206,15 @@ test('creating and updating an article preserves formatted multiline callout mar
     get(route('admin.posts.edit', $post))->assertOk()->assertInertia(fn (Assert $page) => $page
         ->component('Admin/Posts/Edit')
         ->where('post.content', $updatedContent));
-    get('/blog/'.$post->slug)->assertOk()->assertInertia(fn (Assert $page) => $page
-        ->where('contentHtml', fn (string $html) => str_contains($html, 'blog-callout-warning')
+    get('/blog/'.$post->slug)->assertOk()->assertViewHas('contentHtml', fn (string $html) => str_contains($html, 'blog-callout-warning')
             && str_contains($html, '<strong>Useful</strong>')
             && str_contains($html, '<li>First item</li>')
             && str_contains($html, '<li>Second item</li>')
             && str_contains($html, 'href="https://example.com/guide"')
             && str_contains($html, 'After the note.'))
-        ->etc());
+        ->assertSee('<strong>Useful</strong>', false)
+        ->assertSee('<li>First item</li>', false)
+        ->assertSee('blog-callout-warning', false);
 });
 
 test('invalid embed URL is rejected when saving', function () {
