@@ -15,22 +15,103 @@ incoming_bytes=${11:-0}
 php_expected=${12:-}
 http_verified=${13:-false}
 maintenance=${14:-false}
+php_web_user=${15:-auto}
+incoming=${incoming:-}
+active_stage=
+stage_started=0
+start_stage() {
+  active_stage=$1
+  stage_started=$(date +%s%N)
+}
+finish_stage() {
+  local elapsed=$(( $(date +%s%N) - stage_started ))
+  printf 'HOSTINGER_TIMING {"stage":"%s","seconds":%s.%03d,"outcome":"%s"}\n' "$active_stage" "$((elapsed / 1000000000))" "$((elapsed / 1000000 % 1000))" "${1:-success}"
+  active_stage=
+}
+start_stage remote-preparation
 
 fail() { echo "Hostinger $phase: $*" >&2; exit 1; }
 trap 'echo "Hostinger remote phase $phase failed at line $LINENO" >&2' ERR
 cleanup_trap() {
   local code=$?
-  if [[ "$phase" == prepare && "$maintenance" == true && -f artisan && $code -ne 0 ]]; then
+  if [[ -n "$active_stage" ]]; then finish_stage "$([[ $code == 0 ]] && echo success || echo failure)"; fi
+  if [[ "$phase" == prepare && "${entered_maintenance:-false}" == true && $code -ne 0 ]]; then
     echo 'Deployment prepare aborted; recovering from maintenance mode' >&2
-    php artisan up 2>/dev/null || true
+    php artisan up || echo 'Maintenance recovery failed; operator intervention required' >&2
   fi
 }
 trap cleanup_trap EXIT
 
 (( BASH_VERSINFO[0] >= 4 )) || fail 'Bash 4 or newer is required'
-for tool in find sha256sum cut stat dirname basename cat mkdir printf touch mv sort mktemp date grep rm rsync awk wc; do
+for tool in find sha256sum cut stat dirname basename cat mkdir printf touch mv sort mktemp date grep rm rsync awk wc id; do
   command -v "$tool" >/dev/null || fail "Required server command is unavailable: $tool"
 done
+
+safe_directory() {
+  local path=$1 part walk=$target
+  [[ "$path" =~ ^[a-zA-Z0-9_./-]+$ && "$path" != /* && "$path" != *..* ]] || fail "Unsafe runtime directory: $path"
+  IFS=/ read -r -a path_parts <<< "$path"
+  for part in "${path_parts[@]}"; do
+    walk="$walk/$part"
+    [[ ! -L "$walk" ]] || fail "Symlink in runtime directory: $walk; no permission changes performed"
+    [[ ! -e "$walk" || -d "$walk" ]] || fail "Runtime path is not a directory: $walk"
+  done
+}
+check_writable() {
+  local path=$1 owner group mode
+  read -r owner group mode < <(stat -c '%u %g %a' -- "$path")
+  echo "Runtime directory $path: uid=$owner gid=$group mode=$mode; deploy/PHP uid=$(id -u)"
+  [[ "$owner" == "$(id -u)" && -w "$path" && -x "$path" && -r "$path" ]] || fail "Ownership/access mismatch at $path (uid=$owner gid=$group mode=$mode). Fix this directory for the audited PHP user; no recursive chmod/chown attempted"
+  (( (8#$mode & 0700) == 0700 )) || fail "Owner cannot read/write/traverse $path (mode=$mode); no recursive chmod attempted"
+  (( (8#$mode & 0002) == 0 )) || fail "World-writable runtime directory: $path (mode=$mode). Review ownership and access explicitly"
+}
+check_runtime_permissions() {
+  local uid worker_users path cli_uid
+  uid=$(id -u)
+  cli_uid=$(php -r 'if (!function_exists("posix_geteuid")) { exit(1); } echo posix_geteuid();') || fail 'PHP POSIX identity check is unavailable'
+  [[ "$cli_uid" == "$uid" ]] || fail "PHP CLI uid=$cli_uid differs from deploy uid=$uid"
+  if [[ "$php_web_user" == auto ]]; then
+    command -v ps >/dev/null || fail 'Process inspection is unavailable; audit and configure php_web_user explicitly'
+    worker_users=$(ps -eo uid=,comm= | awk '$2 ~ /^(lsphp|php-fpm|php-cgi)/ {print $1}')
+    grep -qx "$uid" <<< "$worker_users" || fail "Cannot verify a PHP web worker running as deploy uid=$uid. Audit the vhost PHP user and configure php_web_user explicitly; no permissions changed"
+    echo "PHP web worker found for deploy uid=$uid (same-user hosting policy)"
+  else
+    [[ "$php_web_user" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_-]*$ ]] || fail 'Invalid configured PHP web user'
+    [[ "$(id -u "$php_web_user")" == "$uid" ]] || fail "Configured PHP web user $php_web_user differs from deployment user; shared-group ownership needs a separate audited policy"
+  fi
+  for path in storage storage/app storage/app/private storage/app/public storage/framework storage/framework/sessions storage/framework/views storage/framework/cache storage/framework/cache/data storage/logs bootstrap bootstrap/cache; do
+    safe_directory "$path"
+    if [[ ! -d "$path" ]]; then (umask 002; mkdir -p -- "$path"); fi
+    check_writable "$path"
+  done
+  # Probe only runtime roots, never descend into existing uploads/media.
+  php <<'WRITABLE_PHP'
+<?php
+foreach (['storage/app/private', 'storage/app/public', 'storage/framework/sessions', 'storage/framework/views', 'storage/framework/cache/data', 'storage/logs', 'bootstrap/cache'] as $directory) {
+    $probe = tempnam($directory, '.deploy-access-');
+    if ($probe === false || realpath(dirname($probe)) !== realpath($directory)) {
+        file_put_contents('php://stderr', "Writable probe failed: {$directory}\n");
+        exit(1);
+    }
+    if (file_put_contents($probe, 'probe') === false || !unlink($probe)) {
+        file_put_contents('php://stderr', "Write/remove probe failed: {$directory}\n");
+        exit(1);
+    }
+}
+WRITABLE_PHP
+}
+check_public_permissions() {
+  local path mode owner group
+  for path in public public/build "${asset_dirs[@]}"; do
+    safe_directory "$path"
+    (umask 022; mkdir -p -- "$path")
+    read -r owner group mode < <(stat -c '%u %g %a' -- "$path")
+    echo "Public directory $path: uid=$owner gid=$group mode=$mode; deploy uid=$(id -u)"
+    if [[ ! -w "$path" ]] || (( (8#$mode & 0005) != 0005 )); then
+      fail "Public directory $path is not writable by deploy/readable and traversable by web server (mode=$mode); no recursive chmod attempted"
+    fi
+  done
+}
 
 [[ "$target" == /* && "$target" != / && "$target" != *$'\n'* ]]
 [[ -d "$target" ]] || fail "Destination does not exist. Create the application directory before deploying: $target"
@@ -106,10 +187,14 @@ if ($decoded === false) {
 }
 echo "Production image runtime ready.\n";
 PHP
-      if [[ "$maintenance" == true && -f artisan ]]; then
-        echo 'Entering maintenance mode during deployment'
-        php artisan down --retry=15 2>/dev/null || true
-      fi
+      finish_stage
+      start_stage storage-permissions
+      check_runtime_permissions
+      finish_stage
+      start_stage public-permissions
+      check_public_permissions
+      finish_stage
+      start_stage remote-retention-preflight
     fi
     missing_files=0
     reused_bytes=0
@@ -179,26 +264,50 @@ PHP
       touch -- "$state/baseline-done"
     fi
     printf '%s\n' "$incoming" > "$state/pending/$run.txt"
-    for dir in "${asset_dirs[@]}"; do mkdir -p -- "$dir"; done
+    for dir in "${asset_dirs[@]}"; do (umask 022; mkdir -p -- "$dir"); done
+    finish_stage
+    if [[ "$profile" == laravel-vite && "$maintenance" == true && -f artisan ]]; then
+      start_stage maintenance-down
+      echo 'Entering maintenance mode during deployment'
+      entered_maintenance=true
+      php artisan down --retry=15
+      finish_stage
+    fi
     ;;
   optimize)
+    finish_stage
     if [[ "$profile" == laravel-vite ]]; then
       [[ -f artisan ]]
+      start_stage storage-permissions
+      check_runtime_permissions
+      finish_stage
+      start_stage public-permissions
+      check_public_permissions
+      finish_stage
+      start_stage cache-clear
       php artisan optimize:clear
+      finish_stage
       if [[ "$migrate" == true ]]; then
+        start_stage migration
         echo 'Explicit database migration option enabled; failures are not automatically rolled back'
         php artisan migrate --force
+        finish_stage
       fi
+      start_stage cache-build
       php artisan config:cache
       php artisan route:cache
       php artisan view:cache
+      finish_stage
       if [[ "$maintenance" == true ]]; then
+        start_stage maintenance-up
         echo 'Exiting maintenance mode after deployment'
-        php artisan up 2>/dev/null || true
+        php artisan up
+        finish_stage
       fi
     fi
     ;;
   cleanup)
+    finish_stage
     [[ -d "$state/history" && ! -L "$state/history" && ! -L "$state/pending" ]]
     [[ -f "$state/pending/$run.txt" && ! -L "$state/pending/$run.txt" ]]
     published="$state/history/$(date -u +%Y%m%d%H%M%S)-$run.txt"
@@ -254,9 +363,6 @@ PHP
       done < "$inventory"
       rm -- "$inventory"
     done
-    if [[ "$profile" == laravel-vite && "$maintenance" == true && -f artisan ]]; then
-      php artisan up 2>/dev/null || true
-    fi
     echo "Asset cleanup: $deleted files removed; last $keep releases and $days days protected."
     ;;
   *) echo "Unknown deployment phase: $phase" >&2; exit 1 ;;

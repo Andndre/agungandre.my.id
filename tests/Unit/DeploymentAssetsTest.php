@@ -31,7 +31,7 @@ function deploymentAssetTransfers(): array
         $transfers[] = [
             'source' => $dir.'/',
             'target_suffix' => '/'.$dir.'/',
-            'args' => ['-rlz', '--checksum', '--delay-updates'],
+            'args' => ['-rlzp', '--chmod=Du=rwx,Dgo=rx,Fu=rwX,Fgo=rX', '--checksum', '--delay-updates'],
         ];
     }
 
@@ -44,7 +44,7 @@ function deploymentAssetTransfers(): array
     $transfers[] = [
         'source' => '',
         'target_suffix' => '/',
-        'args' => ['-rlz', '--checksum', '--delay-updates', '--delete-delay', ...$excludes],
+        'args' => ['-rlzp', '--chmod=Du=rwx,Dgo=rx,Fu=rwX,Fgo=rX', '--checksum', '--delay-updates', '--delete-delay', ...$excludes],
     ];
 
     return $transfers;
@@ -60,6 +60,45 @@ test('deployment publishes assets before exposing the new manifest', function ()
         ->and($transfers[0]['args'])->not->toContain('--delete-delay')
         ->and(implode(' ', $transfers[1]['args']))->toContain('--exclude=/public/build/assets')
         ->not->toContain('--delete-excluded');
+});
+
+test('deployment consumes the verified artifact without rebuilding frontend dependencies', function () {
+    $workflow = Yaml::parseFile(base_path('.github/workflows/deploy.yml'));
+    $verify = $workflow['jobs']['verify'];
+    $deploy = $workflow['jobs']['deploy'];
+    $commands = implode("\n", array_column($deploy['steps'], 'run'));
+    $uses = array_column($deploy['steps'], 'uses');
+
+    expect($deploy['needs'])->toContain('verify')
+        ->and($commands)->not->toContain('npm ci')->not->toContain('npm run build')
+        ->toContain('composer install --no-dev')->toContain('build_artifact.py restore')
+        ->and($uses)->toContain('actions/download-artifact@v4')->not->toContain('actions/setup-node@v4')
+        ->and(substr_count(implode("\n", array_column($verify['steps'], 'run')), 'npm run build'))->toBe(1);
+
+    $stepNames = array_column($verify['steps'], 'name');
+    expect(array_search('Seal Verified Frontend Build', $stepNames))->toBeGreaterThan(array_search('Run Automated Tests (Pest)', $stepNames));
+
+    $download = array_values(array_filter($deploy['steps'], fn (array $step): bool => ($step['uses'] ?? '') === 'actions/download-artifact@v4'))[0];
+    expect($download['with']['artifact-ids'])->toBe('${{ needs.verify.outputs.artifact_id }}')
+        ->and($download['with'])->not->toHaveKey('run-id');
+});
+
+test('dependency caches include lockfiles and runtime and never cache a build', function () {
+    $workflow = Yaml::parseFile(base_path('.github/workflows/deploy.yml'));
+    foreach ($workflow['jobs'] as $job) {
+        foreach ($job['steps'] as $step) {
+            if (($step['uses'] ?? '') === 'actions/cache@v4') {
+                expect($step['with']['key'])->toContain('runner.os')->toContain('PHP_VERSION')->toContain('composer2')->toContain("hashFiles('composer.lock')")
+                    ->and($step['with']['path'])->toBe('${{ steps.composer-path.outputs.path }}');
+            }
+            if (($step['uses'] ?? '') === 'actions/setup-node@v4') {
+                expect($step['with']['cache'])->toBe('npm')
+                    ->and($step['with']['cache-dependency-path'])->toContain('package-lock.json')->toContain('.node-cache-runtime');
+            }
+        }
+    }
+    $commands = implode("\n", array_column($workflow['jobs']['verify']['steps'], 'run'));
+    expect($commands)->toContain('"$NODE_VERSION"')->toContain('npm ci')->toContain('composer install');
 });
 
 test('rsync keeps open browser chunks and persistent data across a deployment', function () {
