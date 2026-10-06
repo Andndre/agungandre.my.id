@@ -32,6 +32,9 @@ yarn-error.log
 .kilo
 
 /public/build
+/frontend-artifact
+/deploy-diagnostics
+/.github/hostinger/.node-cache-runtime
 
 # Laravel IDE Helper
 _ide_helper.php
@@ -45,4 +48,3 @@ _ide_helper_models.php
 __pycache__/
 *.py[cod]
 *$py.class
-

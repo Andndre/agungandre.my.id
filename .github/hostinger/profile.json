@@ -12,6 +12,7 @@
     "node_modules",
     ".hostinger-ci",
     "deploy-diagnostics",
+    "frontend-artifact",
     "storage",
     "database/*.sqlite*",
     "tests",
@@ -29,5 +30,7 @@
   "page_contains": "",
   "max_assets": 6,
   "package_manager": "npm",
-  "build_command": "npm run build"
+  "build_command": "npm run build",
+  "require_build_artifact": true,
+  "php_web_user": "u519809216"
 }

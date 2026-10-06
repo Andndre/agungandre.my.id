@@ -12,40 +12,75 @@ permissions:
 
 env:
   CI: 'true'
+  NODE_VERSION: '22'
+  PHP_VERSION: '8.3'
 
 jobs:
   verify:
     name: Code Quality & Tests (Pint, ESLint, Svelte, Pest)
     runs-on: ubuntu-latest
+    env:
+      HOSTINGER_TIMING_JOB: verify
+    outputs:
+      artifact_id: ${{ steps.artifact.outputs.artifact-id }}
+      build_sha256: ${{ steps.seal.outputs.sha256 }}
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: ${{ env.PHP_VERSION }}
+          tools: composer:v2
           extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, bcmath, curl, zip, gd, exif
           coverage: none
 
+      - name: Scope npm download cache to runtime
+        run: printf 'node=%s\n' "$NODE_VERSION" > .github/hostinger/.node-cache-runtime
+
       - name: Setup Node.js
+        id: node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            .github/hostinger/.node-cache-runtime
 
-      - name: Install Dependencies
-        run: |
-          composer install --no-interaction --prefer-dist --optimize-autoloader
-          npm ci
+      - name: Locate Composer download cache
+        id: composer-path
+        run: echo "path=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Composer downloads
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-path.outputs.path }}
+          key: composer-${{ runner.os }}-${{ runner.arch }}-php${{ env.PHP_VERSION }}-composer2-${{ hashFiles('composer.lock') }}
+
+      - name: Install PHP Dependencies
+        run: python3 .github/hostinger/measure.py --cache-hit '${{ steps.composer-cache.outputs.cache-hit }}' composer-install -- composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Install Frontend Dependencies
+        run: python3 .github/hostinger/measure.py --cache-hit '${{ steps.node.outputs.cache-hit }}' npm-install -- npm ci
 
       - name: Prepare Environment & Wayfinder Types
         run: |
           cp .env.example .env
           php artisan key:generate
           php artisan media:check-image-runtime
-          npm run build
+          python3 .github/hostinger/measure.py frontend-build -- npm run build
+
+      - name: Test Deployment Scripts
+        run: |
+          bash -n .github/hostinger/remote-deploy.sh
+          shellcheck .github/hostinger/remote-deploy.sh
+          python3 -m unittest discover -s tests/hostinger -v
 
       - name: Check PHP Code Style (Pint)
         run: vendor/bin/pint --test
@@ -59,6 +94,28 @@ jobs:
       - name: Run Automated Tests (Pest)
         run: ./vendor/bin/pest
 
+      - name: Seal Verified Frontend Build
+        id: seal
+        run: python3 .github/hostinger/build_artifact.py seal
+
+      - name: Save Verified Frontend Build
+        id: artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-${{ github.run_id }}-${{ github.sha }}-${{ github.run_attempt }}
+          path: frontend-artifact/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Save Verification Timings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-timings-${{ github.run_id }}-${{ github.run_attempt }}
+          path: deploy-diagnostics/
+          if-no-files-found: ignore
+          retention-days: 14
+
   deploy:
     name: Deploy to Hostinger
     runs-on: ubuntu-latest
@@ -68,6 +125,7 @@ jobs:
       group: production-deploy
       cancel-in-progress: false
     env:
+      HOSTINGER_TIMING_JOB: deploy
       HOSTINGER_SSH_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
       HOSTINGER_SSH_USER: ${{ secrets.HOSTINGER_SSH_USER }}
       HOSTINGER_SSH_PORT: ${{ secrets.HOSTINGER_SSH_PORT }}
@@ -78,25 +136,42 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: ${{ env.PHP_VERSION }}
+          tools: composer:v2
           extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, bcmath, curl, zip, gd, exif
           coverage: none
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Download Verified Frontend Build
+        uses: actions/download-artifact@v4
         with:
-          node-version: 22
-          cache: 'npm'
+          artifact-ids: ${{ needs.verify.outputs.artifact_id }}
+          path: frontend-artifact/
+          merge-multiple: true
 
-      - name: Install Dependencies and Build
-        run: |
-          composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
-          npm ci
-          npm run build
+      - name: Validate and Restore Verified Build
+        env:
+          EXPECTED_BUILD_SHA256: ${{ needs.verify.outputs.build_sha256 }}
+        run: python3 .github/hostinger/measure.py artifact-restore -- python3 .github/hostinger/build_artifact.py restore --sha256 "$EXPECTED_BUILD_SHA256"
+
+      - name: Locate Composer download cache
+        id: composer-path
+        run: echo "path=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Composer downloads
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-path.outputs.path }}
+          key: composer-${{ runner.os }}-${{ runner.arch }}-php${{ env.PHP_VERSION }}-composer2-${{ hashFiles('composer.lock') }}
+
+      - name: Install Production PHP Dependencies
+        run: python3 .github/hostinger/measure.py --cache-hit '${{ steps.composer-cache.outputs.cache-hit }}' composer-install-production -- composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
 
       - name: Upload Immutable Assets, Then Publish Application
         id: transfer
@@ -104,7 +179,7 @@ jobs:
 
       - name: Verify Deployed HTML and JS/CSS
         id: verify
-        run: python3 .github/hostinger/check-deploy.py
+        run: python3 .github/hostinger/measure.py http-verification -- python3 .github/hostinger/check-deploy.py
 
       - name: Clean Expired Deployment Assets
         id: cleanup
