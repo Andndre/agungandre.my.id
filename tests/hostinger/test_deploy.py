@@ -18,13 +18,15 @@ HELPERS = ROOT / '.github/hostinger'
 sys.path.insert(0, str(HELPERS))
 import build_artifact as artifact
 import deploy
+import measure
 
 
 class TimingTests(unittest.TestCase):
     def test_command_failure_stops_the_job_and_records_duration_cache_miss_and_exit_code(self):
         with tempfile.TemporaryDirectory() as directory:
             result = subprocess.run([sys.executable, str(HELPERS / 'measure.py'), '--cache-hit', '', 'frontend-build', '--',
-                                     sys.executable, '-c', 'raise SystemExit(13)'], cwd=directory, capture_output=True, text=True)
+                                     sys.executable, '-c', 'raise SystemExit(13)'], cwd=directory, capture_output=True, text=True,
+                                    env=os.environ | dict(GITHUB_STEP_SUMMARY='', HOSTINGER_TIMING_JOB='test'))
             self.assertEqual(result.returncode, 13)
             metrics = list((Path(directory) / 'deploy-diagnostics').glob('timings-*.jsonl'))
             metric = json.loads(metrics[0].read_text())
@@ -36,6 +38,9 @@ class TimingTests(unittest.TestCase):
 
 class ArtifactTests(unittest.TestCase):
     def setUp(self):
+        recording = patch.object(measure, 'record')
+        recording.start()
+        self.addCleanup(recording.stop)
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
@@ -126,6 +131,9 @@ class ArtifactTests(unittest.TestCase):
 @unittest.skipUnless(os.name == 'posix' and shutil.which('rsync'), 'Linux and rsync required')
 class RemoteTests(unittest.TestCase):
     def setUp(self):
+        recording = patch.object(measure, 'record')
+        recording.start()
+        self.addCleanup(recording.stop)
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
