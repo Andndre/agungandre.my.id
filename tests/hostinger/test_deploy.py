@@ -2,6 +2,7 @@
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
@@ -186,6 +187,57 @@ else:
             self.assertIn('"stage":"' + stage + '"', result.stdout)
         self.assertEqual((self.target / 'commands.log').read_text().splitlines(),
                          ['down', 'optimize:clear', 'migrate', 'config:cache', 'route:cache', 'view:cache', 'up'])
+
+    def test_permission_checks_work_in_a_jail_without_dev_fd(self):
+        if not shutil.which('chroot') or not shutil.which('ldd'):
+            self.skipTest('chroot and ldd are required for the jailed-shell regression')
+        privilege = []
+        if os.getuid() != 0:
+            if not shutil.which('sudo') or subprocess.run(['sudo', '-n', 'true'], capture_output=True).returncode:
+                self.skipTest('The jailed-shell regression requires root or passwordless sudo')
+            privilege = ['sudo', '-n']
+        jail = self.root / 'jail'
+        jail.mkdir()
+        for name in ('bash', 'stat', 'id', 'mkdir'):
+            binary = Path(shutil.which(name))
+            dependencies = subprocess.check_output(['ldd', str(binary)], text=True)
+            for path in [str(binary), *re.findall(r'/[^\s()]+', dependencies)]:
+                source = Path(path)
+                destination = jail / source.relative_to('/')
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, destination)
+        (jail / 'dev').mkdir()
+        (jail / 'dev/null').touch()
+        (jail / 'site/storage').mkdir(parents=True)
+        (jail / 'site/public/build/assets').mkdir(parents=True)
+        self.assertFalse((jail / 'dev/fd').exists())
+        self.assertFalse((jail / 'proc').exists())
+        definitions = 'safe_directory() {' + self.script.split('safe_directory() {', 1)[1].split('\n[[ "$target" ==', 1)[0]
+        script = ('set -euo pipefail\nPATH=/usr/bin:/bin\ntarget=/site\nasset_dirs=(public/build/assets)\n'
+                  'fail() { echo "$*" >&2; exit 1; }\n' + definitions
+                  + '\ncd /site\ncheck_writable storage\ncheck_public_permissions\n')
+        result = subprocess.run([*privilege, 'chroot', f'--userspec={os.getuid()}:{os.getgid()}', str(jail),
+                                 shutil.which('bash'), '-s'], input=script, text=True, capture_output=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('Runtime directory storage:', result.stdout)
+        self.assertIn('Public directory public/build/assets:', result.stdout)
+
+    def test_unreadable_permission_metadata_fails_clearly_before_maintenance(self):
+        stat = self.tools / 'stat'
+        stat.write_text('''#!/bin/bash
+if [[ "$2" == '%u %g %a' && "$4" == "$FAIL_STAT_ROOT" ]]; then
+  echo 'stat: simulated metadata failure' >&2
+  exit 1
+fi
+exec /usr/bin/stat "$@"
+''')
+        stat.chmod(0o755)
+        for path in ('storage', 'public'):
+            with self.subTest(path=path):
+                result = self.execute('prepare', FAIL_STAT_ROOT=path)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn('Cannot read permission/ownership metadata: ' + path, result.stderr)
+                self.assertFalse((self.target / 'maintenance').exists())
 
     def test_python_remote_transport_collects_metrics_and_propagates_failures(self):
         ssh = self.root / 'local-ssh'
