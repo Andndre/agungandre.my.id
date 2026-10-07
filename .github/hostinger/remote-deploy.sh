@@ -58,8 +58,9 @@ safe_directory() {
   done
 }
 check_writable() {
-  local path=$1 owner group mode
-  read -r owner group mode < <(stat -c '%u %g %a' -- "$path")
+  local path=$1 owner group mode metadata
+  metadata=$(stat -c '%u %g %a' -- "$path") || fail "Cannot read permission/ownership metadata: $path"
+  read -r owner group mode <<< "$metadata"
   echo "Runtime directory $path: uid=$owner gid=$group mode=$mode; deploy/PHP uid=$(id -u)"
   [[ "$owner" == "$(id -u)" && -w "$path" && -x "$path" && -r "$path" ]] || fail "Ownership/access mismatch at $path (uid=$owner gid=$group mode=$mode). Fix this directory for the audited PHP user; no recursive chmod/chown attempted"
   (( (8#$mode & 0700) == 0700 )) || fail "Owner cannot read/write/traverse $path (mode=$mode); no recursive chmod attempted"
@@ -101,11 +102,12 @@ foreach (['storage/app/private', 'storage/app/public', 'storage/framework/sessio
 WRITABLE_PHP
 }
 check_public_permissions() {
-  local path mode owner group
+  local path mode owner group metadata
   for path in public public/build "${asset_dirs[@]}"; do
     safe_directory "$path"
     (umask 022; mkdir -p -- "$path")
-    read -r owner group mode < <(stat -c '%u %g %a' -- "$path")
+    metadata=$(stat -c '%u %g %a' -- "$path") || fail "Cannot read permission/ownership metadata: $path"
+    read -r owner group mode <<< "$metadata"
     echo "Public directory $path: uid=$owner gid=$group mode=$mode; deploy uid=$(id -u)"
     if [[ ! -w "$path" ]] || (( (8#$mode & 0005) != 0005 )); then
       fail "Public directory $path is not writable by deploy/readable and traversable by web server (mode=$mode); no recursive chmod attempted"
