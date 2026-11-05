@@ -146,6 +146,31 @@ test('markdown HTML and unsafe links are removed while custom blocks render safe
         ->assertSee('youtube-nocookie.com/embed/', false);
 });
 
+test('markdown renders block and inline LaTeX formulas without mangling syntax or currency prose', function () {
+    $formula = 'W_{\text{item}} = \frac{W_{\text{container}} - P_{\text{left}} - P_{\text{right}} - (N - 1) \times \text{gap}}{N}';
+    $sumFormula = '\sum W_{\text{child}} + (N - 1) \times \text{gap} + P_{\text{horizontal}} \le W_{\text{container}}';
+    $post = Post::factory()->create([
+        'content' => implode("\n\n", [
+            '$$'.$formula.'$$',
+            "$$\n".$sumFormula."\n$$",
+            '$'.$formula.'$',
+            'Lebar kolom $W_{\text{item}}$ dan himpunan $\{a_1 * b_2\}$ dihitung otomatis.',
+            'It costs $5 and I paid $10.',
+            '$$<script>alert(1)</script>$$',
+        ]),
+    ]);
+
+    get('/blog/'.$post->slug)->assertOk()
+        ->assertViewHas('contentHtml', fn (string $html) => str_contains($html, '<div class="blog-math-block" data-math="display">'.$formula.'</div>')
+            && str_contains($html, '<div class="blog-math-block" data-math="display">'.$sumFormula.'</div>')
+            && str_contains($html, '<p><span class="blog-math-block" data-math="display">'.$formula.'</span></p>')
+            && str_contains($html, '<span class="blog-math-inline" data-math="inline">W_{\text{item}}</span>')
+            && str_contains($html, '<span class="blog-math-inline" data-math="inline">\{a_1 * b_2\}</span>')
+            && str_contains($html, '<p>It costs $5 and I paid $10.</p>')
+            && ! str_contains($html, '<script>alert(1)</script>'))
+        ->assertDontSee('<script>alert(1)</script>', false);
+});
+
 test('only the configured owner can manage posts', function () {
     config()->set('blog.owner_email', 'owner@example.com');
     $other = User::factory()->createOne(['email' => 'other@example.com']);
