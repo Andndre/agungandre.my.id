@@ -155,6 +155,7 @@ test('markdown renders block and inline LaTeX formulas without mangling syntax o
             "$$\n".$sumFormula."\n$$",
             '$'.$formula.'$',
             'Lebar kolom $W_{\text{item}}$ dan himpunan $\{a_1 * b_2\}$ dihitung otomatis.',
+            'Inline code seperti `scripts/audit_canvas.py` dan `uv run` tidak boleh rusak.',
             'It costs $5 and I paid $10.',
             '$$<script>alert(1)</script>$$',
         ]),
@@ -166,6 +167,8 @@ test('markdown renders block and inline LaTeX formulas without mangling syntax o
             && str_contains($html, '<p><span class="blog-math-block" data-math="display">'.$formula.'</span></p>')
             && str_contains($html, '<span class="blog-math-inline" data-math="inline">W_{\text{item}}</span>')
             && str_contains($html, '<span class="blog-math-inline" data-math="inline">\{a_1 * b_2\}</span>')
+            && str_contains($html, '<code>scripts/audit_canvas.py</code>')
+            && str_contains($html, '<code>uv run</code>')
             && str_contains($html, '<p>It costs $5 and I paid $10.</p>')
             && ! str_contains($html, '<script>alert(1)</script>'))
         ->assertDontSee('<script>alert(1)</script>', false);

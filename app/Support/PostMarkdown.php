@@ -300,7 +300,11 @@ class PostMarkdown
                     return null;
                 }
 
-                $mode = $node->data->get('math');
+                if (! $node->data->has('math')) {
+                    return null;
+                }
+
+                $mode = $node->data->get('math', null);
 
                 if (! in_array($mode, ['inline', 'display'], true)) {
                     return null;
