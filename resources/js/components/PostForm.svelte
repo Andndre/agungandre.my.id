@@ -21,6 +21,7 @@
         SheetTitle,
         SheetDescription,
     } from '@/components/ui/sheet';
+    import { renderBlogMath } from '@/lib/blog-math';
     import posts from '@/routes/admin/posts';
     import type { AdminPost } from '@/types/blog';
 
@@ -85,10 +86,17 @@
     let previewError = $state('');
     let previewTitle = $state('');
     let previewExcerpt = $state('');
+    let previewContainer = $state<HTMLElement | null>(null);
     let previewTrigger: HTMLElement | null = null;
     let previewVersion = 0;
     const preview = useHttp<{ content: string }, { contentHtml: string }>({
         content: '',
+    });
+
+    $effect(() => {
+        if (previewHtml && previewContainer) {
+            void renderBlogMath(previewContainer);
+        }
     });
 
     function save(event: SubmitEvent): void {
@@ -474,7 +482,10 @@
                     {previewTitle || 'Judul artikel'}
                 </h2>
                 <p class="mt-4 text-muted-foreground">{previewExcerpt}</p>
-                <div class="studio-prose prose mt-8 max-w-none">
+                <div
+                    bind:this={previewContainer}
+                    class="studio-prose prose mt-8 max-w-none"
+                >
                     <!-- eslint-disable-next-line svelte/no-at-html-tags -- sanitized by the shared server renderer -->
                     {@html previewHtml}
                 </div>
