@@ -677,6 +677,24 @@
 .blog-embed-error {
     color: var(--error);
 }
+.blog-math-block {
+    display: block;
+    max-width: 100%;
+    margin-block: 1.25rem;
+    padding-block: 0.25rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    color: var(--on-surface);
+}
+.blog-math-block .katex-display {
+    margin: 0;
+}
+.blog-math-inline {
+    color: var(--on-surface);
+}
+.blog-callout :is(.blog-math-block, .blog-math-inline) {
+    color: inherit;
+}
 .blog-editor .milkdown {
     min-height: 24rem;
     background: var(--surface-container-lowest);
