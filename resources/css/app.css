@@ -906,22 +906,224 @@
 .intro-frame {
     animation: studio-enter var(--motion-reveal) var(--ease-standard) both;
 }
+.landing-hero {
+    min-height: min(48rem, calc(100svh - 5rem));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 4rem;
+    padding-block: 4rem 3rem;
+}
+.landing-hero-meta,
+.landing-hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    color: var(--on-surface-variant);
+    font-size: 0.875rem;
+}
+.landing-name {
+    font-size: clamp(5rem, 14vw, 12.25rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: var(--tracking-display);
+}
+.landing-hero-detail {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    border-top: 1px solid var(--outline-variant);
+    margin-top: 2rem;
+    padding-top: 2rem;
+}
+.landing-hero-detail p {
+    max-width: 36rem;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    line-height: 1.35;
+}
+.landing-intro {
+    position: fixed;
+    z-index: 40;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    pointer-events: none;
+    background: var(--surface);
+    color: var(--on-surface);
+    animation: intro-exit 450ms var(--ease-standard) 1750ms both;
+}
+.landing-intro > span {
+    color: var(--on-surface-variant);
+    font-size: 0.875rem;
+}
+.landing-intro strong {
+    font-size: clamp(5rem, 14vw, 13rem);
+    line-height: 1;
+    letter-spacing: var(--tracking-display);
+}
+.landing-intro strong span {
+    color: var(--primary);
+}
+.landing-intro-label,
+.landing-intro-name,
+.landing-intro-location {
+    animation: intro-text 500ms var(--ease-standard) both;
+}
+.landing-intro-name {
+    animation-delay: 200ms;
+}
+.landing-intro-location {
+    animation-delay: 400ms;
+}
+.landing-intro-skip {
+    position: fixed;
+    z-index: 41;
+    top: 1rem;
+    right: 1.5rem;
+    min-height: 2.75rem;
+    padding-inline: 0.75rem;
+    color: var(--on-surface);
+}
+.landing-work {
+    border-top: 1px solid var(--outline-variant);
+    padding-block: 5rem;
+}
+.work-layout {
+    display: grid;
+    gap: 3rem;
+}
+.work-intro {
+    max-width: 22rem;
+}
+.work-progress {
+    display: none;
+}
+.work-progress-track {
+    height: 2px;
+    background: var(--outline-variant);
+}
+.work-progress-fill {
+    height: 100%;
+    background: var(--primary);
+}
+.work-track {
+    display: grid;
+    gap: 3rem;
+    min-width: 0;
+}
+.work-card {
+    min-width: 0;
+}
+.work-card .product-stage {
+    border-radius: var(--radius-lg);
+}
+@media (min-width: 1024px) {
+    .work-single .work-layout {
+        grid-template-columns: minmax(16rem, 21rem) minmax(0, 1fr);
+    }
+    .work-single .work-card {
+        max-width: 38.75rem;
+    }
+    .work-single .stage-image {
+        aspect-ratio: 16 / 9;
+    }
+    .work-horizontal {
+        height: calc(100svh + var(--work-distance, 0px));
+        padding-block: 0;
+    }
+    .work-horizontal .work-layout {
+        position: sticky;
+        top: 5rem;
+        height: calc(100svh - 5rem);
+        grid-template-columns: minmax(16rem, 21rem) minmax(0, 1fr);
+        align-items: start;
+        padding-block: 4rem;
+    }
+    .work-horizontal .work-track {
+        display: flex;
+        gap: 1.75rem;
+        overflow-x: auto;
+        max-height: 100%;
+        scrollbar-width: thin;
+        overscroll-behavior-inline: contain;
+    }
+    .work-horizontal .work-intro {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
+    .work-horizontal .work-progress {
+        display: grid;
+        gap: 1rem;
+        max-width: 14rem;
+        color: var(--on-surface-variant);
+        font-size: 0.875rem;
+    }
+    .work-horizontal .work-card {
+        flex: 0 0 min(80%, 38.75rem);
+    }
+    .work-horizontal .stage-image {
+        aspect-ratio: 16 / 9;
+        max-height: 35svh;
+    }
+}
+@media (max-width: 639px) {
+    .landing-hero {
+        min-height: 37.5rem;
+        padding-block: 3rem;
+    }
+    .landing-hero-meta span:last-child,
+    .landing-hero-bottom > span {
+        display: none;
+    }
+    .landing-hero-detail {
+        align-items: start;
+        flex-direction: column;
+    }
+    .landing-work {
+        padding-block: 4rem;
+    }
+}
 .intro-copy {
     animation: studio-copy var(--motion-reveal) var(--ease-standard) both;
 }
 @keyframes studio-enter {
-    0% {
+    from {
         transform: translateY(12px);
     }
-    100% {
+    to {
         transform: none;
+    }
+}
+@keyframes intro-text {
+    0% {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    100% {
+        opacity: 1;
+        transform: none;
+    }
+}
+@keyframes intro-exit {
+    to {
+        opacity: 0;
+        transform: translateY(-2rem);
     }
 }
 @keyframes studio-copy {
     0% {
+        opacity: 0;
         transform: translateY(12px);
     }
     100% {
+        opacity: 1;
         transform: none;
     }
 }
