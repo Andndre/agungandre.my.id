@@ -1,7 +1,6 @@
 <script lang="ts">
     import { Link } from '@inertiajs/svelte';
     import ArrowDown from 'lucide-svelte/icons/arrow-down';
-    import ArrowRight from 'lucide-svelte/icons/arrow-right';
     import ArrowUpRight from 'lucide-svelte/icons/arrow-up-right';
     import { onMount } from 'svelte';
     import AppHead from '@/components/AppHead.svelte';
@@ -20,16 +19,17 @@
         latestPosts = [],
     }: { projects?: PublicProjectSummary[]; latestPosts?: PostSummary[] } =
         $props();
-    let selectedId = $state<number | null>(null);
-    const selected = $derived(
-        projects.find((project) => project.id === selectedId) ??
-            projects.find((project) => project.is_featured) ??
-            projects[0] ??
-            null,
-    );
+    let workSection: HTMLElement;
+    let workTrack: HTMLElement;
+    let workProgress = $state(0);
     let intro = $state(false);
+    let introFinished = $state(false);
     let introTimer: ReturnType<typeof setTimeout>;
     function finishIntro(): void {
+        if (intro) {
+            introFinished = true;
+        }
+
         intro = false;
         clearTimeout(introTimer);
     }
@@ -37,7 +37,7 @@
         intro = claimIntro();
 
         if (intro) {
-            introTimer = setTimeout(finishIntro, 1200);
+            introTimer = setTimeout(finishIntro, 2200);
         }
 
         let frame = 0;
@@ -68,10 +68,90 @@
         };
         reduced.addEventListener('change', stop);
 
+        const desktopMotion = window.matchMedia(
+            '(min-width: 1024px) and (prefers-reduced-motion: no-preference)',
+        );
+        let distance = 0;
+        const updateWork = (): void => {
+            if (distance > 0) {
+                workTrack.scrollLeft = Math.max(
+                    0,
+                    Math.min(
+                        distance,
+                        80 - workSection.getBoundingClientRect().top,
+                    ),
+                );
+                workProgress = workTrack.scrollLeft / distance;
+            }
+        };
+        const measureWork = (): void => {
+            workSection.classList.toggle(
+                'work-single',
+                desktopMotion.matches && projects.length === 1,
+            );
+            workSection.classList.toggle(
+                'work-horizontal',
+                desktopMotion.matches && projects.length > 1,
+            );
+            distance =
+                desktopMotion.matches && projects.length > 1
+                    ? Math.max(0, workTrack.scrollWidth - workTrack.clientWidth)
+                    : 0;
+            workSection.style.setProperty('--work-distance', `${distance}px`);
+            updateWork();
+        };
+        const followFocus = (event: FocusEvent): void => {
+            if (distance === 0 || !(event.target instanceof HTMLElement)) {
+                return;
+            }
+
+            const card = event.target.closest<HTMLElement>('.work-card');
+
+            if (!card) {
+                return;
+            }
+
+            const trackRect = workTrack.getBoundingClientRect();
+            const cardRect = card.getBoundingClientRect();
+
+            if (
+                cardRect.left < trackRect.left ||
+                cardRect.right > trackRect.right
+            ) {
+                const target = Math.max(
+                    0,
+                    Math.min(
+                        distance,
+                        workTrack.scrollLeft + cardRect.left - trackRect.left,
+                    ),
+                );
+                window.scrollTo({
+                    top:
+                        window.scrollY +
+                        workSection.getBoundingClientRect().top -
+                        80 +
+                        target,
+                    behavior: 'instant',
+                });
+            }
+        };
+        const resizeObserver = new ResizeObserver(measureWork);
+        resizeObserver.observe(workTrack);
+        desktopMotion.addEventListener('change', measureWork);
+        window.addEventListener('resize', measureWork);
+        window.addEventListener('scroll', updateWork, { passive: true });
+        workTrack.addEventListener('focusin', followFocus);
+        measureWork();
+
         return () => {
             clearTimeout(introTimer);
             cancelAnimationFrame(frame);
             reduced.removeEventListener('change', stop);
+            resizeObserver.disconnect();
+            desktopMotion.removeEventListener('change', measureWork);
+            window.removeEventListener('resize', measureWork);
+            window.removeEventListener('scroll', updateWork);
+            workTrack.removeEventListener('focusin', followFocus);
         };
     });
     const date = (value: string): string =>
@@ -94,105 +174,141 @@
         content="Andre is a full-stack developer from Klungkung, Bali, building web and mobile applications with Laravel, Svelte, and Flutter. View projects, read articles, or get in touch."
     /></AppHead
 >
-<section
-    class="studio-shell studio-hero relative"
-    class:has-project={selected !== null}
-    aria-labelledby="hero-title"
->
-    <div class="hero-copy" class:intro-copy={intro}>
-        <h1 id="hero-title" class="studio-title">
-            I'm Andre.<br /><span class="text-primary"
-                >Full-stack developer.</span
-            >
+{#if intro}
+    <div class="landing-intro" aria-hidden="true">
+        <span class="landing-intro-label">Full-stack developer</span>
+        <strong class="landing-intro-name">Andre<span>.</span></strong>
+        <span class="landing-intro-location">Klungkung, Bali</span>
+    </div>
+    <button type="button" class="landing-intro-skip" onclick={finishIntro}
+        >Skip intro</button
+    >
+{/if}
+<section class="studio-shell landing-hero" aria-labelledby="hero-title">
+    <div class="landing-hero-meta">
+        <span>Full-stack developer · Klungkung, Bali</span><span
+            >Web &amp; mobile</span
+        >
+    </div>
+    <div class:intro-copy={introFinished}>
+        <p class="mb-4 text-lg text-muted-foreground">Hello, I'm</p>
+        <h1 id="hero-title" class="landing-name">
+            Andre<span class="text-primary">.</span>
         </h1>
-        <p class="mt-6 text-lg leading-relaxed text-muted-foreground">
-            I build web and mobile applications with Laravel, Svelte, and
-            Flutter. Based in Klungkung, Bali.
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#work" class="studio-button"
-                >View work <ArrowDown class="size-4" /></a
-            ><a
-                href="mailto:contact@agungandre.my.id"
-                class="studio-button quiet"
-                >Get in touch <ArrowUpRight class="size-4" /></a
+        <div class="landing-hero-detail">
+            <p>
+                I build web and mobile applications with Laravel, Svelte, and
+                Flutter.
+            </p>
+            <a href="#work" class="studio-button rounded-full"
+                >Explore my work <ArrowDown class="size-4" /></a
             >
         </div>
     </div>
-    {#if selected}<div class:intro-frame={intro}>
-            <ProjectPreview project={selected} source="hero" eager />
-            {#if projects.length > 1}<div
-                    class="mt-4 flex flex-wrap gap-2"
-                    role="group"
-                    aria-label="Choose project preview"
-                >
-                    {#each projects.slice(0, 5) as project, i (project.id)}<button
-                            type="button"
-                            class="theme-option border border-border text-xs"
-                            aria-label={'Preview ' + project.title}
-                            aria-pressed={selected?.id === project.id}
-                            onclick={() => {
-                                finishIntro();
-                                selectedId = project.id;
-                            }}>{String(i + 1).padStart(2, '0')}</button
-                        >{/each}
-                </div>{/if}
-        </div>{/if}
-    {#if intro}<button
-            type="button"
-            class="studio-link absolute right-0 bottom-3"
-            onclick={finishIntro}
-            >Skip intro<ArrowRight class="size-4" aria-hidden="true" /></button
-        >{/if}
-</section>
-<section id="work" class="studio-section" aria-labelledby="work-title">
-    <div class="studio-shell">
-        <h2 id="work-title" class="section-title">Selected work</h2>
-        {#if projects.length === 0}<p class="mt-6 text-muted-foreground">
-                No projects published yet.
-            </p>
-        {:else}{#each projects as project (project.id)}<article
-                    class="work-row"
-                >
-                    <ProjectPreview {project} source={'work-' + project.id} />
-                    <div>
-                        <h3 class="text-3xl font-semibold tracking-tight">
-                            {project.title}
-                        </h3>
-                        {#if project.is_featured}<p
-                                class="mt-3 text-sm text-primary"
-                            >
-                                Featured project
-                            </p>{/if}
-                        <p
-                            class="mt-4 line-clamp-4 leading-relaxed text-muted-foreground"
-                        >
-                            {project.description}
-                        </p>
-                        <div class="mt-5 flex flex-wrap gap-2">
-                            {#each project.tech_stack as tech (tech)}<span
-                                    class="tech-label">{tech}</span
-                                >{/each}
-                        </div>
-                        <Link
-                            href={projectDetail({ slug: project.slug })}
-                            viewTransition={typeof window !== 'undefined' &&
-                                !window.matchMedia(
-                                    '(prefers-reduced-motion: reduce)',
-                                ).matches}
-                            onclick={(event?: MouseEvent) =>
-                                selectProject(event, 'work-' + project.id)}
-                            class="studio-link mt-6"
-                            >View project <ArrowUpRight class="size-4" /></Link
-                        >
-                    </div>
-                </article>{/each}{/if}
+    <div class="landing-hero-bottom">
+        <span>Thoughtful digital experiences</span><a
+            href="mailto:contact@agungandre.my.id"
+            class="studio-link">Get in touch <ArrowUpRight class="size-4" /></a
+        >
     </div>
 </section>
-<section id="about" class="studio-section" aria-labelledby="about-title">
+<section
+    id="work"
+    bind:this={workSection}
+    class="landing-work"
+    aria-labelledby="work-title"
+>
+    <div class="studio-shell work-layout">
+        <div class="work-intro">
+            <div>
+                <h2 id="work-title" class="section-title">Selected work</h2>
+                <p class="mt-6 text-muted-foreground">
+                    A selection of web and mobile applications.
+                </p>
+            </div>
+            {#if projects.length > 1}
+                <div class="work-progress" aria-hidden="true">
+                    <div class="work-progress-track">
+                        <div
+                            class="work-progress-fill"
+                            style:width={`${Math.max(1 / projects.length, workProgress) * 100}%`}
+                        ></div>
+                    </div>
+                    <span
+                        >{String(
+                            Math.min(
+                                projects.length,
+                                Math.floor(workProgress * projects.length) + 1,
+                            ),
+                        ).padStart(2, '0')} / {String(projects.length).padStart(
+                            2,
+                            '0',
+                        )}</span
+                    >
+                </div>
+            {/if}
+        </div>
+        <div
+            bind:this={workTrack}
+            class="work-track"
+            aria-label="Selected projects"
+        >
+            {#if projects.length === 0}<p class="text-muted-foreground">
+                    No projects published yet.
+                </p>
+            {:else}{#each projects as project (project.id)}<article
+                        class="work-card"
+                    >
+                        <ProjectPreview
+                            {project}
+                            source={'work-' + project.id}
+                        />
+                        <div>
+                            <h3 class="sr-only">{project.title}</h3>
+                            {#if project.is_featured}<p
+                                    class="mt-3 text-sm text-primary"
+                                >
+                                    Featured project
+                                </p>{/if}
+                            <p
+                                class="mt-4 line-clamp-4 leading-relaxed text-muted-foreground"
+                            >
+                                {project.description}
+                            </p>
+                            <div class="mt-5 flex flex-wrap gap-2">
+                                {#each project.tech_stack as tech (tech)}<span
+                                        class="tech-label">{tech}</span
+                                    >{/each}
+                            </div>
+                            <Link
+                                href={projectDetail({ slug: project.slug })}
+                                viewTransition={typeof window !== 'undefined' &&
+                                    !window.matchMedia(
+                                        '(prefers-reduced-motion: reduce)',
+                                    ).matches}
+                                onclick={(event?: MouseEvent) =>
+                                    selectProject(event, 'work-' + project.id)}
+                                class="studio-link mt-6"
+                                >View project <ArrowUpRight
+                                    class="size-4"
+                                /></Link
+                            >
+                        </div>
+                    </article>{/each}{/if}
+        </div>
+    </div>
+</section>
+<section
+    id="about"
+    class="studio-section bg-sidebar"
+    aria-labelledby="about-title"
+>
     <div class="studio-shell grid gap-10 lg:grid-cols-2">
         <div>
             <h2 id="about-title" class="section-title">About me</h2>
+            <p class="mt-6 max-w-sm text-2xl text-primary">
+                From curiosity to things people can use.
+            </p>
         </div>
         <div class="space-y-5 text-base leading-relaxed text-muted-foreground">
             <p>
@@ -208,10 +324,11 @@
                 systems, alongside projects for lecturers and personal clients.
             </p>
             <ul
-                class="flex flex-wrap gap-x-5 gap-y-2 pt-2 text-sm"
+                class="flex flex-wrap gap-2 pt-2 text-sm"
                 aria-label="Technologies"
             >
                 {#each ['Laravel', 'Svelte', 'Flutter', 'Next.js', 'Tailwind CSS'] as tech (tech)}<li
+                        class="rounded-full border border-input px-3 py-2"
                     >
                         {tech}
                     </li>{/each}
@@ -256,15 +373,19 @@
                 </article>{/each}{/if}
     </div>
 </section>
-<section id="contact" class="studio-section" aria-labelledby="contact-title">
+<section
+    id="contact"
+    class="studio-section bg-primary-container text-on-primary-container"
+    aria-labelledby="contact-title"
+>
     <div class="studio-shell flex flex-wrap items-end justify-between gap-6">
         <div>
-            <h2 id="contact-title" class="section-title">Contact</h2>
-            <p class="mt-4 text-muted-foreground">
-                For project enquiries or hiring conversations.
-            </p>
+            <h2 id="contact-title" class="section-title">Let's talk.</h2>
+            <p class="mt-4">For project enquiries or hiring conversations.</p>
         </div>
-        <a href="mailto:contact@agungandre.my.id" class="studio-link"
+        <a
+            href="mailto:contact@agungandre.my.id"
+            class="studio-link text-on-primary-container"
             >contact@agungandre.my.id <ArrowUpRight class="size-4" /></a
         >
     </div>
