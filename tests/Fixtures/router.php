@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Vite;
 use Tests\Fixtures\PortfolioQaEnvironment;
 
 if (PHP_SAPI !== 'cli-server') {
@@ -20,5 +21,6 @@ if ($file && is_file($file)
 
 require $root.'/vendor/autoload.php';
 $app = PortfolioQaEnvironment::boot(http: true);
+Vite::useHotFile($app->storagePath('framework/testing/dusk.hot'));
 PortfolioQaEnvironment::useQaMedia($app);
 $app->handleRequest(Request::capture());
