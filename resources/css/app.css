@@ -48,6 +48,7 @@
     --color-on-error-container: var(--error);
 }
 :root {
+    color-scheme: light dark;
     --surface: #f9f8f5;
     --surface-container-lowest: #fff;
     --surface-container-low: #f2f1ee;
@@ -254,14 +255,14 @@
         background: var(--primary);
     }
     .studio-title {
-        font-size: clamp(2.8rem, 5.7vw, 5rem);
+        font-size: clamp(2.8rem, 1.5rem + 3.5vw, 5rem);
         font-weight: 600;
         line-height: 1.04;
         letter-spacing: var(--tracking-display);
         text-wrap: balance;
     }
     .section-title {
-        font-size: clamp(2rem, 4vw, 3.5rem);
+        font-size: clamp(2rem, 1rem + 2.5vw, 3.5rem);
         font-weight: 600;
         line-height: 1.08;
         letter-spacing: var(--tracking-heading);
@@ -477,7 +478,7 @@
         margin-bottom: 2rem;
     }
     .cms-title {
-        font-size: clamp(1.7rem, 3vw, 2.2rem);
+        font-size: clamp(1.7rem, 1rem + 1.5vw, 2.2rem);
         font-weight: 600;
         letter-spacing: var(--tracking-heading);
     }
@@ -502,7 +503,12 @@
         background: var(--surface-container-lowest);
         color: var(--on-surface);
         padding: 0.7rem 0.9rem;
-        font-size: 0.875rem;
+        font-size: 1rem;
+    }
+    @media (min-width: 640px) {
+        .cms-input {
+            font-size: 0.875rem;
+        }
     }
     .cms-input::placeholder {
         color: var(--on-surface-variant);
@@ -924,7 +930,7 @@
     font-size: 0.875rem;
 }
 .landing-name {
-    font-size: clamp(5rem, 14vw, 12.25rem);
+    font-size: clamp(5rem, 2.5rem + 8vw, 12.25rem);
     font-weight: 700;
     line-height: 0.9;
     letter-spacing: var(--tracking-display);
@@ -940,7 +946,7 @@
 }
 .landing-hero-detail p {
     max-width: 36rem;
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-size: clamp(1.25rem, 1rem + 0.6vw, 1.5rem);
     line-height: 1.35;
 }
 .landing-intro {
@@ -962,7 +968,7 @@
     font-size: 0.875rem;
 }
 .landing-intro strong {
-    font-size: clamp(5rem, 14vw, 13rem);
+    font-size: clamp(5rem, 2.5rem + 8vw, 13rem);
     line-height: 1;
     letter-spacing: var(--tracking-display);
 }
@@ -1184,17 +1190,28 @@
     }
 }
 @media (prefers-reduced-motion: reduce) {
+    :root {
+        --motion-feedback: 0ms;
+        --motion-panel: 0ms;
+        --motion-reveal: 0ms;
+        --motion-project: 0ms;
+    }
     *,
     *::before,
     *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
     ::view-transition-group(*),
     ::view-transition-old(*),
     ::view-transition-new(*) {
         animation: none !important;
+    }
+}
+@media (forced-colors: active) {
+    :focus-visible {
+        outline: 2px solid Highlight !important;
+        outline-offset: 2px;
     }
 }

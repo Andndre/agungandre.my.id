@@ -4,11 +4,18 @@
 
     let {
         class: className = '',
+        label = 'Memuat',
         ...rest
     }: {
         class?: string;
+        label?: string;
         [key: string]: unknown;
     } = $props();
 </script>
 
-<LoaderCircle class={cn('animate-spin', className)} {...rest} />
+<LoaderCircle
+    role="status"
+    aria-label={label}
+    class={cn('animate-spin', className)}
+    {...rest}
+/>

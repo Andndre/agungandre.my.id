@@ -63,6 +63,8 @@
                             <PasswordInput
                                 id="password"
                                 name="password"
+                                required
+                                autocomplete="current-password"
                                 placeholder="Kata sandi"
                                 aria-invalid={Boolean(errors.password)}
                                 aria-describedby="delete-password-error"

@@ -242,6 +242,7 @@
                                     class="h-full w-full bg-background p-3 text-foreground"
                                 />
                                 <button
+                                    type="button"
                                     aria-label={copied
                                         ? 'Kunci tersalin'
                                         : 'Salin kunci pengaturan'}
@@ -258,6 +259,15 @@
                                         <Copy class="w-4" />
                                     {/if}
                                 </button>
+                                <span
+                                    role="status"
+                                    aria-live="polite"
+                                    class="sr-only"
+                                    >{copied
+                                        ? 'Kunci pengaturan berhasil disalin ke papan klip'
+                                        : ''}</span
+                                >
+                                <span role="status" aria-live="polite" class="sr-only">{copied ? 'Kunci pengaturan berhasil disalin ke papan klip' : ''}</span>
                             {/if}
                         </div>
                     </div>

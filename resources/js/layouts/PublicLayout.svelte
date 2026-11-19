@@ -62,21 +62,31 @@
         >
         <nav
             class="hidden items-center gap-7 text-sm md:flex"
-            aria-label="Main navigation"
+            aria-label="Main"
         >
-            {#each links as link (link.label)}
-                {#if link.documentNavigation}
-                    <a
-                        href={link.href}
-                        class="inline-flex min-h-11 items-center text-muted-foreground hover:text-foreground"
-                        >{link.label}</a
-                    >
-                {:else}<Link
-                        href={link.href}
-                        class="inline-flex min-h-11 items-center text-muted-foreground hover:text-foreground"
-                        >{link.label}</Link
-                    >{/if}
-            {/each}
+            <ul class="flex items-center gap-7">
+                {#each links as link (link.label)}
+                    <li>
+                        {#if link.documentNavigation}
+                            <a
+                                href={link.href}
+                                class="inline-flex min-h-11 items-center text-muted-foreground hover:text-foreground"
+                                aria-current={page.url === link.href ||
+                                (page.url.startsWith('/blog') &&
+                                    link.label === 'Writing')
+                                    ? 'page'
+                                    : undefined}>{link.label}</a
+                            >
+                        {:else}<Link
+                                href={link.href}
+                                class="inline-flex min-h-11 items-center text-muted-foreground hover:text-foreground"
+                                aria-current={page.url === link.href
+                                    ? 'page'
+                                    : undefined}>{link.label}</Link
+                            >{/if}
+                    </li>
+                {/each}
+            </ul>
         </nav>
         <div class="flex items-center gap-2">
             <ThemePicker />

@@ -273,6 +273,13 @@
                                 placeholder="Contoh: Laravel"
                                 onkeydown={(event) => {
                                     if (
+                                        event.isComposing ||
+                                        event.keyCode === 229
+                                    ) {
+                                        return;
+                                    }
+
+                                    if (
                                         event.key === 'Enter' ||
                                         event.key === ','
                                     ) {
