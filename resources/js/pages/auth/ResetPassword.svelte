@@ -61,6 +61,7 @@
                 <PasswordInput
                     id="password"
                     name="password"
+                    required
                     aria-invalid={Boolean(errors.password)}
                     aria-describedby="password-error"
                     autocomplete="new-password"
@@ -76,6 +77,7 @@
                 <PasswordInput
                     id="password_confirmation"
                     name="password_confirmation"
+                    required
                     aria-invalid={Boolean(errors.password_confirmation)}
                     aria-describedby="confirmation-error"
                     autocomplete="new-password"

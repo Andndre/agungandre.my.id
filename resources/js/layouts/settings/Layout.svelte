@@ -59,7 +59,16 @@
                         asChild
                     >
                         {#snippet children(props)}
-                            <Link href={toUrl(item.href)} class={props.class}>
+                            <Link
+                                href={toUrl(item.href)}
+                                class={props.class}
+                                aria-current={url.isCurrentUrl(
+                                    item.href,
+                                    url.currentUrl,
+                                )
+                                    ? 'page'
+                                    : undefined}
+                            >
                                 {item.title}
                             </Link>
                         {/snippet}

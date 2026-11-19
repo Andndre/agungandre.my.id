@@ -14,6 +14,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
     <title>{{ $title }} - Agung Andre</title>
     <meta name="description" content="{{ $description }}">
     @include('partials.appearance')
@@ -26,20 +27,34 @@
     <header class="studio-header">
         <div class="studio-shell studio-nav">
             <a href="{{ route('home') }}" class="wordmark" aria-label="Andre — home"><span class="wordmark-symbol" aria-hidden="true">a.</span>andre<span class="text-primary">.</span></a>
-            <nav class="hidden items-center gap-7 text-sm md:flex" aria-label="Main navigation">
-                @foreach ($links as $link)
-                    <a href="{{ $link['href'] }}" class="inline-flex min-h-11 items-center text-muted-foreground hover:text-foreground">{{ $link['label'] }}</a>
-                @endforeach
+            <nav class="hidden items-center gap-7 text-sm md:flex" aria-label="Main">
+                <ul class="flex items-center gap-7">
+                    @foreach ($links as $link)
+                        @php
+                            $isCurrent = request()->fullUrlIs($link['href']) || (request()->routeIs('blog.*') && $link['label'] === 'Writing');
+                        @endphp
+                        <li>
+                            <a href="{{ $link['href'] }}" class="inline-flex min-h-11 items-center text-muted-foreground hover:text-foreground" @if($isCurrent) aria-current="page" @endif>{{ $link['label'] }}</a>
+                        </li>
+                    @endforeach
+                </ul>
             </nav>
             <div id="blog-controls" hidden data-links="{{ json_encode($links, JSON_THROW_ON_ERROR) }}"></div>
             <details id="blog-navigation-fallback" class="relative md:hidden">
                 <summary class="theme-option cursor-pointer list-none [&::-webkit-details-marker]:hidden" aria-label="Open navigation">
                     <x-public-icon name="menu" class="size-5" />
                 </summary>
-                <nav class="absolute top-full right-0 mt-3 flex min-w-48 flex-col gap-2 rounded-xl border border-border bg-popover p-4 text-popover-foreground shadow-xl" aria-label="Mobile navigation">
-                    @foreach ($links as $link)
-                        <a href="{{ $link['href'] }}" class="studio-link">{{ $link['label'] }}<x-public-icon /></a>
-                    @endforeach
+                <nav class="absolute top-full right-0 mt-3 flex min-w-48 flex-col gap-2 rounded-xl border border-border bg-popover p-4 text-popover-foreground shadow-xl" aria-label="Mobile">
+                    <ul class="flex flex-col gap-2">
+                        @foreach ($links as $link)
+                            @php
+                                $isCurrent = request()->fullUrlIs($link['href']) || (request()->routeIs('blog.*') && $link['label'] === 'Writing');
+                            @endphp
+                            <li>
+                                <a href="{{ $link['href'] }}" class="studio-link" @if($isCurrent) aria-current="page" @endif>{{ $link['label'] }}<x-public-icon /></a>
+                            </li>
+                        @endforeach
+                    </ul>
                 </nav>
             </details>
         </div>

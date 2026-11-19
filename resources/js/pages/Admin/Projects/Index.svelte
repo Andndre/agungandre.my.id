@@ -73,7 +73,7 @@
             >
         </div>
     {:else}
-        <div class="cms-panel mb-6 flex flex-wrap items-end gap-4">
+        <search class="cms-panel mb-6 flex flex-wrap items-end gap-4">
             <div class="cms-field min-w-0 flex-1">
                 <label class="cms-label" for="project-search">Cari proyek</label
                 ><input
@@ -103,7 +103,7 @@
                     class="size-5 accent-primary"
                 />Hanya unggulan</label
             >
-        </div>
+        </search>
         <p role="status" class="mb-3 text-sm text-muted-foreground">
             {filtered.length} proyek ditampilkan
         </p>
@@ -123,17 +123,27 @@
                 >
             </div>
         {:else}
-            <div class="cms-panel hidden overflow-hidden p-0 md:block">
+            <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+            <div
+                class="cms-panel hidden overflow-x-auto p-0 md:block"
+                tabindex="0"
+                role="region"
+                aria-label="Tabel proyek"
+            >
                 <table class="cms-table">
-                    <thead
-                        ><tr
-                            ><th>Proyek</th><th>Publikasi</th><th>Unggulan</th
-                            ><th>Urutan</th><th
+                    <thead>
+                        <tr>
+                            <th scope="col">Proyek</th>
+                            <th scope="col">Publikasi</th>
+                            <th scope="col">Unggulan</th>
+                            <th scope="col">Urutan</th>
+                            <th scope="col"
                                 ><span class="sr-only">Aksi</span></th
-                            ></tr
-                        ></thead
-                    ><tbody
-                        >{#each filtered as project (project.id)}<tr
+                            >
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#each filtered as project (project.id)}<tr
                                 ><td
                                     ><Link
                                         class="font-medium hover:text-primary"

@@ -46,7 +46,8 @@
                     name="email"
                     aria-invalid={Boolean(errors.email)}
                     aria-describedby="email-error"
-                    autocomplete="off"
+                    autocomplete="email"
+                    required
                     placeholder="email@example.com"
                 />
                 <InputError id="email-error" message={errors.email} />

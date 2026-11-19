@@ -30,28 +30,32 @@
         <SheetTitle>Explore</SheetTitle><SheetDescription
             >Work, ideas, and ways to connect.</SheetDescription
         >
-        <nav class="mt-6 flex flex-col gap-2" aria-label="Mobile navigation">
-            {#each links as link (link.label)}
-                {#if link.documentNavigation}
-                    <a
-                        href={link.href}
-                        class="studio-link"
-                        onclick={() => (open = false)}
-                        >{link.label}<ArrowUpRight
-                            class="size-4"
-                            aria-hidden="true"
-                        /></a
-                    >
-                {:else}<Link
-                        href={link.href}
-                        class="studio-link"
-                        onclick={() => (open = false)}
-                        >{link.label}<ArrowUpRight
-                            class="size-4"
-                            aria-hidden="true"
-                        /></Link
-                    >{/if}
-            {/each}
+        <nav class="mt-6 flex flex-col gap-2" aria-label="Mobile">
+            <ul class="flex flex-col gap-2">
+                {#each links as link (link.label)}
+                    <li>
+                        {#if link.documentNavigation}
+                            <a
+                                href={link.href}
+                                class="studio-link"
+                                onclick={() => (open = false)}
+                                >{link.label}<ArrowUpRight
+                                    class="size-4"
+                                    aria-hidden="true"
+                                /></a
+                            >
+                        {:else}<Link
+                                href={link.href}
+                                class="studio-link"
+                                onclick={() => (open = false)}
+                                >{link.label}<ArrowUpRight
+                                    class="size-4"
+                                    aria-hidden="true"
+                                /></Link
+                            >{/if}
+                    </li>
+                {/each}
+            </ul>
         </nav>
     </SheetContent></Sheet
 >
