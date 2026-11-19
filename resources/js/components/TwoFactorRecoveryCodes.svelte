@@ -56,9 +56,14 @@
     </CardHeader>
     <CardContent>
         <div
-            class="flex flex-col gap-3 select-none sm:flex-row sm:items-center sm:justify-between"
+            class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
         >
-            <Button onclick={toggleRecoveryCodesVisibility} class="w-fit">
+            <Button
+                onclick={toggleRecoveryCodesVisibility}
+                class="w-fit"
+                aria-expanded={isRecoveryCodesVisible}
+                aria-controls="recovery-codes-section"
+            >
                 {#if isRecoveryCodesVisible}
                     <EyeOff class="size-4" />
                 {:else}
@@ -86,6 +91,8 @@
             {/if}
         </div>
         <div
+            id="recovery-codes-section"
+            hidden={!isRecoveryCodesVisible}
             class="relative overflow-hidden transition-all duration-300 {isRecoveryCodesVisible
                 ? 'h-auto opacity-100'
                 : 'h-0 opacity-0'}"
@@ -114,7 +121,7 @@
                             {/each}
                         {/if}
                     </div>
-                    <p class="text-xs text-muted-foreground select-none">
+                    <p class="text-xs text-muted-foreground">
                         Setiap kode pemulihan hanya dapat digunakan sekali untuk
                         mengakses akun dan akan dihapus setelah digunakan. Jika
                         membutuhkan kode lain, klik <span class="font-bold"

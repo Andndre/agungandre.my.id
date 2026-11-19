@@ -37,7 +37,11 @@ const setCookie = (name: string, value: string, days = 365): void => {
     }
 
     const maxAge = days * 24 * 60 * 60;
-    document.cookie = `${name}=${value};path=/;max-age=${maxAge};SameSite=Lax`;
+    const secureFlag =
+        typeof location !== 'undefined' && location.protocol === 'https:'
+            ? ';Secure'
+            : '';
+    document.cookie = `${name}=${value};path=/;max-age=${maxAge};SameSite=Lax${secureFlag}`;
 };
 
 const applyTheme = (value: Appearance): void => {

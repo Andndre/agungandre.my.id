@@ -55,6 +55,7 @@
                         'data-sidebar': 'menu-button',
                         'data-size': size,
                         'data-active': isActive,
+                        'aria-current': isActive ? 'page' : undefined,
                         ...rest,
                         ...triggerProps,
                     })}
@@ -66,6 +67,7 @@
                         data-sidebar="menu-button"
                         data-size={size}
                         data-active={isActive}
+                        aria-current={isActive ? 'page' : undefined}
                         {...rest}
                         {...triggerProps}
                     >
@@ -86,6 +88,7 @@
             'data-sidebar': 'menu-button',
             'data-size': size,
             'data-active': isActive,
+            'aria-current': isActive ? 'page' : undefined,
             ...rest,
         })}
     {:else}
@@ -96,6 +99,7 @@
             data-sidebar="menu-button"
             data-size={size}
             data-active={isActive}
+            aria-current={isActive ? 'page' : undefined}
             {...rest}
         >
             {@render children?.({})}

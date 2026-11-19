@@ -41,7 +41,7 @@
             Agung Andre · Full-stack developer
         </p>
     </div>
-    <div class="auth-form-side">
+    <main class="auth-form-side" id="main-content">
         <div class="mb-12 flex flex-wrap items-center justify-between gap-4">
             <Link href={home()} class="studio-wordmark"
                 >agung andre<span aria-hidden="true">.</span></Link
@@ -60,5 +60,5 @@
             href={home()}
             ><ArrowLeft class="size-4" aria-hidden="true" />Kembali ke portfolio</Link
         >
-    </div>
+    </main>
 </div>

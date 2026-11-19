@@ -69,6 +69,7 @@
                 <PasswordInput
                     id="current_password"
                     name="current_password"
+                    required
                     aria-invalid={Boolean(errors.current_password)}
                     aria-describedby="current-password-error"
                     class="mt-1 block w-full"
@@ -86,6 +87,7 @@
                 <PasswordInput
                     id="password"
                     name="password"
+                    required
                     aria-invalid={Boolean(errors.password)}
                     aria-describedby="new-password-error"
                     class="mt-1 block w-full"
@@ -101,6 +103,7 @@
                 <PasswordInput
                     id="password_confirmation"
                     name="password_confirmation"
+                    required
                     aria-invalid={Boolean(errors.password_confirmation)}
                     aria-describedby="password-confirmation-error"
                     class="mt-1 block w-full"

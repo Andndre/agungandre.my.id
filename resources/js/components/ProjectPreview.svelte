@@ -46,7 +46,7 @@
                     width="1200"
                     height="900"
                     loading={eager ? 'eager' : 'lazy'}
-                    fetchpriority={eager ? 'high' : 'auto'}
+                    fetchpriority={eager ? 'high' : undefined}
                     onerror={() => {
                         failed = true;
                     }}
